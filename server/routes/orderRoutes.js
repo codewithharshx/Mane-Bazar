@@ -10,6 +10,7 @@ const {
   updateOrderStatus
 } = require("../controllers/orderController");
 const { adminOnly, protect } = require("../middleware/authMiddleware");
+const { checkoutRateLimiter } = require("../middleware/rateLimiter");
 const validateRequest = require("../middleware/validateRequest");
 const { normalizeDeliverySlot } = require("../utils/order");
 
@@ -30,7 +31,14 @@ const orderValidation = [
     .withMessage("Invalid delivery slot")
 ];
 
-router.post("/cod", protect, orderValidation, validateRequest, createCODOrder);
+router.post(
+  "/cod",
+  checkoutRateLimiter,
+  protect,
+  orderValidation,
+  validateRequest,
+  createCODOrder
+);
 router.get("/my-orders", protect, getMyOrders);
 router.get(
   "/:orderId",
@@ -61,7 +69,13 @@ router.put(
         "delivered",
         "cancelled"
       ])
-      .withMessage("Invalid order status")
+      .withMessage("Invalid order status"),
+    body("note")
+      .optional()
+      .isString()
+      .trim()
+      .isLength({ max: 200 })
+      .withMessage("note must be 200 characters or less")
   ],
   validateRequest,
   updateOrderStatus

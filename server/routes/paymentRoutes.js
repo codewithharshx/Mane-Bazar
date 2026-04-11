@@ -2,6 +2,7 @@ const express = require("express");
 const { body } = require("express-validator");
 const { createOrder, verifyPayment } = require("../controllers/paymentController");
 const { protect } = require("../middleware/authMiddleware");
+const { checkoutRateLimiter } = require("../middleware/rateLimiter");
 const validateRequest = require("../middleware/validateRequest");
 const { normalizeDeliverySlot } = require("../utils/order");
 
@@ -22,9 +23,17 @@ const paymentOrderValidation = [
     .withMessage("Invalid delivery slot")
 ];
 
-router.post("/create-order", protect, paymentOrderValidation, validateRequest, createOrder);
+router.post(
+  "/create-order",
+  checkoutRateLimiter,
+  protect,
+  paymentOrderValidation,
+  validateRequest,
+  createOrder
+);
 router.post(
   "/verify",
+  checkoutRateLimiter,
   protect,
   [
     ...paymentOrderValidation,

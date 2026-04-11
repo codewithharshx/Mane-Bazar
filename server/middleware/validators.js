@@ -3,10 +3,9 @@
  * Validates all critical inputs across the application
  */
 
-const { body, validationResult } = require("express-validator");
+const { body, param, validationResult } = require("express-validator");
 
 // ─── Email Validation ─────────────────────────────────────────────────────
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const validateEmail = () =>
   body("email")
@@ -129,6 +128,24 @@ const validateLogin = [
   handleValidationErrors
 ];
 
+const validateGoogleAuth = [
+  body("credential")
+    .trim()
+    .notEmpty()
+    .withMessage("Google credential is required"),
+  handleValidationErrors
+];
+
+const validateOptionalRefreshToken = [
+  body("refreshToken")
+    .optional()
+    .isString()
+    .trim()
+    .notEmpty()
+    .withMessage("refreshToken must be a non-empty string"),
+  handleValidationErrors
+];
+
 const validateUpdateProfile = [
   validateName(),
   body("avatar")
@@ -150,6 +167,11 @@ const validateAddAddress = [
     .optional()
     .isBoolean()
     .withMessage("isDefault must be a boolean"),
+  handleValidationErrors
+];
+
+const validateAddressIdParam = [
+  param("addressId").isMongoId().withMessage("Invalid address id"),
   handleValidationErrors
 ];
 
@@ -196,7 +218,10 @@ module.exports = {
   handleValidationErrors,
   validateRegister,
   validateLogin,
+  validateGoogleAuth,
+  validateOptionalRefreshToken,
   validateUpdateProfile,
+  validateAddressIdParam,
   validateAddAddress,
   validateCreateOrder
 };

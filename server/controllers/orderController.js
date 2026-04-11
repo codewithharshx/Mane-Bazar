@@ -7,12 +7,21 @@ const Product = require("../models/Product");
 const Store = require("../models/Store");
 const User = require("../models/User");
 const asyncHandler = require("../middleware/asyncHandler");
+const {
+  acquireIdempotency,
+  extractIdempotencyKey,
+  hashPayload,
+  markIdempotencyCompleted,
+  markIdempotencyFailed
+} = require("../services/idempotencyService");
 const { validateCoupon } = require("./couponController");
 const { generateInvoice } = require("../services/invoiceService");
 const {
   calculatePricing,
   generateOrderId,
   isCancellableStatus,
+  canTransitionOrderStatus,
+  getAllowedNextOrderStatuses,
   normalizeDeliverySlot,
   calculateDistance,
   mockCoordinatesFromPincode
@@ -136,8 +145,6 @@ const buildOrderPayload = async ({
       }
 
       const distance = calculateDistance(storeLat, storeLng, userLat, userLng);
-      // Let's console log for debugging distance
-      console.log(`Calculated distance between store and delivery address: ${distance.toFixed(2)} km`);
       if (distance > 25) {
         throw new Error("Delivery not available. Your location is outside our 25km delivery radius.");
       }
@@ -228,26 +235,60 @@ const persistSuccessfulOrder = async (orderPayload) => {
 };
 
 const createCODOrder = asyncHandler(async (req, res) => {
-  const orderPayload = await buildOrderPayload({
-    userId: req.user._id,
+  const idempotencyKey = extractIdempotencyKey(req);
+  const requestHash = hashPayload({
+    userId: req.user._id.toString(),
+    storeId: req.body.storeId || "",
     items: req.body.items,
-    storeId: req.body.storeId,
     deliveryAddress: req.body.deliveryAddress,
     deliverySlot: req.body.deliverySlot,
-    paymentMethod: "cod",
-    paymentStatus: "pending",
     couponCode: req.body.couponCode || ""
   });
 
-  const { order } = await persistSuccessfulOrder(orderPayload);
-  const populatedOrder = await Order.findById(order._id)
-    .populate("items.product", "name slug")
-    .populate("user", "name email");
-
-  res.status(201).json({
-    message: "COD order placed successfully",
-    order: populatedOrder
+  const lock = await acquireIdempotency({
+    userId: req.user._id,
+    scope: "orders:cod",
+    key: idempotencyKey,
+    requestHash
   });
+
+  if (lock.mode === "replay") {
+    return res.status(lock.responseCode || 200).json(lock.responseBody || {});
+  }
+
+  if (lock.mode === "conflict" || lock.mode === "processing") {
+    res.status(409);
+    throw new Error(lock.message);
+  }
+
+  try {
+    const orderPayload = await buildOrderPayload({
+      userId: req.user._id,
+      items: req.body.items,
+      storeId: req.body.storeId,
+      deliveryAddress: req.body.deliveryAddress,
+      deliverySlot: req.body.deliverySlot,
+      paymentMethod: "cod",
+      paymentStatus: "pending",
+      couponCode: req.body.couponCode || ""
+    });
+
+    const { order } = await persistSuccessfulOrder(orderPayload);
+    const populatedOrder = await Order.findById(order._id)
+      .populate("items.product", "name slug")
+      .populate("user", "name email");
+
+    const responseBody = {
+      message: "COD order placed successfully",
+      order: populatedOrder
+    };
+
+    await markIdempotencyCompleted(lock.record, 201, responseBody);
+    return res.status(201).json(responseBody);
+  } catch (error) {
+    await markIdempotencyFailed(lock.record, error.message);
+    throw error;
+  }
 });
 
 const getMyOrders = asyncHandler(async (req, res) => {
@@ -287,6 +328,20 @@ const updateOrderStatus = asyncHandler(async (req, res) => {
   if (!order) {
     res.status(404);
     throw new Error("Order not found");
+  }
+
+  if (order.status === status) {
+    res.status(400);
+    throw new Error("Order is already in the requested status");
+  }
+
+  if (!canTransitionOrderStatus(order.status, status)) {
+    const allowedStatuses = getAllowedNextOrderStatuses(order.status);
+    const guidance = allowedStatuses.length
+      ? `Allowed next statuses: ${allowedStatuses.join(", ")}`
+      : "No further transitions are allowed from the current status";
+    res.status(400);
+    throw new Error(`Invalid status transition from '${order.status}' to '${status}'. ${guidance}`);
   }
 
   order.status = status;

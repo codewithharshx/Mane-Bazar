@@ -14,11 +14,20 @@ const protect = asyncHandler(async (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (!decoded?.id) {
+      res.status(401);
+      throw new Error("Invalid access token payload");
+    }
     const user = await User.findById(decoded.id).select("-password -refreshToken");
 
     if (!user) {
       res.status(401);
       throw new Error("User no longer exists");
+    }
+
+    if (!user.isActive) {
+      res.status(401);
+      throw new Error("User account is inactive");
     }
 
     req.user = user;

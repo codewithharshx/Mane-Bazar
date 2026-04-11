@@ -1,7 +1,9 @@
 const Order = require("../models/Order");
 const Product = require("../models/Product");
 const User = require("../models/User");
+const AdminAuditLog = require("../models/AdminAuditLog");
 const asyncHandler = require("../middleware/asyncHandler");
+const { logAdminAction } = require("../services/adminAuditService");
 
 /* ─── Dashboard Stats ─────────────────────────────────────────────────────── */
 
@@ -186,6 +188,43 @@ const getAdminUsers = asyncHandler(async (req, res) => {
   res.json({ users, total, page: Number(page), pages: Math.ceil(total / Number(limit)) });
 });
 
+const getAdminAuditLogs = asyncHandler(async (req, res) => {
+  const { action, targetType, actorId, page = 1, limit = 20 } = req.query;
+  const filter = {};
+
+  if (action && action !== "all") {
+    filter.action = action;
+  }
+
+  if (targetType && targetType !== "all") {
+    filter.targetType = targetType;
+  }
+
+  if (actorId) {
+    filter.actor = actorId;
+  }
+
+  const safeLimit = Math.min(Number(limit) || 20, 100);
+  const safePage = Number(page) || 1;
+  const skip = (safePage - 1) * safeLimit;
+
+  const [logs, total] = await Promise.all([
+    AdminAuditLog.find(filter)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(safeLimit)
+      .populate("actor", "name email role"),
+    AdminAuditLog.countDocuments(filter)
+  ]);
+
+  res.json({
+    logs,
+    total,
+    page: safePage,
+    pages: Math.ceil(total / safeLimit)
+  });
+});
+
 const updateUserRole = asyncHandler(async (req, res) => {
   const { role } = req.body;
 
@@ -199,15 +238,32 @@ const updateUserRole = asyncHandler(async (req, res) => {
     throw new Error("You cannot change your own role.");
   }
 
-  const user = await User.findByIdAndUpdate(
-    req.params.userId,
-    { role },
-    { new: true, select: "-password -refreshToken" }
-  );
+  const existingUser = await User.findById(req.params.userId).select("name email role");
 
-  if (!user) {
+  if (!existingUser) {
     res.status(404);
     throw new Error("User not found");
+  }
+
+  const previousRole = existingUser.role;
+  existingUser.role = role;
+  await existingUser.save();
+
+  const user = await User.findById(existingUser._id).select("-password -refreshToken");
+
+  try {
+    await logAdminAction(req, {
+      action: "user.role.updated",
+      targetType: "user",
+      targetId: user._id,
+      meta: {
+        email: user.email,
+        previousRole,
+        newRole: role
+      }
+    });
+  } catch (auditError) {
+    console.error("Failed to write admin audit log:", auditError.message);
   }
 
   res.json({ message: `Role updated to ${role}`, user });
@@ -219,11 +275,26 @@ const deleteUser = asyncHandler(async (req, res) => {
     throw new Error("You cannot delete your own account from admin panel.");
   }
 
-  const user = await User.findByIdAndDelete(req.params.userId);
+  const user = await User.findByIdAndDelete(req.params.userId).select("name email role");
 
   if (!user) {
     res.status(404);
     throw new Error("User not found");
+  }
+
+  try {
+    await logAdminAction(req, {
+      action: "user.deleted",
+      targetType: "user",
+      targetId: user._id,
+      meta: {
+        email: user.email,
+        role: user.role,
+        name: user.name
+      }
+    });
+  } catch (auditError) {
+    console.error("Failed to write admin audit log:", auditError.message);
   }
 
   res.json({ message: "User deleted successfully" });
@@ -259,6 +330,21 @@ const restockProduct = asyncHandler(async (req, res) => {
     throw new Error("Product not found");
   }
 
+  try {
+    await logAdminAction(req, {
+      action: "inventory.restock",
+      targetType: "product",
+      targetId: product._id,
+      meta: {
+        productName: product.name,
+        quantityAdded: Number(quantity),
+        newStock: product.stock
+      }
+    });
+  } catch (auditError) {
+    console.error("Failed to write admin audit log:", auditError.message);
+  }
+
   res.json({ message: `Restocked ${quantity} units`, product });
 });
 
@@ -266,6 +352,7 @@ module.exports = {
   getDashboardStats,
   getAdminOrders,
   getAdminUsers,
+  getAdminAuditLogs,
   updateUserRole,
   deleteUser,
   getInventoryAlerts,

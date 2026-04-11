@@ -252,6 +252,7 @@ npm start
 
 ```bash
 curl http://localhost:5000/api/health
+curl http://localhost:5000/api/ready
 ```
 
 Expected response:
@@ -262,6 +263,30 @@ Expected response:
   "ts": "2026-04-09T12:00:00.000Z"
 }
 ```
+
+Readiness response should be:
+```json
+{
+   "status": "ready",
+   "service": "mane-bazar-api"
+}
+```
+
+### Checkout Idempotency (Recommended)
+
+For payment/order write calls, include an idempotency key header:
+
+```bash
+curl -X POST http://localhost:5000/api/orders/cod \
+   -H "Authorization: Bearer <access_token>" \
+   -H "Content-Type: application/json" \
+   -H "x-idempotency-key: checkout-<unique-attempt-id>" \
+   -d '{ ... }'
+```
+
+Behavior:
+- Same key + same payload: previous success response is replayed safely.
+- Same key + different payload: `409 Conflict`.
 
 ### Auth System
 

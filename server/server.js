@@ -11,11 +11,15 @@ const morgan = require("morgan");
 dotenv.config();
 
 const passport = require("passport");
-const connectDB = require("./config/db");
+const { connectDB, disconnectDB, getDbHealth } = require("./config/db");
 const configurePassport = require("./config/passport");
+const { validateRuntimeConfig } = require("./config/env");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
-const { authRateLimiter } = require("./middleware/rateLimiter");
+const { attachRequestContext } = require("./middleware/requestContext");
+const { authRateLimiter, globalApiRateLimiter } = require("./middleware/rateLimiter");
 const { ensureSeeded } = require("./utils/seedData");
+
+morgan.token("request-id", (req) => req.requestId || "-");
 
 // ─── App factory ──────────────────────────────────────────────────────────
 const createApp = () => {
@@ -50,15 +54,36 @@ const createApp = () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
   app.use(mongoSanitize());
+  app.use(attachRequestContext);
   app.use(passport.initialize());
-  app.use(morgan("dev"));
+  app.use(morgan(":request-id :method :url :status :response-time ms - :res[content-length]"));
 
   // ── Health check ──
-  app.get("/api/health", (_req, res) => {
-    res.json({ status: "ok", service: "mane-bazar-api", ts: new Date().toISOString() });
+  app.get("/api/health", (req, res) => {
+    res.json({
+      status: "ok",
+      service: "mane-bazar-api",
+      requestId: req.requestId,
+      ts: new Date().toISOString()
+    });
+  });
+
+  app.get("/api/ready", (req, res) => {
+    const db = getDbHealth();
+    const isReady = db.readyState === 1;
+
+    res.status(isReady ? 200 : 503).json({
+      status: isReady ? "ready" : "not_ready",
+      service: "mane-bazar-api",
+      requestId: req.requestId,
+      uptimeSeconds: Number(process.uptime().toFixed(0)),
+      db,
+      ts: new Date().toISOString()
+    });
   });
 
   // ── API routes ──
+  app.use("/api", globalApiRateLimiter);
   app.use("/api/auth", authRateLimiter, require("./routes/authRoutes"));
   app.use("/api/products",              require("./routes/productRoutes"));
   app.use("/api/stores",                require("./routes/storeRoutes"));
@@ -81,6 +106,7 @@ const createApp = () => {
 // ─── Start ────────────────────────────────────────────────────────────────
 const startServer = async () => {
   try {
+    validateRuntimeConfig();
     await connectDB();
 
     if (process.env.NODE_ENV !== "production") {
@@ -94,9 +120,17 @@ const startServer = async () => {
       console.log(`🚀 Server running on port ${PORT} [${process.env.NODE_ENV || "development"}]`);
     });
 
-    const shutdown = (signal) => () => {
+    const shutdown = (signal) => async () => {
       console.log(`${signal} received — shutting down gracefully...`);
-      server.close(() => process.exit(0));
+
+      server.close(async () => {
+        try {
+          await disconnectDB();
+        } catch (error) {
+          console.error("Error during DB shutdown:", error.message);
+        }
+        process.exit(0);
+      });
     };
 
     process.on("SIGTERM", shutdown("SIGTERM"));

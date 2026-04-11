@@ -65,6 +65,21 @@ const calculatePricing = ({ items, couponDiscount = 0, deliveryCharge = 40 }) =>
 
 const isCancellableStatus = (status) => ["placed", "confirmed"].includes(status);
 
+const ORDER_STATUS_TRANSITIONS = Object.freeze({
+  placed: ["confirmed", "cancelled"],
+  confirmed: ["packed", "cancelled"],
+  packed: ["out_for_delivery"],
+  out_for_delivery: ["delivered"],
+  delivered: [],
+  cancelled: []
+});
+
+const getAllowedNextOrderStatuses = (currentStatus) =>
+  ORDER_STATUS_TRANSITIONS[currentStatus] || [];
+
+const canTransitionOrderStatus = (currentStatus, nextStatus) =>
+  getAllowedNextOrderStatuses(currentStatus).includes(nextStatus);
+
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const R = 6371; // km
   const dLat = (lat2 - lat1) * Math.PI / 180;
@@ -100,6 +115,8 @@ module.exports = {
   calculatePricing,
   generateOrderId,
   isCancellableStatus,
+  getAllowedNextOrderStatuses,
+  canTransitionOrderStatus,
   normalizeDeliverySlot,
   calculateDistance,
   mockCoordinatesFromPincode

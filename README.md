@@ -244,6 +244,10 @@ npm run admin -- reset-password email@example.com NewPassword123
 - `GET /api/auth/me` - Get current user
 - `POST /api/auth/logout` - Logout
 
+### Service Health
+- `GET /api/health` - Liveness probe (process is running)
+- `GET /api/ready` - Readiness probe (returns 200 only when DB is connected)
+
 ### Products
 - `GET /api/products` - List products
 - `GET /api/products/:id` - Get product
@@ -253,6 +257,11 @@ npm run admin -- reset-password email@example.com NewPassword123
 - `POST /api/orders` - Create order
 - `GET /api/orders` - User orders
 - `GET /api/orders/:id` - Order details
+
+### Idempotency For Checkout
+- Use header `x-idempotency-key` on checkout/payment write requests.
+- Reusing the same key with the same payload safely replays the previous result.
+- Reusing the same key with a different payload returns `409`.
 
 ### Admin
 - `GET /api/admin/stats` - Dashboard stats

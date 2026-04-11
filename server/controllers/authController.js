@@ -2,10 +2,12 @@ const jwt = require("jsonwebtoken");
 const { OAuth2Client } = require("google-auth-library");
 const User = require("../models/User");
 const asyncHandler = require("../middleware/asyncHandler");
+const { getRuntimeConfig } = require("../config/env");
 const {
   clearRefreshTokenCookie,
   generateAccessToken,
   generateRefreshToken,
+  hashToken,
   setRefreshTokenCookie
 } = require("../utils/tokens");
 
@@ -13,11 +15,24 @@ const googleClient = process.env.GOOGLE_CLIENT_ID
   ? new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
   : null;
 
+const getRefreshTokenFromRequest = (req) => {
+  if (req.cookies.refreshToken) {
+    return req.cookies.refreshToken;
+  }
+
+  const config = getRuntimeConfig();
+  if (config.allowRefreshTokenBody && req.body.refreshToken) {
+    return req.body.refreshToken;
+  }
+
+  return "";
+};
+
 const buildAuthResponse = async (user, res) => {
   const accessToken = generateAccessToken(user._id);
   const refreshToken = generateRefreshToken(user._id);
 
-  user.refreshToken = refreshToken;
+  user.refreshToken = hashToken(refreshToken);
   await user.save();
   setRefreshTokenCookie(res, refreshToken);
 
@@ -53,7 +68,7 @@ const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
 
-  if (!user || !(await user.matchPassword(password))) {
+  if (!user || !user.isActive || !(await user.matchPassword(password))) {
     res.status(401);
     throw new Error("Invalid email or password");
   }
@@ -76,6 +91,11 @@ const googleAuth = asyncHandler(async (req, res) => {
   });
 
   const payload = ticket.getPayload();
+  if (!payload?.email || payload.email_verified === false) {
+    res.status(401);
+    throw new Error("Google account email is not verified");
+  }
+
   let user = await User.findOne({
     $or: [{ email: payload.email }, { googleId: payload.sub }]
   });
@@ -98,7 +118,7 @@ const googleAuth = asyncHandler(async (req, res) => {
 });
 
 const refreshToken = asyncHandler(async (req, res) => {
-  const token = req.cookies.refreshToken || req.body.refreshToken;
+  const token = getRefreshTokenFromRequest(req);
 
   if (!token) {
     res.status(401);
@@ -114,7 +134,11 @@ const refreshToken = asyncHandler(async (req, res) => {
   }
 
   const user = await User.findById(decoded.id);
-  if (!user || user.refreshToken !== token) {
+  const incomingTokenHash = hashToken(token);
+  const hasValidStoredToken =
+    user && (user.refreshToken === incomingTokenHash || user.refreshToken === token);
+
+  if (!user || !user.isActive || !hasValidStoredToken) {
     res.status(401);
     throw new Error("Refresh token has been rotated or revoked");
   }
@@ -124,10 +148,14 @@ const refreshToken = asyncHandler(async (req, res) => {
 });
 
 const logout = asyncHandler(async (req, res) => {
-  const token = req.cookies.refreshToken || req.body.refreshToken;
+  const token = getRefreshTokenFromRequest(req);
 
   if (token) {
-    const user = await User.findOne({ refreshToken: token });
+    const tokenHash = hashToken(token);
+    const user = await User.findOne({
+      $or: [{ refreshToken: tokenHash }, { refreshToken: token }]
+    });
+
     if (user) {
       user.refreshToken = "";
       await user.save();
@@ -140,11 +168,19 @@ const logout = asyncHandler(async (req, res) => {
 
 const getMe = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id).select("-password -refreshToken");
+  if (!user || !user.isActive) {
+    res.status(401);
+    throw new Error("User account is inactive");
+  }
   res.json(user);
 });
 
 const updateProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
+  if (!user || !user.isActive) {
+    res.status(401);
+    throw new Error("User account is inactive");
+  }
   user.name = req.body.name || user.name;
 
   if (req.body.avatar !== undefined) {
@@ -171,6 +207,10 @@ const updateProfile = asyncHandler(async (req, res) => {
 
 const addAddress = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
+  if (!user || !user.isActive) {
+    res.status(401);
+    throw new Error("User account is inactive");
+  }
   const address = req.body;
 
   if (address.isDefault) {
@@ -194,6 +234,10 @@ const addAddress = asyncHandler(async (req, res) => {
 
 const updateAddress = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
+  if (!user || !user.isActive) {
+    res.status(401);
+    throw new Error("User account is inactive");
+  }
   const address = user.addresses.id(req.params.addressId);
 
   if (!address) {
@@ -218,6 +262,10 @@ const updateAddress = asyncHandler(async (req, res) => {
 
 const deleteAddress = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
+  if (!user || !user.isActive) {
+    res.status(401);
+    throw new Error("User account is inactive");
+  }
   const address = user.addresses.id(req.params.addressId);
 
   if (!address) {

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../utils/api";
 import { DELIVERY_SLOTS } from "../utils/constants";
 import { formatCurrency } from "../utils/formatters";
+import { createIdempotencyKey } from "../utils/idempotency";
 import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import PageTransition from "../components/PageTransition";
@@ -72,18 +73,34 @@ const CheckoutPage = () => {
     navigate(`/orders/${orderId}`);
   };
 
-  const handleCOD = async () => {
-    const { data } = await api.post("/orders/cod", buildPayload());
+  const handleCOD = async (attemptKey) => {
+    const { data } = await api.post(
+      "/orders/cod",
+      buildPayload(),
+      {
+        headers: {
+          "x-idempotency-key": `${attemptKey}:cod`
+        }
+      }
+    );
     handleSuccess(data.order.orderId);
   };
 
-  const handleRazorpay = async () => {
+  const handleRazorpay = async (attemptKey) => {
     const scriptLoaded = await loadRazorpayScript();
     if (!scriptLoaded) {
       throw new Error("Unable to load Razorpay checkout");
     }
 
-    const { data } = await api.post("/payment/create-order", buildPayload());
+    const { data } = await api.post(
+      "/payment/create-order",
+      buildPayload(),
+      {
+        headers: {
+          "x-idempotency-key": `${attemptKey}:create-order`
+        }
+      }
+    );
 
     await new Promise((resolve, reject) => {
       const razorpay = new window.Razorpay({
@@ -102,7 +119,15 @@ const CheckoutPage = () => {
               razorpayPaymentId: response.razorpay_payment_id,
               razorpaySignature: response.razorpay_signature
             };
-            const verifyResponse = await api.post("/payment/verify", verifyPayload);
+            const verifyResponse = await api.post(
+              "/payment/verify",
+              verifyPayload,
+              {
+                headers: {
+                  "x-idempotency-key": `${attemptKey}:verify`
+                }
+              }
+            );
             handleSuccess(verifyResponse.data.order.orderId);
             resolve();
           } catch (error) {
@@ -139,11 +164,12 @@ const CheckoutPage = () => {
     }
 
     setPlacingOrder(true);
+    const attemptKey = createIdempotencyKey("checkout");
     try {
       if (paymentMethod === "cod") {
-        await handleCOD();
+        await handleCOD(attemptKey);
       } else {
-        await handleRazorpay();
+        await handleRazorpay(attemptKey);
       }
     } catch (error) {
       toast.error(error.response?.data?.message || error.message || "Checkout failed");

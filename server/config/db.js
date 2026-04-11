@@ -3,6 +3,13 @@ const { MongoMemoryServer } = require("mongodb-memory-server");
 
 let memoryServer;
 
+const READY_STATE_LABELS = {
+  0: "disconnected",
+  1: "connected",
+  2: "connecting",
+  3: "disconnecting"
+};
+
 const isPlaceholderUri = (uri = "") =>
   !uri ||
   uri.includes("your_mongodb_connection_string");
@@ -35,4 +42,29 @@ const connectDB = async () => {
   }
 };
 
-module.exports = connectDB;
+const getDbHealth = () => {
+  const state = mongoose.connection.readyState;
+  return {
+    readyState: state,
+    state: READY_STATE_LABELS[state] || "unknown",
+    host: mongoose.connection.host || "",
+    name: mongoose.connection.name || ""
+  };
+};
+
+const disconnectDB = async () => {
+  if (mongoose.connection.readyState !== 0) {
+    await mongoose.disconnect();
+  }
+
+  if (memoryServer) {
+    await memoryServer.stop();
+    memoryServer = null;
+  }
+};
+
+module.exports = {
+  connectDB,
+  disconnectDB,
+  getDbHealth
+};

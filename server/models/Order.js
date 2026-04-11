@@ -117,5 +117,12 @@ const orderSchema = new mongoose.Schema(
 );
 
 orderSchema.index({ storeId: 1, createdAt: -1 });
+orderSchema.index(
+  { razorpayPaymentId: 1 },
+  {
+    unique: true,
+    partialFilterExpression: { razorpayPaymentId: { $type: "string", $ne: "" } }
+  }
+);
 
 module.exports = mongoose.model("Order", orderSchema);
