@@ -600,6 +600,7 @@ To use a real MongoDB Atlas cluster, set `USE_MEMORY_DB=false` and configure `MO
 - **Role-based access control** — user / admin roles enforced on every protected route
 
 ---
+Updated for CodeRabbit test
 
 ## 📜 License
 
