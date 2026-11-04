@@ -26,7 +26,7 @@ If applicable, add screenshots or console output to help explain the problem.
 - **OS:** [e.g. Windows 11, macOS Sequoia, Ubuntu 24.04]
 - **Node.js Version:** [e.g. 18.20.0, 20.12.0]
 - **Browser:** [e.g. Chrome 124, Firefox 125, Safari 17]
-- **Database:** [In-Memory MongoDB / MongoDB Atlas]
+- **Database:** [PostgreSQL (Local / Cloud)]
 
 ## 📝 Additional Context
 Add any other context about the problem here (e.g., error response payloads, network tab status codes).

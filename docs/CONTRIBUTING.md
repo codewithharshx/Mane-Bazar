@@ -35,9 +35,6 @@ cd Mane-Bazar
 ### Step 2: Install Dependencies
 ```bash
 npm install
-cd server && npm ci
-cd ../client && npm ci
-cd ..
 ```
 
 ### Step 3: Create a Feature Branch
@@ -46,14 +43,17 @@ git checkout -b feat/your-feature-name
 ```
 
 ### Step 4: Make Changes & Test Locally
-- Run backend tests:
+- Run test suite:
   ```bash
-  cd server && npm test
+  npm test
   ```
-- Verify frontend builds and module imports:
+- Run TypeScript lint across workspaces:
   ```bash
-  cd client && npm run lint
-  cd client && npm run build
+  npm run lint
+  ```
+- Verify production builds:
+  ```bash
+  npm run build
   ```
 - Run secret scanning before committing:
   ```bash

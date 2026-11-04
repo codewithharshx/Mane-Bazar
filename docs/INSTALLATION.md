@@ -1,208 +1,199 @@
-# Mane Bazar — Installation & Local Setup Guide
+# Mane Bazar — Local Installation & Setup Guide
 
-Follow this guide to install, configure, and launch the **Mane Bazar** grocery platform locally.
-
----
-
-## 1. System Prerequisites
-
-Before starting, ensure your system meets these requirements:
-
-| Tool | Minimum Version | Recommended Version | Verification Command |
-|------|-----------------|---------------------|----------------------|
-| **Node.js** | `v18.0.0` | `v20.x` or `v22.x` (LTS) | `node -v` |
-| **npm** | `v9.0.0` | `v10.x` | `npm -v` |
-| **Git** | `v2.30.0` | Latest | `git --version` |
-
-> [!NOTE]
-> **No local MongoDB installation is required for development!**  
-> Mane Bazar includes built-in in-memory database support (`mongodb-memory-server`) that starts automatically during development.
+This guide walks you through setting up **Mane Bazar** on your local machine for development and testing.
 
 ---
 
-## 2. Fast-Track Quickstart
+## 1. Prerequisites
 
-### On Windows
-Run the automated startup batch script from PowerShell or Command Prompt:
+Before starting, ensure you have the following installed:
 
-```cmd
-git clone https://github.com/codewithharshx/Mane-Bazar.git
-cd Mane-Bazar
-run.bat
+- **Node.js:** `v18.20.0` or higher (tested with `v20.x` and `v22.x`). [Download Node.js](https://nodejs.org/)
+- **npm:** `v9.x` or higher (bundled with Node.js).
+- **PostgreSQL:** `v14` or higher (tested on PostgreSQL 16 & 18). [Download PostgreSQL](https://www.postgresql.org/download/)
+- **Git:** [Download Git](https://git-scm.com/)
+
+---
+
+## 2. PostgreSQL Database Setup
+
+Mane Bazar strictly requires **PostgreSQL**. Follow these steps to initialize your local database:
+
+### A. Start PostgreSQL Service
+
+- **Windows:** Ensure the `postgresql-x64-XX` service is running in Windows Services or via PowerShell:
+  ```powershell
+  Start-Service postgresql*
+  ```
+- **macOS (Homebrew):**
+  ```bash
+  brew services start postgresql@16
+  ```
+- **Linux (Ubuntu/Debian):**
+  ```bash
+  sudo systemctl start postgresql
+  ```
+
+### B. Create Database and User
+
+Log in to the PostgreSQL prompt:
+```bash
+psql -U postgres
 ```
 
-The script will automatically:
-1. Generate `server/.env` and `client/.env.local` templates if they do not exist.
-2. Install dependencies for the server and client.
-3. Prompt you to seed the 360+ item grocery catalog.
-4. Launch the backend API on `http://localhost:5000` and frontend on `http://localhost:5173`.
+Create the application database:
+```sql
+CREATE DATABASE mane_bazar;
+```
 
-### On macOS / Linux
-Run the Unix shell counterpart:
+*(Optional: If creating a dedicated application user)*
+```sql
+CREATE USER mane_bazar_user WITH PASSWORD 'secure_password';
+GRANT ALL PRIVILEGES ON DATABASE mane_bazar TO mane_bazar_user;
+```
+
+---
+
+## 3. Clone Repository & Install Dependencies
+
+Clone the Mane Bazar repository:
 
 ```bash
 git clone https://github.com/codewithharshx/Mane-Bazar.git
 cd Mane-Bazar
-chmod +x run.sh
-./run.sh
 ```
 
----
+Install monorepo dependencies across all packages and apps:
 
-## 3. Manual Step-by-Step Installation
-
-If you prefer installing dependencies manually or setting up custom scripts:
-
-### Step 1: Clone the Repository
-```bash
-git clone https://github.com/codewithharshx/Mane-Bazar.git
-cd Mane-Bazar
-```
-
-### Step 2: Install Root Dependencies
 ```bash
 npm install
 ```
 
-### Step 3: Configure and Install Backend (`server/`)
+---
+
+## 4. Environment Configuration
+
+Copy the example environment files for the monorepo workspaces:
+
+### A. Database Workspace
 ```bash
-cd server
-npm ci
+# Windows
+copy packages\database\.env.example packages\database\.env
 
-# Create your local environment file
-copy .env.example .env        # Windows Command Prompt
-# or: cp .env.example .env    # PowerShell / macOS / Linux
+# macOS / Linux
+cp packages/database/.env.example packages/database/.env
+```
+Edit `packages/database/.env` and update your PostgreSQL connection string:
+```ini
+DATABASE_URL="postgresql://postgres:your_password@localhost:5432/mane_bazar?schema=public"
 ```
 
-In `server/.env`, verify the following defaults:
-```env
-PORT=5000
-NODE_ENV=development
-MONGODB_MEMORY_SERVER=true
-MONGO_URI=
-CLIENT_URL=http://localhost:5173
-```
-
-### Step 4: Seed the Grocery Catalog
-Populate the database with the pre-configured 360+ kirana grocery dataset:
+### B. Backend Workspace
 ```bash
-npm run seed
-```
-*(This creates categories, products with realistic pricing and inventory levels, active coupons, and a default admin user).*
+# Windows
+copy apps\backend\.env.example apps\backend\.env
 
-### Step 5: Configure and Install Frontend (`client/`)
-Open a new terminal window:
+# macOS / Linux
+cp apps/backend/.env.example apps/backend/.env
+```
+Configure your credentials in `apps/backend/.env`:
+- `DATABASE_URL`: Match the database URL from above.
+- `JWT_SECRET`: Random string (min 32 characters).
+- `JWT_REFRESH_SECRET`: Random string (min 32 characters).
+- `RAZORPAY_KEY_ID`: Razorpay test key ID (`rzp_test_...`).
+- `RAZORPAY_KEY_SECRET`: Razorpay test key secret.
+
+### C. Frontend Workspace
 ```bash
-cd client
-npm ci
+# Windows
+copy apps\frontend\.env.example apps\frontend\.env
 
-# Create your local environment file
-copy .env.example .env.local        # Windows Command Prompt
-# or: cp .env.example .env.local    # PowerShell / macOS / Linux
+# macOS / Linux
+cp apps/frontend/.env.example apps/frontend/.env
 ```
-
-Verify `client/.env.local` contains:
-```env
-VITE_API_URL=http://localhost:5000/api
-```
+Ensure `VITE_API_URL` points to `http://localhost:4000/api`.
 
 ---
 
-## 4. Running the Development Servers
+## 5. Database Migration & Seeding
 
-### Option A: From Repository Root (Recommended)
-You can start both server and client concurrently with a single command from the root directory:
+### A. Run Prisma Migrations
+Apply version-controlled database schema migrations to your PostgreSQL database:
+
+```bash
+npm run db:migrate
+```
+
+### B. Seed Authentic Kirana Catalog & Demo Accounts
+Populate your database with categories, coupons, authentic kirana products, and demo accounts:
+
+```bash
+npm run db:seed
+```
+
+**Default Demo Credentials:**
+- **Admin Account:**
+  - Email: `admin@manebazar.com`
+  - Password: `Admin@123`
+- **Customer Account:**
+  - Email: `user@manebazar.com`
+  - Password: `User@123`
+
+---
+
+## 6. Running the Application
+
+### Option 1: One-Click Startup Script
+
+- **Windows:** Double-click `run.bat` or run:
+  ```cmd
+  run.bat
+  ```
+- **macOS / Linux:** Run:
+  ```bash
+  chmod +x run.sh
+  ./run.sh
+  ```
+
+### Option 2: Standard Monorepo Dev Command
+
+Start both backend and frontend concurrently:
+
 ```bash
 npm run dev
 ```
 
-### Option B: Separate Terminals
-
-**Terminal 1 — Backend API:**
+Or start them individually:
 ```bash
-cd server
-npm run dev
-# Server runs on: http://localhost:5000
-```
+# Terminal 1 — Backend API (Port 4000)
+npm run dev:backend
 
-**Terminal 2 — Frontend Application:**
-```bash
-cd client
-npm run dev
-# Frontend runs on: http://localhost:5173
+# Terminal 2 — Frontend Web App (Port 5173)
+npm run dev:frontend
 ```
 
 ---
 
-## 5. Health Checks & Verification
+## 7. Verifying Application Health
 
-After starting both servers, verify their health status:
+Open your browser and verify the services:
 
-### 1. API Liveness Check
-```bash
-curl http://localhost:5000/api/health
-```
-**Expected Response:**
-```json
-{
-  "status": "ok",
-  "service": "mane-bazar-api",
-  "requestId": "6a9e1452-f47a-4293-8321-7f9cb8ec081b",
-  "ts": "2026-11-04T09:30:00.000Z"
-}
-```
-
-### 2. Database Readiness Check
-```bash
-curl http://localhost:5000/api/ready
-```
-**Expected Response:**
-```json
-{
-  "status": "ready",
-  "service": "mane-bazar-api",
-  "uptimeSeconds": 15,
-  "db": {
-    "readyState": 1,
-    "status": "connected"
-  }
-}
-```
-
-### 3. Frontend Storefront Check
-Open your browser and navigate to:
-```
-http://localhost:5173
-```
-- You should see the Mane Bazar homepage with grocery categories, promotional banners, and product grids.
-- Try searching for "Atta", "Rice", or "Masala" in the search bar.
-- Test adding items to your cart drawer.
+- **Frontend Web App:** [http://localhost:5173](http://localhost:5173)
+- **Backend Health Check:** [http://localhost:4000/api/health](http://localhost:4000/api/health)
+  - Expected response: `{"status":"ok","service":"mane-bazar-api",...}`
+- **Prisma Studio (GUI Database Browser):**
+  ```bash
+  npm run db:studio
+  ```
+  Opens [http://localhost:5555](http://localhost:5555) to visually inspect PostgreSQL tables.
 
 ---
 
-## 6. Troubleshooting Common Issues
+## 8. Common Troubleshooting
 
-### Issue 1: Port `5000` or `5173` Already in Use
-**Symptom:** `Error: listen EADDRINUSE: address already in use :::5000`  
-**Solution:**
-- On Windows: Run `netstat -ano | findstr :5000` and terminate the PID with `taskkill /F /PID <pid>`.
-- Or modify `PORT=5001` in `server/.env` and adjust `VITE_API_URL=http://localhost:5001/api` in `client/.env.local`.
-
-### Issue 2: Windows PowerShell Script Execution Policy
-**Symptom:** `File npm.ps1 cannot be loaded because running scripts is disabled on this system.`  
-**Solution:**
-Use `npm.cmd` explicitly or set your user execution policy:
-```powershell
-Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
-```
-
-### Issue 3: In-Memory Database Download Timeout
-**Symptom:** `MongoServerSelectionError` or slow startup on first launch.  
-**Solution:**
-On the very first launch, `mongodb-memory-server` downloads a pre-compiled MongoDB binary (~70MB). Ensure your internet connection is active during initial initialization. Subsequent server launches start in under 2 seconds from cache.
-
-### Issue 4: EPERM or Permission Denied During `npm ci`
-**Symptom:** `EPERM: operation not permitted, mkdir ...`  
-**Solution:**
-Antivirus or active Node processes can occasionally lock folders in Windows. Close any open terminal sessions, stop running dev servers, and re-run `npm ci`.
-
+| Issue | Cause | Resolution |
+|-------|-------|------------|
+| `P1001: Can't reach database server` | PostgreSQL is not running or port is incorrect | Check that PostgreSQL is running on port 5432 and verify credentials in `.env`. |
+| `EADDRINUSE: port 4000 already in use` | Another process is occupying port 4000 | Kill process on port 4000 or configure `PORT=4001` in `apps/backend/.env`. |
+| `CORS error in browser console` | Origin mismatch | Ensure `CLIENT_URL=http://localhost:5173` is set in `apps/backend/.env`. |
+| `CSRF token missing or invalid` | Missing CSRF cookie on unsafe request | Ensure cookies are enabled in your browser; frontend automatically sends `x-csrf-token`. |

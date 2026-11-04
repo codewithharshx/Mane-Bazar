@@ -27,11 +27,11 @@ sequenceDiagram
     participant Client as React App
     participant Server as Express Backend
     participant Gateway as Razorpay Gateway
-    participant DB as MongoDB
+    participant DB as PostgreSQL
 
     Customer->>Client: Clicks "Proceed to Pay"
-    Client->>Server: POST /api/orders (Reserve stock & create order)
-    Server->>DB: Atomic Mongoose Transaction (Stock decremented, Order: PENDING)
+    Client->>Server: POST /api/payment/create-order (Reserve stock & create order)
+    Server->>DB: Atomic PostgreSQL Transaction (Stock decremented, Order: PENDING_PAYMENT)
     DB-->>Server: Order Created (e.g. MB-20261104-0012)
     Server->>Client: Order metadata + ID
     Client->>Server: POST /api/payment/create-order
@@ -98,7 +98,7 @@ In scenarios where the customer's browser crashes, network connectivity drops, o
 To prevent overselling grocery inventory during peak shopping periods:
 
 ### 5.1 Atomic Stock Decrement
-When an order is created (`createPendingPaymentOrder`), a Mongoose session starts an atomic transaction:
+When an order is created (`createPendingPaymentOrder`), Prisma executes an atomic PostgreSQL transaction (`prisma.$transaction`):
 - The required quantities are verified against available stock for each line item.
 - Stock is atomically decremented.
 - The order status is marked as `PENDING_PAYMENT`.

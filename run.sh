@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # Mane Bazar - Cross-Platform Startup Script (macOS / Linux)
+# PostgreSQL + TypeScript Monorepo
 # ==============================================================================
 
 set -e
@@ -10,59 +11,55 @@ cd "$SCRIPT_DIR"
 
 echo "=============================================="
 echo "      Mane Bazar - Startup Script (Unix)      "
+echo "    PostgreSQL + TypeScript Monorepo"
 echo "=============================================="
 echo ""
 
 # Setup environment files
-if [ ! -f "server/.env" ]; then
-  echo "Creating server/.env from example..."
-  cp "server/.env.example" "server/.env"
+if [ ! -f "apps/backend/.env" ]; then
+  echo "Creating apps/backend/.env from example..."
+  cp "apps/backend/.env.example" "apps/backend/.env"
 fi
 
-if [ ! -f "client/.env.local" ]; then
-  echo "Creating client/.env.local from example..."
-  cp "client/.env.example" "client/.env.local"
+if [ ! -f "packages/database/.env" ]; then
+  echo "Creating packages/database/.env from example..."
+  cp "packages/database/.env.example" "packages/database/.env"
+fi
+
+if [ ! -f "apps/frontend/.env" ]; then
+  echo "Creating apps/frontend/.env from example..."
+  cp "apps/frontend/.env.example" "apps/frontend/.env"
 fi
 
 # Install dependencies if missing
-if [ ! -d "server/node_modules" ]; then
-  echo "Installing server dependencies..."
-  (cd server && npm install)
-fi
-
-if [ ! -d "client/node_modules" ]; then
-  echo "Installing client dependencies..."
-  (cd client && npm install)
+if [ ! -d "node_modules" ]; then
+  echo "Installing monorepo dependencies..."
+  npm install
 fi
 
 echo ""
 echo "=============================================="
-echo "[Notice] Mane Bazar 360+ Kirana catalog ready"
+echo "Database: PostgreSQL with Prisma ORM"
 echo "=============================================="
-read -p "Do you want to run the database seeder? [y/N]: " -r RE_SEED
+read -p "Run Prisma database migrations? [y/N]: " -r RUN_MIGRATE
+if [[ "$RUN_MIGRATE" =~ ^[Yy]$ ]]; then
+  echo "Applying Prisma migrations to PostgreSQL..."
+  npm run db:migrate
+  echo "Migration complete!"
+  echo ""
+fi
+
+read -p "Run database seeder (demo catalog & users)? [y/N]: " -r RE_SEED
 if [[ "$RE_SEED" =~ ^[Yy]$ ]]; then
-  echo "Seeding database with Mane Bazar authentic grocery dataset..."
-  (cd server && npm run seed)
+  echo "Seeding database with authentic Mane Bazar grocery catalog..."
+  npm run db:seed
   echo "Seeding complete!"
   echo ""
 fi
 
 echo "Starting Backend API and Frontend Web App..."
-echo "- Backend:  http://localhost:5000"
-echo "- Frontend: http://localhost:5173"
+echo "- Backend API:  http://localhost:4000"
+echo "- Frontend App: http://localhost:5173"
 echo ""
 
-# Concurrently run server and client
-if command -v npx >/dev/null 2>&1; then
-  npx concurrently --kill-others \
-    "cd server && npm run dev" \
-    "cd client && npm run dev"
-else
-  (cd server && npm run dev) &
-  SERVER_PID=$!
-  (cd client && npm run dev) &
-  CLIENT_PID=$!
-  trap "kill $SERVER_PID $CLIENT_PID" EXIT
-  wait
-fi
-
+npm run dev

@@ -9,7 +9,7 @@ Mane Bazar is a production-oriented Indian grocery and daily-needs e-commerce pl
   - `apps/backend`: Node.js + Express 4 + Prisma Client + Zod + JWT + bcrypt + Razorpay SDK
   - `packages/shared`: Shared TypeScript domain models & Zod validation schemas
   - `packages/database`: Prisma schema definition, migration engine, and PostgreSQL client singleton
-- **Active Codebase**: `apps/` and `packages/` (legacy `client/` and `server/` preserved per policy).
+- **Active Codebase**: `apps/` and `packages/` (legacy `client/` and `server/` removed to eliminate prohibited MongoDB dependencies).
 
 ## 3. Initial Problems Found
 - Fresh fruits and fresh vegetables items/categories present in product seed files and HTML metadata.

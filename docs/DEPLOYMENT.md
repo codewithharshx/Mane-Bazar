@@ -1,148 +1,126 @@
 # Mane Bazar — Production Deployment Guide
 
-This guide outlines deployment procedures for releasing **Mane Bazar** to production across cloud platforms, including MongoDB Atlas configuration, SSL domains, OAuth redirects, and payment gateways.
+This guide outlines deployment procedures for releasing **Mane Bazar** to production across cloud environments, including PostgreSQL hosting, SSL certificates, OAuth redirects, and Razorpay production keys.
 
 ---
 
-## 1. Architecture Deployment Overview
+## 1. Production Architecture Overview
 
 ```
 ┌─────────────────────────────────┐      ┌─────────────────────────────────┐
-│     Frontend (Vercel / Netlify) │      │     Backend (Railway / Render)  │
-│     https://manebazar.com       │◄────►│     https://api.manebazar.com   │
+│   Frontend (Vercel / Netlify)   │      │    Backend (Railway / Render)   │
+│      https://manebazar.com      │◄────►│    https://api.manebazar.com    │
 └─────────────────────────────────┘      └────────────────┬────────────────┘
-                                                          │ Mongoose
+                                                          │ Prisma Client (SSL)
                                                           ▼
                                          ┌─────────────────────────────────┐
-                                         │       MongoDB Atlas Cluster     │
-                                         │       (AWS / Mumbai Region)     │
+                                         │       PostgreSQL Database       │
+                                         │   (AWS RDS / Neon / Railway)    │
                                          └─────────────────────────────────┘
 ```
 
 ---
 
-## 2. Database Setup (MongoDB Atlas)
+## 2. PostgreSQL Database Setup (Cloud Hosting)
 
-1. Sign in to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
-2. Create a new cluster (select an Indian region such as `ap-south-1 Mumbai` for low kirana network latency).
-3. **Database Access:** Create a database user with read/write permissions on the `mane-bazar` database.
-4. **Network Access:** Add your backend server's IP address (or `0.0.0.0/0` if deploying to serverless/container hosts like Railway or Render).
-5. Copy the standard connection string:
-   ```text
-   your_mongodb_atlas_connection_string
-   ```
+Mane Bazar requires **PostgreSQL**. Choose a managed cloud PostgreSQL provider:
+
+- **AWS RDS:** Engine: PostgreSQL 16+, region `ap-south-1` (Mumbai) for low latency across Indian merchants.
+- **Neon / Railway / Render / Supabase:** Managed serverless or containerized PostgreSQL instance.
+
+### A. Connection String Configuration
+Your production `DATABASE_URL` should look like:
+```ini
+DATABASE_URL="postgresql://db_user:db_password@db_host.region.rds.amazonaws.com:5432/mane_bazar?schema=public&sslmode=require"
+```
+
+### B. Applying Migrations in Production
+Before starting the backend, apply database migrations using Prisma's production command:
+```bash
+npx prisma migrate deploy
+```
+This safely applies all pending version-controlled migrations without resetting or dropping existing data.
 
 ---
 
-## 3. Backend Deployment (Render / Railway / VPS)
+## 3. Backend API Deployment (Railway / Render / Docker)
 
-### Option A: Railway or Render Container
-1. Connect your GitHub repository `Mane-Bazar`.
-2. Configure root directory / subfolder: `server`.
-3. Set **Build Command:** `npm ci`
-4. Set **Start Command:** `npm start`
-5. Configure Environment Variables in the service settings:
+### Option A: Railway or Render Deployment
+1. Connect your GitHub repository: `https://github.com/codewithharshx/Mane-Bazar`.
+2. Configure **Root Directory:** `apps/backend` (or monorepo root).
+3. **Build Command:**
+   ```bash
+   npm run build:shared && npm run build:database && npm run build:backend
+   ```
+4. **Pre-Deploy Command (Migrations):**
+   ```bash
+   npm --workspace=packages/database run prisma:migrate
+   ```
+5. **Start Command:**
+   ```bash
+   node apps/backend/dist/server.js
+   ```
+
+### Option B: Production Environment Variables
+
+Configure these variables in your hosting provider's dashboard:
 
 ```env
 NODE_ENV=production
-PORT=5000
-MONGODB_MEMORY_SERVER=false
-MONGO_URI=your_mongodb_atlas_connection_string
-JWT_SECRET=use_a_cryptographically_secure_random_string_32_chars_min
-JWT_REFRESH_SECRET=use_a_second_cryptographically_secure_random_string
+PORT=4000
+DATABASE_URL=postgresql://user:password@host:5432/mane_bazar?schema=public&sslmode=require
+JWT_SECRET=production_random_secret_minimum_64_hex_characters
+JWT_REFRESH_SECRET=production_random_refresh_secret_minimum_64_hex_characters
+JWT_EXPIRE=15m
+JWT_REFRESH_EXPIRE=7d
 CLIENT_URL=https://manebazar.com
 CORS_WHITELIST=https://manebazar.com,https://www.manebazar.com
+COOKIE_DOMAIN=manebazar.com
 COOKIE_SECURE=true
-COOKIE_SAME_SITE=strict
-GOOGLE_CLIENT_ID=your-production-google-client-id.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=your-production-google-client-secret
+COOKIE_SAME_SITE=lax
+GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-google-client-secret
 GOOGLE_CALLBACK_URL=https://api.manebazar.com/api/auth/google/callback
 RAZORPAY_KEY_ID=rzp_live_your_actual_key_id
-RAZORPAY_KEY_SECRET=your_actual_razorpay_secret
-RAZORPAY_WEBHOOK_SECRET=your_actual_webhook_secret
-EMAIL_HOST=smtp.sendgrid.net
-EMAIL_PORT=587
-EMAIL_USER=apikey
-EMAIL_PASS=your_sendgrid_api_key
-EMAIL_FROM=orders@manebazar.com
+RAZORPAY_KEY_SECRET=your_actual_live_secret
+RAZORPAY_WEBHOOK_SECRET=your_actual_live_webhook_secret
+SMTP_HOST=smtp.sendgrid.net
+SMTP_PORT=587
+SMTP_USER=apikey
+SMTP_PASS=your_sendgrid_or_ses_api_key
+EMAIL_FROM="Mane Bazar <orders@manebazar.com>"
 ADMIN_EMAIL=admin@manebazar.com
 ```
 
-### Option B: Linux VPS (Ubuntu / Debian) with PM2 & Nginx
-1. Clone the repository and install dependencies:
-   ```bash
-   cd /var/www/mane-bazar/server
-   npm ci --omit=dev
+---
+
+## 4. Frontend Deployment (Vercel / Netlify / Cloudflare Pages)
+
+1. Connect your GitHub repository to Vercel or Netlify.
+2. Configure project settings:
+   - **Framework Preset:** Vite
+   - **Root Directory:** `apps/frontend`
+   - **Build Command:** `npm run build`
+   - **Output Directory:** `dist`
+3. Configure Environment Variables:
+   ```env
+   VITE_API_URL=https://api.manebazar.com/api
+   VITE_RAZORPAY_KEY_ID=rzp_live_your_actual_key_id
+   VITE_GOOGLE_CLIENT_ID=your-google-client-id.apps.googleusercontent.com
    ```
-2. Start the application using PM2 process manager:
-   ```bash
-   npm install -g pm2
-   pm2 start server.js --name "mane-bazar-api"
-   pm2 startup
-   pm2 save
-   ```
-3. Configure Nginx reverse proxy with Certbot SSL:
-   ```nginx
-   server {
-       server_name api.manebazar.com;
-       location / {
-           proxy_pass http://localhost:5000;
-           proxy_http_version 1.1;
-           proxy_set_header Upgrade $http_upgrade;
-           proxy_set_header Connection 'upgrade';
-           proxy_set_header Host $host;
-           proxy_cache_bypass $http_upgrade;
-       }
-   }
-   ```
+4. Configure SPA routing rewrites:
+   - For Vercel, ensure `vercel.json` rewrites all routes to `/index.html`:
+     ```json
+     {
+       "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+     }
+     ```
 
 ---
 
-## 4. Frontend Deployment (Vercel / Netlify)
+## 5. Post-Deployment Verification
 
-### On Vercel
-1. Import your GitHub repository `Mane-Bazar`.
-2. Configure **Root Directory:** `client`.
-3. Framework Preset: **Vite**.
-4. Build Command: `npm run build`.
-5. Output Directory: `dist`.
-6. Add Environment Variables:
-   - `VITE_API_URL`: `https://api.manebazar.com/api`
-   - `VITE_RAZORPAY_KEY_ID`: `rzp_live_your_actual_key_id`
-   - `VITE_GOOGLE_CLIENT_ID`: `your-production-google-client-id.apps.googleusercontent.com`
-7. Click **Deploy**.
-
----
-
-## 5. External Service Production Configurations
-
-### 5.1 Google Cloud Console OAuth
-1. Open [Google Cloud Console Credentials](https://console.cloud.google.com/apis/credentials).
-2. Edit your OAuth 2.0 Web Client ID.
-3. Add **Authorized JavaScript Origins:**
-   - `https://manebazar.com`
-4. Add **Authorized Redirect URIs:**
-   - `https://api.manebazar.com/api/auth/google/callback`
-
-### 5.2 Razorpay Production Gateway
-1. Complete KYC in the [Razorpay Dashboard](https://dashboard.razorpay.com/) to activate Live Mode.
-2. Generate Live API Keys (`rzp_live_...`).
-3. Set Webhook URL:
-   - URL: `https://api.manebazar.com/api/payment/webhook`
-   - Secret: Configure a secret matching `RAZORPAY_WEBHOOK_SECRET`.
-   - Active Events: `payment.captured`, `payment.failed`, `refund.processed`.
-
----
-
-## 6. Post-Deployment Verification
-
-1. Ping API health:
-   ```bash
-   curl -I https://api.manebazar.com/api/health
-   ```
-2. Ping database readiness:
-   ```bash
-   curl https://api.manebazar.com/api/ready
-   ```
-3. Test customer registration and complete a live test transaction.
-4. Verify SSL certificate grade (A+) on [Qualys SSL Labs](https://www.ssllabs.com/ssltest/).
+1. **API Health Check:** Send a request to `https://api.manebazar.com/api/health` and verify HTTP 200 with `{ "status": "ok" }`.
+2. **Product Catalog:** Verify `https://api.manebazar.com/api/products` returns seeded grocery items.
+3. **SSL Validation:** Confirm HTTPS padlock appears for both `manebazar.com` and `api.manebazar.com`.
+4. **Razorpay Webhooks:** Set up your webhook URL in Razorpay Dashboard pointing to `https://api.manebazar.com/api/payment/webhook` with events `payment.captured`, `payment.failed`, and `refund.processed`.

@@ -30,15 +30,15 @@ Mane Bazar implements a modern, secure hybrid authentication model:
 ## 2. Customer Registration & Verification Flow
 
 ### 2.1 Password Hashing
-- User passwords are automatically salted and hashed using **Bcrypt** with 12 salt rounds before persisting to MongoDB.
+- User passwords are automatically salted and hashed using **Bcrypt** with 12 salt rounds before persisting to PostgreSQL.
 - Raw passwords are never stored in plaintext or logged.
 
 ### 2.2 6-Digit Email Verification (OTP)
 When a customer registers:
 1. An ephemeral 6-digit cryptographic OTP is generated via `crypto.randomInt()`.
-2. The OTP record is saved in the `OTP` collection with an automated 10-minute TTL index (`expireAfterSeconds: 0`).
-3. An email containing the OTP is queued via BullMQ / Nodemailer.
-4. **Policy Enforcement (`server/services/otpPolicy.js`):**
+2. The OTP record is saved in PostgreSQL with an automated 10-minute expiration timestamp.
+3. An email containing the OTP is queued via Nodemailer.
+4. **Policy Enforcement (`apps/backend/src/infrastructure/services/otpPolicy.ts`):**
    - **Cooldown:** Customers must wait 60 seconds before requesting a new OTP.
    - **Max Attempts:** The OTP is invalidated if entered incorrectly 5 times.
    - **Hourly Limit:** A maximum of 5 OTP dispatches per email address per hour is strictly enforced.
@@ -65,7 +65,7 @@ When a customer registers:
    ```
 
 ### 3.2 Token Refresh Protocol
-When the frontend Axios interceptor (`client/src/services/apiClient.js`) detects a `401 Unauthorized` response with an expired access token:
+When the frontend Axios interceptor (`apps/frontend/src/services/apiClient.ts`) detects a `401 Unauthorized` response with an expired access token:
 1. It pauses pending requests and automatically calls `POST /api/auth/refresh-token`.
 2. The browser automatically sends the `refreshToken` cookie.
 3. The server verifies the token signature and verifies the user exists in the database.
@@ -73,10 +73,9 @@ When the frontend Axios interceptor (`client/src/services/apiClient.js`) detects
 5. The failed request is retried seamlessly without disrupting the customer's checkout or browsing experience.
 
 ### 3.3 User Profile Sanitization (`/api/auth/me`)
-When user profile data is queried, sensitive fields are stripped using `sanitizeMeUser()`:
+When user profile data is queried, sensitive fields are stripped:
 - Hashed passwords (`password`)
-- Verification tokens & OTP hashes (`verificationToken`, `resetPasswordToken`, `resetPasswordExpire`)
-- Internal database version keys (`__v`)
+- Verification tokens & OTP hashes (`verificationToken`, `passwordResetTokenHash`)
 
 ---
 
@@ -117,9 +116,9 @@ Mane Bazar defines two primary authorization roles:
 | `admin` | All customer capabilities plus: access merchant analytics dashboard, add/edit/delete products, modify inventory levels, update order fulfillment stages, view merchant audit logs, manage user roles. |
 
 ### 5.1 Route Protection Enforcement
-- **Backend Middleware (`server/middleware/authMiddleware.js`):**
+- **Backend Middleware (`apps/backend/src/presentation/middleware/authMiddleware.ts`):**
   - `protect`: Verifies JWT signature and binds `req.user`.
-  - `requireAdmin`: Validates that `req.user.role === 'admin'`. Unauthorized requests receive `403 Forbidden`.
-- **Frontend Guards (`client/src/components/ProtectedRoute.jsx`):**
+  - `adminOnly`: Validates that `req.user.role === 'ADMIN'`. Unauthorized requests receive `403 Forbidden`.
+- **Frontend Guards (`apps/frontend/src/components/ProtectedRoute.tsx`):**
   - `<ProtectedRoute>` checks auth state and role before rendering protected pages. Unauthenticated customers are redirected to `/login` with an automatic `returnUrl`.
 

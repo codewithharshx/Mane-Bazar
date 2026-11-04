@@ -22,9 +22,11 @@ Closes #[issue-number]
 
 Before submitting this PR, please verify:
 - [ ] My code adheres to the project's coding standards and style guidelines.
-- [ ] I have run `npm run lint` in `client/` and verified 0 build/lint warnings.
-- [ ] I have run `npm test` in `server/` and verified all automated tests pass.
+- [ ] I have run `npm run lint` and verified 0 TypeScript or lint errors.
+- [ ] I have run `npm test` and verified all automated tests pass.
+- [ ] I have run `npm run build` and verified all workspaces build cleanly.
+- [ ] I have run `npx secretlint "**/*"` and ensured no secret leaks.
 - [ ] I have not committed any personal credentials, real API secrets, or `.env` files.
-- [ ] I have updated corresponding documentation in `docs/` if modifying APIs or environment variables.
+- [ ] I have updated corresponding documentation in `docs/` if modifying APIs or database schemas.
 - [ ] New and existing tests pass locally with my changes.
 

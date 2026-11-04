@@ -1,4 +1,4 @@
-name: CI — Lint, Test, Audit
+name: CI — Lint, Build, Test & Security Audit
 
 on:
   push:
@@ -9,24 +9,46 @@ on:
 jobs:
   # Job 1: Secret Scanning
   secrets:
-    name: Secret Scan
+    name: Secret Lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.x
+          cache: npm
+
+      - name: Install Root Dependencies
+        run: npm ci
 
       - name: Run SecretLint
-        uses: secretlint/secretlint-action@v0.2.0
-        with:
-          secretlintrcjson: .secretlintrc.json
+        run: npx secretlint "**/*"
 
-  # Job 2: Client (Frontend) Build & Validation
-  client:
-    name: Client — Lint & Build (Node ${{ matrix.node-version }})
+  # Job 2: Monorepo Build, Lint & Tests
+  monorepo:
+    name: Monorepo — Build, Lint & Test (Node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [18.x, 20.x, 22.x]
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password123
+          POSTGRES_DB: mane_bazar_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -36,92 +58,30 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
-          cache-dependency-path: client/package-lock.json
+          cache-dependency-path: package-lock.json
 
-      - name: Install Client Dependencies
-        working-directory: client
+      - name: Install Monorepo Dependencies
         run: npm ci
 
-      - name: Verify Client Modules & Lint
-        working-directory: client
+      - name: Generate Prisma Client
+        run: npm run db:generate
+        env:
+          DATABASE_URL: postgresql://postgres:password123@localhost:5432/mane_bazar_test?schema=public
+
+      - name: Lint All Workspaces (TypeScript check)
         run: npm run lint
 
-      - name: Build Production Bundle
-        working-directory: client
+      - name: Build All Workspaces (Shared, Database, Backend, Frontend)
         run: npm run build
         env:
-          VITE_API_URL: http://localhost:5000/api
-          VITE_RAZORPAY_KEY_ID: rzp_test_mock_key_for_ci
+          DATABASE_URL: postgresql://postgres:password123@localhost:5432/mane_bazar_test?schema=public
+          VITE_API_URL: http://localhost:4000/api
+          VITE_RAZORPAY_KEY_ID: rzp_test_mock_for_ci
           VITE_GOOGLE_CLIENT_ID: mock-client-id.apps.googleusercontent.com
 
-  # Job 3: Server (Backend) Tests & Integrity
-  server:
-    name: Server — Test Suite (Node ${{ matrix.node-version }})
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [18.x, 20.x]
-    services:
-      mongodb:
-        image: mongo:7
-        options: >-
-          --health-cmd mongosh
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 27017:27017
-      redis:
-        image: redis:7
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 6379:6379
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: npm
-          cache-dependency-path: server/package-lock.json
-
-      - name: Install Server Dependencies
-        working-directory: server
-        run: npm ci
-
-      - name: Run Backend Automated Tests
-        working-directory: server
+      - name: Run Test Suite
         run: npm test
         env:
-          NODE_ENV: test
-          MONGO_URI: mongodb://localhost:27017/mane-bazar-test
-          MONGODB_MEMORY_SERVER: false
-          REDIS_URL: redis://localhost:6379
-          JWT_SECRET: ci-test-jwt-secret-minimum-32-chars-long-value!!
-          JWT_REFRESH_SECRET: ci-test-jwt-refresh-secret-min-32-chars-long-value!!
-          RAZORPAY_KEY_ID: rzp_test_mock_key_for_ci
-          RAZORPAY_KEY_SECRET: mock_secret_value_for_ci_testing_only
-          RAZORPAY_WEBHOOK_SECRET: mock_webhook_secret_for_ci_testing_only
-
-  # Job 4: Pipeline Summary
-  quality:
-    name: Quality Summary
-    runs-on: ubuntu-latest
-    needs: [secrets, client, server]
-    if: always()
-    steps:
-      - name: Report Status
-        run: |
-          echo "=============================================="
-          echo "          Mane Bazar CI Pipeline Status       "
-          echo "=============================================="
-          echo "✅ Secret Scanning Passed"
-          echo "✅ Frontend Validation & Production Build Passed"
-          echo "✅ Backend Test Suite Passed Across Node 18 & 20"
-          echo "=============================================="
+          DATABASE_URL: postgresql://postgres:password123@localhost:5432/mane_bazar_test?schema=public
+          JWT_SECRET: ci-test-secret-min-32-chars-long-here!
+          JWT_REFRESH_SECRET: ci-refresh-secret-min-32-chars-long!
