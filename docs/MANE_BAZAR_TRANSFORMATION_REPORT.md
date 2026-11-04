@@ -196,6 +196,12 @@ ORM: Prisma 5.22
 
 ---
 
+### 2.5 Quick-Commerce UI/UX Polish & Visual Verification (Blinkit-Grade Standard)
+- **Eliminated Overlapping Badge Glitch:** Resolved an overlap in `ProductCard.jsx` where the wishlist heart icon and green discount percentage tag collided at the top-left of product cards. Explicitly anchored the discount tag to top-left (`left: 8px`) and the circular wishlist button to top-right (`right: 8px`), verified with headless Chrome rendered crops.
+- **Permanent High-Converting Header Actions:** Ensured the customer Login CTA button, prominent search bar, and vibrant green Blinkit-style Cart pill remain visible and accessible across both desktop and mobile viewports.
+- **Fixed Category Array Ingestion:** Normalized array payload parsing in `HomePage.tsx` to immediately render all 12 staple grocery categories with tailored pastel iconography.
+- **Automated Visual QA Suite:** Captured real, pixel-accurate interface screenshots directly into `screenshots/` (`homepage.png`, `products.png`, `mobile-view.png`, `stores.png`, `login.png`), replacing all dummy placeholders in `README.md`.
+
 ## 7. Conclusion
 
 Mane Bazar now stands as an enterprise-grade, authentic Indian quick-commerce grocery platform. By combining the digitized real-world heritage of the physical Kasegaon Kirana store ("Since 1984") with modern quick-commerce UI/UX, PostgreSQL relational integrity, and rock-solid full-stack code quality, the repository is ready for public presentation, customer shopping, and merchant operations.

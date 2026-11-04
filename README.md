@@ -55,22 +55,19 @@ In the Indian retail landscape, independent kirana merchants face aggressive com
 
 ## 📸 Application Previews
 
-> [!NOTE]
-> High-resolution interface captures can be placed in [`screenshots/`](screenshots/). See [`screenshots/README.md`](screenshots/README.md) for capture guidelines.
-
 <div align="center">
 
-| 🏪 Storefront & Discovery | 📦 Product Catalog & Filters |
+| 🏪 Storefront & Discovery (Desktop) | 📦 Product Catalog & Filters |
 |:---:|:---:|
-| ![Homepage Preview](screenshots/homepage.png)<br><sub>*Storefront banner, categories & promotional strips*</sub> | ![Products Preview](screenshots/products.png)<br><sub>*Faceted category search, price sorting & badges*</sub> |
+| ![Homepage Preview](screenshots/homepage.png)<br><sub>*Bento banner, 12 pastel categories, flash deals & Kirana trust guarantee*</sub> | ![Products Preview](screenshots/products.png)<br><sub>*Faceted category search, price sorting, brand tags & 15-min delivery badges*</sub> |
 
-| 🛒 Shopping Cart & Discounts | 💳 Secure Checkout & Payments |
+| 🏬 Local Stores & Physical Outlets | 🔐 Authentication & Session Security |
 |:---:|:---:|
-| ![Cart Preview](screenshots/cart.png)<br><sub>*Slide-over drawer, quantity limits & coupon engine*</sub> | ![Checkout Preview](screenshots/checkout.png)<br><sub>*Saved addresses, Razorpay UPI & Cash on Delivery*</sub> |
+| ![Stores Preview](screenshots/stores.png)<br><sub>*Authentic Kasegaon store location, operating hours & GSTIN verification*</sub> | ![Login Preview](screenshots/login.png)<br><sub>*Dual-token JWT, instant demo credentials, OTP recovery & Google OAuth*</sub> |
 
-| 📊 Merchant Analytics Dashboard | 📱 Mobile Responsive Experience |
-|:---:|:---:|
-| ![Admin Dashboard](screenshots/admin-dashboard.png)<br><sub>*Revenue curves, order status & inventory alerts*</sub> | ![Mobile View](screenshots/mobile-view.png)<br><sub>*Touch-optimized bottom navigation & quick cart*</sub> |
+| 📱 Mobile-First Quick Commerce |
+|:---:|
+| ![Mobile View](screenshots/mobile-view.png)<br><sub>*Touch-optimized Blinkit-grade navigation, instant add-to-cart & search*</sub> |
 
 </div>
 
