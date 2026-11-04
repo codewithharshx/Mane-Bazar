@@ -64,7 +64,7 @@ img {
 }
 
 /* ══════════════════════════════════════════════════════════════════════════
-   GLASSMORPHISM
+   GLASSMORPHISM & STITCH MCP HELPERS
 ══════════════════════════════════════════════════════════════════════════ */
 .glass-panel {
   background: var(--glass);
@@ -72,6 +72,30 @@ img {
   box-shadow: 0 8px 32px rgba(15, 23, 42, 0.06);
   -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
+}
+
+.green-gradient {
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+}
+
+.text-green-gradient {
+  background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at top right, #dcfce7 0%, #f8fafc 55%);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
 }
 
 .glass-card {
