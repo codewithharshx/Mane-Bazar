@@ -1,40 +1,54 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import api, { clearStoredAuth, getStoredAuth, saveStoredAuth } from "../utils/api";
+import { authApi } from "../services/authApi";
+import { clearStoredAuth, getStoredAuth, saveStoredAuth } from "../services/apiClient";
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(getStoredAuth().user || null);
-  const [accessToken, setAccessToken] = useState(getStoredAuth().accessToken || "");
   const [loading, setLoading] = useState(false);
+  // Prevents the bootstrap effect from running twice in React Strict Mode
+  const bootstrapped = useRef(false);
 
+  // ── Bootstrap auth on mount (or when accessToken changes) ────────────────
   useEffect(() => {
+    if (bootstrapped.current) return;
+    bootstrapped.current = true;
+
     const bootstrapAuth = async () => {
-      if (accessToken || user) return;
       try {
-        const { data } = await api.post("/auth/refresh-token");
-        setUser(data.user);
-        setAccessToken(data.accessToken);
-        saveStoredAuth({ user: data.user, accessToken: data.accessToken });
-      } catch (error) {
-        clearStoredAuth();
+        await authApi.csrfToken();
+        const { data } = await authApi.me();
+        setUser(data);
+        saveStoredAuth({ user: data });
+      } catch {
+        try {
+          const { data } = await authApi.refreshToken();
+          setUser(data.user);
+          saveStoredAuth({ user: data.user });
+        } catch {
+          clearStoredAuth();
+          setUser(null);
+        }
       }
     };
 
     bootstrapAuth();
-  }, [accessToken, user]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ── Persist auth to storage whenever it changes ───────────────────────────
   useEffect(() => {
-    if (user || accessToken) {
-      saveStoredAuth({ user, accessToken });
+    if (user) {
+      saveStoredAuth({ user });
     }
-  }, [user, accessToken]);
+  }, [user]);
+
+  // ── Auth actions ──────────────────────────────────────────────────────────
 
   const handleAuthSuccess = (data, message) => {
     setUser(data.user);
-    setAccessToken(data.accessToken);
-    saveStoredAuth({ user: data.user, accessToken: data.accessToken });
+    saveStoredAuth({ user: data.user });
     if (message) toast.success(message);
     return data;
   };
@@ -42,8 +56,9 @@ export const AuthProvider = ({ children }) => {
   const register = async (payload) => {
     setLoading(true);
     try {
-      const { data } = await api.post("/auth/register", payload);
-      return handleAuthSuccess(data, "Welcome to Mane Bazar");
+      const { data } = await authApi.register(payload);
+      toast.success(data.message || "Verification email sent");
+      return data;
     } finally {
       setLoading(false);
     }
@@ -52,7 +67,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (payload) => {
     setLoading(true);
     try {
-      const { data } = await api.post("/auth/login", payload);
+      const { data } = await authApi.login(payload);
       return handleAuthSuccess(data, "Logged in successfully");
     } finally {
       setLoading(false);
@@ -62,53 +77,83 @@ export const AuthProvider = ({ children }) => {
   const loginWithGoogle = async (credential) => {
     setLoading(true);
     try {
-      const { data } = await api.post("/auth/google", { credential });
+      const { data } = await authApi.googleAuth(credential);
       return handleAuthSuccess(data, "Signed in with Google");
     } finally {
       setLoading(false);
     }
   };
 
+  const resendVerification = async (email) => {
+    const { data } = await authApi.resendVerification(email);
+    toast.success(data.message);
+    return data;
+  };
+
+  const requestPasswordReset = async (email) => {
+    try {
+      const { data } = await authApi.requestPasswordReset(email);
+      toast.success(data.message || "Password reset link sent to your email");
+      return data;
+    } catch (error) {
+      const msg = error.response?.data?.message || "Failed to request password reset";
+      toast.error(msg);
+      throw error;
+    }
+  };
+
+  const resetPassword = async (token, password) => {
+    try {
+      const { data } = await authApi.resetPassword(token, password);
+      toast.success(data.message || "Password reset successful");
+      return data;
+    } catch (error) {
+      const msg = error.response?.data?.message || "Failed to reset password";
+      toast.error(msg);
+      throw error;
+    }
+  };
+
   const logout = async () => {
     try {
-      await api.post("/auth/logout");
-    } catch (error) {
-      // Ignore logout failures and clear local auth anyway.
+      await authApi.logout();
+    } catch {
+      // Ignore logout API failures — clear locally regardless
     } finally {
       setUser(null);
-      setAccessToken("");
       clearStoredAuth();
       toast.success("Logged out successfully");
     }
   };
 
   const refreshProfile = async () => {
-    const { data } = await api.get("/auth/me");
+    const { data } = await authApi.me();
     setUser(data);
+    saveStoredAuth({ user: data });
     return data;
   };
 
   const updateProfile = async (payload) => {
-    const { data } = await api.put("/auth/profile", payload);
+    const { data } = await authApi.updateProfile(payload);
     setUser(data.user);
     toast.success(data.message);
     return data.user;
   };
 
   const addAddress = async (payload) => {
-    const { data } = await api.post("/auth/addresses", payload);
+    const { data } = await authApi.addAddress(payload);
     setUser((current) => ({ ...current, addresses: data.addresses }));
     toast.success(data.message);
   };
 
   const updateAddress = async (addressId, payload) => {
-    const { data } = await api.put(`/auth/addresses/${addressId}`, payload);
+    const { data } = await authApi.updateAddress(addressId, payload);
     setUser((current) => ({ ...current, addresses: data.addresses }));
     toast.success(data.message);
   };
 
   const deleteAddress = async (addressId) => {
-    const { data } = await api.delete(`/auth/addresses/${addressId}`);
+    const { data } = await authApi.deleteAddress(addressId);
     setUser((current) => ({ ...current, addresses: data.addresses }));
     toast.success(data.message);
   };
@@ -116,13 +161,16 @@ export const AuthProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       user,
-      accessToken,
-      isAuthenticated: Boolean(user && accessToken),
+      isAuthenticated: Boolean(user),
       isAdmin: user?.role === "admin",
+      isVerified: user?.isVerified === true,
       loading,
       register,
       login,
       loginWithGoogle,
+      resendVerification,
+      requestPasswordReset,
+      resetPassword,
       logout,
       refreshProfile,
       updateProfile,
@@ -130,7 +178,7 @@ export const AuthProvider = ({ children }) => {
       updateAddress,
       deleteAddress
     }),
-    [user, accessToken, loading]
+    [user, loading] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

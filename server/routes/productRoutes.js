@@ -31,6 +31,7 @@ router.post(
     body("mrp").isFloat({ min: 0 }).withMessage("MRP must be valid"),
     body("discount").isFloat({ min: 0, max: 100 }).withMessage("Discount must be valid"),
     body("stock").isInt({ min: 0 }).withMessage("Stock must be valid"),
+    body("image").optional({ checkFalsy: true }).isURL({ require_protocol: true }).withMessage("Image must be a valid URL"),
     body("description").trim().notEmpty().withMessage("Description is required")
   ],
   validateRequest,
@@ -40,7 +41,19 @@ router.put(
   "/:id",
   protect,
   adminOnly,
-  [param("id").isMongoId().withMessage("Invalid product id")],
+  [
+    param("id").isMongoId().withMessage("Invalid product id"),
+    body("name").optional().trim().notEmpty().withMessage("Name cannot be empty"),
+    body("brand").optional().trim().notEmpty().withMessage("Brand cannot be empty"),
+    body("category").optional().isMongoId().withMessage("Valid category is required"),
+    body("storeId").optional().isMongoId().withMessage("Valid store id is required"),
+    body("slug").optional().trim().notEmpty().withMessage("Slug cannot be empty"),
+    body("price").optional().isFloat({ min: 0 }).withMessage("Price must be valid"),
+    body("mrp").optional().isFloat({ min: 0 }).withMessage("MRP must be valid"),
+    body("discount").optional().isFloat({ min: 0, max: 100 }).withMessage("Discount must be valid"),
+    body("stock").optional().isInt({ min: 0 }).withMessage("Stock must be valid"),
+    body("image").optional({ checkFalsy: true }).isURL({ require_protocol: true }).withMessage("Image must be a valid URL")
+  ],
   validateRequest,
   updateProduct
 );

@@ -69,7 +69,16 @@ router.put(
   "/:storeId",
   protect,
   adminOnly,
-  [param("storeId").isMongoId().withMessage("Invalid store id")],
+  [
+    param("storeId").isMongoId().withMessage("Invalid store id"),
+    body("name").optional().trim().notEmpty().withMessage("Store name cannot be empty"),
+    body("slug").optional().trim().notEmpty().withMessage("Store slug cannot be empty"),
+    body("address").optional().trim().notEmpty().withMessage("Store address cannot be empty"),
+    body("city").optional().trim().notEmpty().withMessage("Store city cannot be empty"),
+    body("pincode").optional().trim().notEmpty().withMessage("Store pincode cannot be empty"),
+    body("lat").optional().isFloat({ min: -90, max: 90 }).withMessage("lat must be valid"),
+    body("lng").optional().isFloat({ min: -180, max: 180 }).withMessage("lng must be valid")
+  ],
   validateRequest,
   updateStore
 );

@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { formatCurrency } from "../utils/formatters";
 import { useCart } from "../context/CartContext";
+import ProductImage from "./ProductImage";
 
 const QuickViewModal = ({ product, onClose }) => {
   const { addToCart } = useCart();
@@ -24,10 +25,11 @@ const QuickViewModal = ({ product, onClose }) => {
             className="glass-panel max-h-[90vh] w-full max-w-4xl overflow-auto rounded-[32px] p-5"
           >
             <div className="grid gap-6 md:grid-cols-[1.1fr_1fr]">
-              <img
-                src={product.images?.[0]}
+              <ProductImage
+                product={product}
                 alt={product.name}
-                className="h-80 w-full rounded-[28px] object-cover"
+                containerClassName="h-80 rounded-[28px]"
+                className="h-full w-full rounded-[28px] object-cover"
               />
               <div className="space-y-4">
                 <p className="text-sm font-semibold uppercase tracking-[0.24em] text-green-700">

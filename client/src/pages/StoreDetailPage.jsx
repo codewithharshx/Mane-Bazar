@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
-import api from "../utils/api";
+import { productApi } from "../services/productApi";
+import { storeApi } from "../services/storeApi";
 import PageTransition from "../components/PageTransition";
 import ProductCard from "../components/ProductCard";
 import QuickViewModal from "../components/QuickViewModal";
@@ -57,8 +58,8 @@ const StoreDetailPage = () => {
     setLoading(true);
     try {
       const [{ data: storeData }, { data: productData }] = await Promise.all([
-        api.get(`/stores/${storeId}`),
-        api.get(`/products?store=${storeId}&limit=16`)
+        storeApi.getById(storeId),
+        productApi.list({ store: storeId, limit: 16 })
       ]);
       setStore(storeData);
       setProducts(productData.products || []);
@@ -82,7 +83,7 @@ const StoreDetailPage = () => {
 
     setSavingReview(true);
     try {
-      await api.post(`/stores/${storeId}/reviews`, {
+      await storeApi.createReview(storeId, {
         rating: Number(reviewForm.rating),
         review: reviewForm.review
       });

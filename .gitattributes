@@ -1,0 +1,23 @@
+# Normalize all line endings to LF on commit, checkout as LF everywhere
+* text=auto eol=lf
+
+# Force binary for media / cert files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.pdf binary
+*.ttf binary
+*.woff binary
+*.woff2 binary
+*.eot binary
+
+# Shell scripts — LF only
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Windows batch files — keep CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf

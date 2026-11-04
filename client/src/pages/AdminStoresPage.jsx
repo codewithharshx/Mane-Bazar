@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import api from "../utils/api";
+import { storeApi } from "../services/storeApi";
 import AdminShell from "../components/AdminShell";
 
 const initialStoreForm = {
@@ -30,7 +30,7 @@ const AdminStoresPage = () => {
 
   const fetchStores = async () => {
     try {
-      const { data } = await api.get("/stores?limit=100");
+      const { data } = await storeApi.list({ limit: 100 });
       setStores(data.stores || []);
     } catch (error) {
       toast.error("Unable to load stores");
@@ -62,10 +62,10 @@ const AdminStoresPage = () => {
     event.preventDefault();
     try {
       if (editingId) {
-        await api.put(`/stores/${editingId}`, mappedPayload);
+        await storeApi.update(editingId, mappedPayload);
         toast.success("Store updated");
       } else {
-        await api.post("/stores", mappedPayload);
+        await storeApi.create(mappedPayload);
         toast.success("Store created");
       }
       setForm(initialStoreForm);
@@ -101,7 +101,7 @@ const AdminStoresPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await api.delete(`/stores/${id}`);
+      await storeApi.remove(id);
       toast.success("Store deleted");
       fetchStores();
     } catch (error) {

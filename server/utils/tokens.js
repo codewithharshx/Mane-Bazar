@@ -15,24 +15,69 @@ const generateRefreshToken = (userId) =>
 const hashToken = (token = "") =>
   crypto.createHash("sha256").update(String(token)).digest("hex");
 
-const setRefreshTokenCookie = (res, token) => {
+const buildCookieOptions = () => {
   const config = getRuntimeConfig();
+  return {
+    secure: config.cookieSecure,
+    sameSite: config.cookieSameSite
+  };
+};
+
+const setAccessTokenCookie = (res, token) => {
+  const config = getRuntimeConfig();
+  const baseOptions = buildCookieOptions();
+
+  res.cookie("accessToken", token, {
+    httpOnly: true,
+    ...baseOptions,
+    maxAge: 15 * 60 * 1000
+  });
+};
+
+const setRefreshTokenCookie = (res, token) => {
+  const baseOptions = buildCookieOptions();
 
   res.cookie("refreshToken", token, {
     httpOnly: true,
-    secure: config.cookieSecure,
-    sameSite: config.cookieSameSite,
+    ...baseOptions,
+    maxAge: 7 * 24 * 60 * 60 * 1000
+  });
+};
+
+const setCsrfTokenCookie = (res, token) => {
+  const baseOptions = buildCookieOptions();
+
+  res.cookie("csrfToken", token, {
+    httpOnly: false,
+    ...baseOptions,
     maxAge: 7 * 24 * 60 * 60 * 1000
   });
 };
 
 const clearRefreshTokenCookie = (res) => {
-  const config = getRuntimeConfig();
+  const baseOptions = buildCookieOptions();
 
   res.clearCookie("refreshToken", {
     httpOnly: true,
-    secure: config.cookieSecure,
-    sameSite: config.cookieSameSite
+    ...baseOptions
+  });
+};
+
+const clearAccessTokenCookie = (res) => {
+  const baseOptions = buildCookieOptions();
+
+  res.clearCookie("accessToken", {
+    httpOnly: true,
+    ...baseOptions
+  });
+};
+
+const clearCsrfTokenCookie = (res) => {
+  const baseOptions = buildCookieOptions();
+
+  res.clearCookie("csrfToken", {
+    httpOnly: false,
+    ...baseOptions
   });
 };
 
@@ -40,6 +85,10 @@ module.exports = {
   generateAccessToken,
   generateRefreshToken,
   hashToken,
+  setAccessTokenCookie,
   setRefreshTokenCookie,
-  clearRefreshTokenCookie
+  setCsrfTokenCookie,
+  clearAccessTokenCookie,
+  clearRefreshTokenCookie,
+  clearCsrfTokenCookie
 };

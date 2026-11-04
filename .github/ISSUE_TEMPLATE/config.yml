@@ -1,0 +1,9 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Mane Bazar Documentation
+    url: https://github.com/codewithharshx/Mane-Bazar/tree/main/docs
+    about: Read the architectural, API, and installation guides before opening an issue.
+  - name: Security Disclosures
+    url: https://github.com/codewithharshx/Mane-Bazar/blob/main/docs/REPOSITORY_AUDIT.md#5-security-audit-findings
+    about: Please report security vulnerabilities responsibly.
+

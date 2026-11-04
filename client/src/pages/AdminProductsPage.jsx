@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import toast from "react-hot-toast";
-import api from "../utils/api";
+import { categoryApi } from "../services/categoryApi";
+import { productApi } from "../services/productApi";
+import { storeApi } from "../services/storeApi";
 import AdminShell from "../components/AdminShell";
 import { formatCurrency } from "../utils/formatters";
 
@@ -14,7 +16,7 @@ const initialForm = {
   mrp: 0,
   discount: 0,
   stock: 20,
-  images: "",
+  image: "",
   description: "",
   tags: ""
 };
@@ -31,13 +33,14 @@ const AdminProductsPage = () => {
     icon: "",
     image: ""
   });
+  const previewImage = form.image.trim();
 
   const fetchData = async () => {
     try {
       const [{ data: productData }, { data: categoryData }, { data: storeData }] = await Promise.all([
-        api.get("/products?limit=50"),
-        api.get("/categories"),
-        api.get("/stores?limit=100")
+        productApi.list({ limit: 50 }),
+        categoryApi.list(),
+        storeApi.list({ limit: 100 })
       ]);
       setProducts(productData.products);
       setCategories(categoryData);
@@ -53,12 +56,11 @@ const AdminProductsPage = () => {
 
   const mappedPayload = useMemo(
     () => {
+      const imageUrl = form.image.trim();
       const payload = {
         ...form,
-        images: form.images
-          .split(",")
-          .map((value) => value.trim())
-          .filter(Boolean),
+        image: imageUrl,
+        images: imageUrl ? [imageUrl] : [],
         tags: form.tags
           .split(",")
           .map((value) => value.trim())
@@ -82,10 +84,10 @@ const AdminProductsPage = () => {
     event.preventDefault();
     try {
       if (editingId) {
-        await api.put(`/products/${editingId}`, mappedPayload);
+        await productApi.update(editingId, mappedPayload);
         toast.success("Product updated");
       } else {
-        await api.post("/products", mappedPayload);
+        await productApi.create(mappedPayload);
         toast.success("Product created");
       }
       setForm(initialForm);
@@ -108,7 +110,7 @@ const AdminProductsPage = () => {
       mrp: product.mrp,
       discount: product.discount,
       stock: product.stock,
-      images: product.images?.join(", ") || "",
+      image: product.image || product.images?.[0] || "",
       description: product.description,
       tags: product.tags?.join(", ") || ""
     });
@@ -116,7 +118,7 @@ const AdminProductsPage = () => {
 
   const handleDelete = async (id) => {
     try {
-      await api.delete(`/products/${id}`);
+      await productApi.remove(id);
       toast.success("Product deleted");
       fetchData();
     } catch (error) {
@@ -127,7 +129,7 @@ const AdminProductsPage = () => {
   const handleCategoryCreate = async (event) => {
     event.preventDefault();
     try {
-      await api.post("/categories", categoryForm);
+      await categoryApi.create(categoryForm);
       toast.success("Category created");
       setCategoryForm({ name: "", slug: "", icon: "", image: "" });
       fetchData();
@@ -166,7 +168,31 @@ const AdminProductsPage = () => {
           <input value={form.mrp} onChange={(e) => setForm((c) => ({ ...c, mrp: e.target.value }))} className="input-field" placeholder="MRP" type="number" />
           <input value={form.discount} onChange={(e) => setForm((c) => ({ ...c, discount: e.target.value }))} className="input-field" placeholder="Discount %" type="number" />
           <input value={form.stock} onChange={(e) => setForm((c) => ({ ...c, stock: e.target.value }))} className="input-field" placeholder="Stock" type="number" />
-          <input value={form.images} onChange={(e) => setForm((c) => ({ ...c, images: e.target.value }))} className="input-field sm:col-span-2" placeholder="Image URLs comma separated" />
+          <div className="sm:col-span-2 grid gap-3">
+            <input
+              value={form.image}
+              onChange={(e) => setForm((c) => ({ ...c, image: e.target.value }))}
+              className="input-field"
+              placeholder="Primary image URL"
+            />
+            <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-slate-50">
+              {previewImage ? (
+                <img
+                  src={previewImage}
+                  alt={form.name || "Product preview"}
+                  loading="lazy"
+                  className="h-44 w-full object-cover"
+                  onError={(event) => {
+                    event.currentTarget.src = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'%3E%3Crect width='800' height='500' rx='32' fill='%23e2e8f0'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dominant-baseline='middle' fill='%2394a3b8' font-family='Arial, sans-serif' font-size='24'%3EImage preview unavailable%3C/text%3E%3C/svg%3E";
+                  }}
+                />
+              ) : (
+                <div className="grid h-44 place-items-center text-sm text-slate-400">
+                  Paste an image URL to preview it here
+                </div>
+              )}
+            </div>
+          </div>
           <input value={form.tags} onChange={(e) => setForm((c) => ({ ...c, tags: e.target.value }))} className="input-field sm:col-span-2" placeholder="Tags comma separated" />
           <textarea value={form.description} onChange={(e) => setForm((c) => ({ ...c, description: e.target.value }))} className="input-field sm:col-span-2 min-h-28" placeholder="Description" />
           <div className="sm:col-span-2 flex gap-3">

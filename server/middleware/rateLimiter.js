@@ -18,6 +18,24 @@ const authRateLimiter = buildLimiter({
   message: "Too many auth requests. Please try again later."
 });
 
+const resendVerificationRateLimiter = buildLimiter({
+  windowMs: config.resendVerificationRateLimitWindowMs,
+  max: config.resendVerificationRateLimitMax,
+  message: "Too many verification email requests. Please try again shortly."
+});
+
+const verifyEmailRateLimiter = buildLimiter({
+  windowMs: config.verifyEmailRateLimitWindowMs,
+  max: config.verifyEmailRateLimitMax,
+  message: "Too many verification attempts. Please try again shortly."
+});
+
+const passwordResetRateLimiter = buildLimiter({
+  windowMs: config.passwordResetRateLimitWindowMs,
+  max: config.passwordResetRateLimitMax,
+  message: "Too many password reset requests. Please try again shortly."
+});
+
 const globalApiRateLimiter = buildLimiter({
   windowMs: config.apiRateLimitWindowMs,
   max: config.apiRateLimitMax,
@@ -32,6 +50,9 @@ const checkoutRateLimiter = buildLimiter({
 
 module.exports = {
   authRateLimiter,
+  resendVerificationRateLimiter,
+  verifyEmailRateLimiter,
+  passwordResetRateLimiter,
   globalApiRateLimiter,
   checkoutRateLimiter
 };

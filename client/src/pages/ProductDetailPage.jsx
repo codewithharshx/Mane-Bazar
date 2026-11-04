@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useParams } from "react-router-dom";
-import api from "../utils/api";
+import { productApi } from "../services/productApi";
 import { formatCurrency, formatDateTime } from "../utils/formatters";
 import PageTransition from "../components/PageTransition";
 import SkeletonLoader from "../components/SkeletonLoader";
 import { useCart } from "../context/CartContext";
+import ProductImage from "../components/ProductImage";
 
 const ProductDetailPage = () => {
   const { slug } = useParams();
@@ -18,7 +19,7 @@ const ProductDetailPage = () => {
     const fetchProduct = async () => {
       setLoading(true);
       try {
-        const { data } = await api.get(`/products/${slug}`);
+        const { data } = await productApi.getBySlug(slug);
         setProduct(data);
       } catch (error) {
         toast.error("Unable to load product");
@@ -46,10 +47,11 @@ const ProductDetailPage = () => {
   return (
     <PageTransition className="section-shell grid gap-8 py-6 lg:grid-cols-[1.1fr_0.9fr]">
       <div className="card-surface overflow-hidden p-4">
-        <img
-          src={product.images?.[0]}
+        <ProductImage
+          product={product}
           alt={product.name}
-          className="h-[520px] w-full rounded-[28px] object-cover"
+          containerClassName="h-[520px] rounded-[28px]"
+          className="h-full w-full rounded-[28px] object-cover"
         />
       </div>
       <div className="space-y-6">

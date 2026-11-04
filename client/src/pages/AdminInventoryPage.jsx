@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import api from "../utils/api";
+import { adminApi } from "../services/adminApi";
 import AdminShell from "../components/AdminShell";
 
 const AdminInventoryPage = () => {
@@ -12,7 +12,7 @@ const AdminInventoryPage = () => {
   const fetchInventory = async () => {
     setLoading(true);
     try {
-      const { data } = await api.get("/admin/inventory");
+      const { data } = await adminApi.inventory();
       setProducts(data);
       // Initialise quantity inputs to 10 each
       const initQtys = {};
@@ -38,7 +38,7 @@ const AdminInventoryPage = () => {
 
     setRestocking((prev) => ({ ...prev, [productId]: true }));
     try {
-      const { data } = await api.patch(`/admin/inventory/${productId}/restock`, { quantity: qty });
+      const { data } = await adminApi.restock(productId, qty);
       toast.success(data.message);
       // Update product inline or re-fetch
       setProducts((prev) =>

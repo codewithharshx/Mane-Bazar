@@ -90,7 +90,9 @@ const orderSchema = new mongoose.Schema(
     },
     paymentStatus: {
       type: String,
-      enum: ["pending", "paid", "failed"],
+      // refund_pending: paid order cancelled, awaiting refund
+      // refunded: refund processed
+      enum: ["pending", "paid", "failed", "refund_pending", "refunded"],
       default: "pending"
     },
     razorpayOrderId: { type: String, default: "" },
@@ -101,6 +103,7 @@ const orderSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: [
+        "pending_payment",  // stock reserved, Razorpay opened but not yet paid
         "placed",
         "confirmed",
         "packed",
@@ -111,12 +114,22 @@ const orderSchema = new mongoose.Schema(
       default: "placed"
     },
     statusHistory: { type: [statusHistorySchema], default: [] },
-    invoicePath: { type: String, default: "" }
+    invoicePath: { type: String, default: "" },
+    // Expiry marker for pending payment reservations.
+    // Cleanup is handled by a controlled worker so stock/coupons are restored safely.
+    pendingPaymentExpiry: { type: Date, default: null }
   },
   { timestamps: { createdAt: true, updatedAt: true } }
 );
 
+// Performance indexes
+orderSchema.index({ user: 1, createdAt: -1 });            // My orders query (orderId unique already on field)
 orderSchema.index({ storeId: 1, createdAt: -1 });
+orderSchema.index({ status: 1, createdAt: -1 });           // Admin orders filter
+orderSchema.index({ razorpayOrderId: 1 }, {
+  sparse: true,
+  partialFilterExpression: { razorpayOrderId: { $type: "string", $ne: "" } }
+});
 orderSchema.index(
   { razorpayPaymentId: 1 },
   {
@@ -124,5 +137,4 @@ orderSchema.index(
     partialFilterExpression: { razorpayPaymentId: { $type: "string", $ne: "" } }
   }
 );
-
 module.exports = mongoose.model("Order", orderSchema);

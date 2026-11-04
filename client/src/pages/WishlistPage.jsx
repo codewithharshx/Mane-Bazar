@@ -3,6 +3,7 @@ import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
 import PageTransition from "../components/PageTransition";
 import { formatCurrency } from "../utils/formatters";
+import ProductImage from "../components/ProductImage";
 
 const WishlistPage = () => {
   const { wishlist, toggleWishlist } = useWishlist();
@@ -33,10 +34,11 @@ const WishlistPage = () => {
             <div key={product._id} className="card-surface flex flex-col overflow-hidden">
               {/* Image */}
               <Link to={`/products/${product.slug}`} className="block">
-                <img
-                  src={product.images?.[0]}
+                <ProductImage
+                  product={product}
                   alt={product.name}
-                  className="h-48 w-full object-cover transition-transform duration-300 hover:scale-105"
+                  containerClassName="h-48"
+                  className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </Link>
 

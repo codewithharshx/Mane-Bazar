@@ -1,0 +1,3242 @@
+[
+    {
+        "name": "24 Mantra Brown Rice",
+        "category": "Rice",
+        "price": 206,
+        "brand": "24 Mantra",
+        "stock": 211,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Daawat Seeraga Samba Rice",
+        "category": "Rice",
+        "price": 72,
+        "brand": "Daawat",
+        "stock": 294,
+        "unit": "10kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Organic Organic Tattva Broken Rice",
+        "category": "Rice",
+        "price": 115,
+        "brand": "Organic Tattva",
+        "stock": 20,
+        "unit": "10kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Patanjali Sona Masoori",
+        "category": "Rice",
+        "price": 155,
+        "brand": "Patanjali",
+        "stock": 159,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "India Gate Jeera Samba Rice - Special",
+        "category": "Rice",
+        "price": 217,
+        "brand": "India Gate",
+        "stock": 83,
+        "unit": "10kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Organic Local Miniket Rice",
+        "category": "Rice",
+        "price": 200,
+        "brand": "Local",
+        "stock": 270,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Kohinoor HMT Kolam Rice",
+        "category": "Rice",
+        "price": 201,
+        "brand": "Kohinoor",
+        "stock": 368,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "24 Mantra Broken Rice",
+        "category": "Rice",
+        "price": 147,
+        "brand": "24 Mantra",
+        "stock": 94,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "24 Mantra Indrayani Rice",
+        "category": "Rice",
+        "price": 174,
+        "brand": "24 Mantra",
+        "stock": 59,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic 24 Mantra Basmati Rice - Special",
+        "category": "Rice",
+        "price": 81,
+        "brand": "24 Mantra",
+        "stock": 355,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Fortune Indrayani Rice",
+        "category": "Rice",
+        "price": 223,
+        "brand": "Fortune",
+        "stock": 321,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Patanjali Matta Rice - Authentic",
+        "category": "Rice",
+        "price": 141,
+        "brand": "Patanjali",
+        "stock": 143,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium India Gate Matta Rice - Natural",
+        "category": "Rice",
+        "price": 131,
+        "brand": "India Gate",
+        "stock": 220,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "India Gate Seeraga Samba Rice",
+        "category": "Rice",
+        "price": 103,
+        "brand": "India Gate",
+        "stock": 34,
+        "unit": "10kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Organic 24 Mantra Kolam Rice",
+        "category": "Rice",
+        "price": 123,
+        "brand": "24 Mantra",
+        "stock": 91,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Patanjali Gobindobhog Rice",
+        "category": "Rice",
+        "price": 63,
+        "brand": "Patanjali",
+        "stock": 279,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Tattva Ponni Rice - Authentic",
+        "category": "Rice",
+        "price": 71,
+        "brand": "Organic Tattva",
+        "stock": 265,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Tattva Ambemohar Rice",
+        "category": "Rice",
+        "price": 72,
+        "brand": "Organic Tattva",
+        "stock": 221,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Fortune Ambemohar Rice",
+        "category": "Rice",
+        "price": 94,
+        "brand": "Fortune",
+        "stock": 271,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Patanjali Matta Rice",
+        "category": "Rice",
+        "price": 242,
+        "brand": "Patanjali",
+        "stock": 158,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Patanjali Ponni Rice - Authentic",
+        "category": "Rice",
+        "price": 73,
+        "brand": "Patanjali",
+        "stock": 137,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium 24 Mantra Jasmine Rice - Natural",
+        "category": "Rice",
+        "price": 123,
+        "brand": "24 Mantra",
+        "stock": 52,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Fortune Wada Kolam Rice - Special",
+        "category": "Rice",
+        "price": 199,
+        "brand": "Fortune",
+        "stock": 275,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Patanjali Miniket Rice",
+        "category": "Rice",
+        "price": 217,
+        "brand": "Patanjali",
+        "stock": 107,
+        "unit": "10kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Local Matta Rice",
+        "category": "Rice",
+        "price": 120,
+        "brand": "Local",
+        "stock": 51,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Daawat Indrayani Rice",
+        "category": "Rice",
+        "price": 106,
+        "brand": "Daawat",
+        "stock": 324,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Tattva Brown Rice - Special",
+        "category": "Rice",
+        "price": 205,
+        "brand": "Organic Tattva",
+        "stock": 99,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Patanjali Miniket Rice",
+        "category": "Rice",
+        "price": 179,
+        "brand": "Patanjali",
+        "stock": 292,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Patanjali Brown Rice",
+        "category": "Rice",
+        "price": 211,
+        "brand": "Patanjali",
+        "stock": 69,
+        "unit": "10kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Kohinoor Bamboo Rice",
+        "category": "Rice",
+        "price": 170,
+        "brand": "Kohinoor",
+        "stock": 125,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Organic Fortune Red Rice",
+        "category": "Rice",
+        "price": 206,
+        "brand": "Fortune",
+        "stock": 226,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium India Gate Gobindobhog Rice",
+        "category": "Rice",
+        "price": 108,
+        "brand": "India Gate",
+        "stock": 61,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Daawat Matta Rice - Original",
+        "category": "Rice",
+        "price": 247,
+        "brand": "Daawat",
+        "stock": 171,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Local Bamboo Rice",
+        "category": "Rice",
+        "price": 196,
+        "brand": "Local",
+        "stock": 48,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Fortune Banskathi Rice",
+        "category": "Rice",
+        "price": 118,
+        "brand": "Fortune",
+        "stock": 164,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Organic Tattva Sona Masoori - Authentic",
+        "category": "Rice",
+        "price": 124,
+        "brand": "Organic Tattva",
+        "stock": 309,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Fortune Basmati Rice - Special",
+        "category": "Rice",
+        "price": 102,
+        "brand": "Fortune",
+        "stock": 342,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Organic India Gate Dubraj Rice",
+        "category": "Rice",
+        "price": 132,
+        "brand": "India Gate",
+        "stock": 294,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "India Gate Bamboo Rice",
+        "category": "Rice",
+        "price": 155,
+        "brand": "India Gate",
+        "stock": 284,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic India Gate Organic Rice",
+        "category": "Rice",
+        "price": 193,
+        "brand": "India Gate",
+        "stock": 140,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium India Gate Organic Rice",
+        "category": "Rice",
+        "price": 65,
+        "brand": "India Gate",
+        "stock": 412,
+        "unit": "10kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic 24 Mantra Organic Rice",
+        "category": "Rice",
+        "price": 144,
+        "brand": "24 Mantra",
+        "stock": 179,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Fortune Seeraga Samba Rice",
+        "category": "Rice",
+        "price": 63,
+        "brand": "Fortune",
+        "stock": 37,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Patanjali Idli Rice - Authentic",
+        "category": "Rice",
+        "price": 148,
+        "brand": "Patanjali",
+        "stock": 376,
+        "unit": "25kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Patanjali Dubraj Rice - Original",
+        "category": "Rice",
+        "price": 236,
+        "brand": "Patanjali",
+        "stock": 52,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Ramdev Cardamom",
+        "category": "Spices",
+        "price": 188,
+        "brand": "Ramdev",
+        "stock": 102,
+        "unit": "100g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Everest Red Chilli Powder - Original",
+        "category": "Spices",
+        "price": 194,
+        "brand": "Everest",
+        "stock": 281,
+        "unit": "50g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Catch Star Anise - Natural",
+        "category": "Spices",
+        "price": 214,
+        "brand": "Catch",
+        "stock": 183,
+        "unit": "50g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Suhana Nutmeg",
+        "category": "Spices",
+        "price": 72,
+        "brand": "Suhana",
+        "stock": 209,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Patanjali Black Salt - Authentic",
+        "category": "Spices",
+        "price": 220,
+        "brand": "Patanjali",
+        "stock": 306,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Tata Sampann Chicken Masala",
+        "category": "Spices",
+        "price": 150,
+        "brand": "Tata Sampann",
+        "stock": 195,
+        "unit": "100g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Tata Sampann Turmeric Powder",
+        "category": "Spices",
+        "price": 260,
+        "brand": "Tata Sampann",
+        "stock": 130,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Tata Sampann Kasuri Methi",
+        "category": "Spices",
+        "price": 257,
+        "brand": "Tata Sampann",
+        "stock": 158,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Patanjali Turmeric Powder",
+        "category": "Spices",
+        "price": 144,
+        "brand": "Patanjali",
+        "stock": 44,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Ramdev Asafoetida (Hing)",
+        "category": "Spices",
+        "price": 63,
+        "brand": "Ramdev",
+        "stock": 206,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Ramdev Fennel Seeds",
+        "category": "Spices",
+        "price": 77,
+        "brand": "Ramdev",
+        "stock": 29,
+        "unit": "100g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium MDH Cumin Powder - Natural",
+        "category": "Spices",
+        "price": 167,
+        "brand": "MDH",
+        "stock": 273,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Suhana Kashmiri Chilli Powder",
+        "category": "Spices",
+        "price": 270,
+        "brand": "Suhana",
+        "stock": 403,
+        "unit": "50g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic India Rock Salt - Natural",
+        "category": "Spices",
+        "price": 84,
+        "brand": "Organic India",
+        "stock": 205,
+        "unit": "50g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Tata Sampann Saffron",
+        "category": "Spices",
+        "price": 82,
+        "brand": "Tata Sampann",
+        "stock": 236,
+        "unit": "50g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic MDH Fennel Seeds - Authentic",
+        "category": "Spices",
+        "price": 258,
+        "brand": "MDH",
+        "stock": 31,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Everest Turmeric Powder",
+        "category": "Spices",
+        "price": 48,
+        "brand": "Everest",
+        "stock": 263,
+        "unit": "50g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic India Fennel Seeds - Authentic",
+        "category": "Spices",
+        "price": 210,
+        "brand": "Organic India",
+        "stock": 195,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Everest Red Chilli Powder",
+        "category": "Spices",
+        "price": 208,
+        "brand": "Everest",
+        "stock": 320,
+        "unit": "100g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Ramdev Rock Salt - Authentic",
+        "category": "Spices",
+        "price": 71,
+        "brand": "Ramdev",
+        "stock": 257,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Catch Mustard Seeds - Special",
+        "category": "Spices",
+        "price": 42,
+        "brand": "Catch",
+        "stock": 359,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Everest Cinnamon",
+        "category": "Spices",
+        "price": 213,
+        "brand": "Everest",
+        "stock": 83,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Patanjali Cumin Powder",
+        "category": "Spices",
+        "price": 80,
+        "brand": "Patanjali",
+        "stock": 369,
+        "unit": "100g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Suhana Chicken Masala - Authentic",
+        "category": "Spices",
+        "price": 32,
+        "brand": "Suhana",
+        "stock": 280,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Catch Nutmeg",
+        "category": "Spices",
+        "price": 114,
+        "brand": "Catch",
+        "stock": 28,
+        "unit": "100g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic MDH Fennel Seeds",
+        "category": "Spices",
+        "price": 185,
+        "brand": "MDH",
+        "stock": 353,
+        "unit": "50g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "MDH Cinnamon",
+        "category": "Spices",
+        "price": 293,
+        "brand": "MDH",
+        "stock": 372,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "MDH Cloves",
+        "category": "Spices",
+        "price": 66,
+        "brand": "MDH",
+        "stock": 99,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Tata Sampann Kasuri Methi - Original",
+        "category": "Spices",
+        "price": 148,
+        "brand": "Tata Sampann",
+        "stock": 86,
+        "unit": "50g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Patanjali Black Salt",
+        "category": "Spices",
+        "price": 163,
+        "brand": "Patanjali",
+        "stock": 72,
+        "unit": "100g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Catch Chaat Masala",
+        "category": "Spices",
+        "price": 271,
+        "brand": "Catch",
+        "stock": 164,
+        "unit": "50g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic MDH Cardamom",
+        "category": "Spices",
+        "price": 218,
+        "brand": "MDH",
+        "stock": 46,
+        "unit": "100g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Everest Fennel Seeds - Natural",
+        "category": "Spices",
+        "price": 245,
+        "brand": "Everest",
+        "stock": 230,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "MDH Star Anise - Special",
+        "category": "Spices",
+        "price": 48,
+        "brand": "MDH",
+        "stock": 26,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "MDH Kashmiri Chilli Powder - Special",
+        "category": "Spices",
+        "price": 232,
+        "brand": "MDH",
+        "stock": 291,
+        "unit": "50g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium MDH Kasuri Methi",
+        "category": "Spices",
+        "price": 113,
+        "brand": "MDH",
+        "stock": 90,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Ramdev Cumin Seeds - Special",
+        "category": "Spices",
+        "price": 31,
+        "brand": "Ramdev",
+        "stock": 77,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic India Black Pepper - Natural",
+        "category": "Spices",
+        "price": 246,
+        "brand": "Organic India",
+        "stock": 56,
+        "unit": "100g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "MDH Nutmeg",
+        "category": "Spices",
+        "price": 94,
+        "brand": "MDH",
+        "stock": 197,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Tata Sampann Mace (Javitri)",
+        "category": "Spices",
+        "price": 110,
+        "brand": "Tata Sampann",
+        "stock": 171,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic MDH Cumin Seeds",
+        "category": "Spices",
+        "price": 57,
+        "brand": "MDH",
+        "stock": 135,
+        "unit": "100g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic India Kasuri Methi",
+        "category": "Spices",
+        "price": 290,
+        "brand": "Organic India",
+        "stock": 24,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Ramdev Coriander Powder",
+        "category": "Spices",
+        "price": 206,
+        "brand": "Ramdev",
+        "stock": 160,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Everest Kashmiri Chilli Powder",
+        "category": "Spices",
+        "price": 106,
+        "brand": "Everest",
+        "stock": 138,
+        "unit": "100g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "MDH Coriander Powder",
+        "category": "Spices",
+        "price": 51,
+        "brand": "MDH",
+        "stock": 23,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Organic Pro Nature Green Moong",
+        "category": "Pulses & Grains",
+        "price": 249,
+        "brand": "Pro Nature",
+        "stock": 289,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Fortune Maida",
+        "category": "Pulses & Grains",
+        "price": 137,
+        "brand": "Fortune",
+        "stock": 165,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pro Nature Wheat Flour (Atta)",
+        "category": "Pulses & Grains",
+        "price": 117,
+        "brand": "Pro Nature",
+        "stock": 309,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Rajdhani Oats - Authentic",
+        "category": "Pulses & Grains",
+        "price": 85,
+        "brand": "Rajdhani",
+        "stock": 220,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Rajdhani Rajma",
+        "category": "Pulses & Grains",
+        "price": 126,
+        "brand": "Rajdhani",
+        "stock": 375,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Tenali Moth Bean - Authentic",
+        "category": "Pulses & Grains",
+        "price": 225,
+        "brand": "Tenali",
+        "stock": 219,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pro Nature Quinoa",
+        "category": "Pulses & Grains",
+        "price": 148,
+        "brand": "Pro Nature",
+        "stock": 127,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Local Dalia",
+        "category": "Pulses & Grains",
+        "price": 221,
+        "brand": "Local",
+        "stock": 23,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Local Poha",
+        "category": "Pulses & Grains",
+        "price": 239,
+        "brand": "Local",
+        "stock": 291,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Rajdhani Millet",
+        "category": "Pulses & Grains",
+        "price": 204,
+        "brand": "Rajdhani",
+        "stock": 209,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Local Bajra Flour",
+        "category": "Pulses & Grains",
+        "price": 148,
+        "brand": "Local",
+        "stock": 269,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Organic Rajdhani Lobia - Authentic",
+        "category": "Pulses & Grains",
+        "price": 209,
+        "brand": "Rajdhani",
+        "stock": 386,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Fortune Kabuli Chana",
+        "category": "Pulses & Grains",
+        "price": 223,
+        "brand": "Fortune",
+        "stock": 215,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Rajdhani Oats",
+        "category": "Pulses & Grains",
+        "price": 195,
+        "brand": "Rajdhani",
+        "stock": 140,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Local Wheat Flour (Atta) - Original",
+        "category": "Pulses & Grains",
+        "price": 156,
+        "brand": "Local",
+        "stock": 165,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Tenali Green Moong",
+        "category": "Pulses & Grains",
+        "price": 64,
+        "brand": "Tenali",
+        "stock": 274,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pro Nature Ragi Flour",
+        "category": "Pulses & Grains",
+        "price": 193,
+        "brand": "Pro Nature",
+        "stock": 36,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Rajdhani Wheat Flour (Atta)",
+        "category": "Pulses & Grains",
+        "price": 105,
+        "brand": "Rajdhani",
+        "stock": 330,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Local Dalia - Natural",
+        "category": "Pulses & Grains",
+        "price": 199,
+        "brand": "Local",
+        "stock": 406,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Fortune Lobia",
+        "category": "Pulses & Grains",
+        "price": 162,
+        "brand": "Fortune",
+        "stock": 151,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pro Nature Masoor Dal - Authentic",
+        "category": "Pulses & Grains",
+        "price": 124,
+        "brand": "Pro Nature",
+        "stock": 77,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pro Nature Ragi Flour - Authentic",
+        "category": "Pulses & Grains",
+        "price": 219,
+        "brand": "Pro Nature",
+        "stock": 69,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Pro Nature Millet",
+        "category": "Pulses & Grains",
+        "price": 99,
+        "brand": "Pro Nature",
+        "stock": 403,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Rajdhani Maida - Authentic",
+        "category": "Pulses & Grains",
+        "price": 194,
+        "brand": "Rajdhani",
+        "stock": 345,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "24 Mantra Masoor Dal",
+        "category": "Pulses & Grains",
+        "price": 220,
+        "brand": "24 Mantra",
+        "stock": 194,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Local Lobia",
+        "category": "Pulses & Grains",
+        "price": 81,
+        "brand": "Local",
+        "stock": 53,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Fortune Soya Chunks - Original",
+        "category": "Pulses & Grains",
+        "price": 155,
+        "brand": "Fortune",
+        "stock": 34,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "24 Mantra Moth Bean",
+        "category": "Pulses & Grains",
+        "price": 115,
+        "brand": "24 Mantra",
+        "stock": 61,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Rajdhani Besan",
+        "category": "Pulses & Grains",
+        "price": 131,
+        "brand": "Rajdhani",
+        "stock": 85,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Tenali Poha - Special",
+        "category": "Pulses & Grains",
+        "price": 116,
+        "brand": "Tenali",
+        "stock": 369,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Tenali Jowar Flour - Natural",
+        "category": "Pulses & Grains",
+        "price": 96,
+        "brand": "Tenali",
+        "stock": 36,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "24 Mantra Chana Dal",
+        "category": "Pulses & Grains",
+        "price": 220,
+        "brand": "24 Mantra",
+        "stock": 410,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Fortune Oats",
+        "category": "Pulses & Grains",
+        "price": 65,
+        "brand": "Fortune",
+        "stock": 350,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Local Sabudana",
+        "category": "Pulses & Grains",
+        "price": 140,
+        "brand": "Local",
+        "stock": 271,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pro Nature Sabudana",
+        "category": "Pulses & Grains",
+        "price": 83,
+        "brand": "Pro Nature",
+        "stock": 84,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pro Nature Soya Chunks",
+        "category": "Pulses & Grains",
+        "price": 149,
+        "brand": "Pro Nature",
+        "stock": 29,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "24 Mantra Maida - Original",
+        "category": "Pulses & Grains",
+        "price": 96,
+        "brand": "24 Mantra",
+        "stock": 307,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Rajdhani Masoor Dal",
+        "category": "Pulses & Grains",
+        "price": 238,
+        "brand": "Rajdhani",
+        "stock": 163,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "24 Mantra Toor Dal",
+        "category": "Pulses & Grains",
+        "price": 209,
+        "brand": "24 Mantra",
+        "stock": 369,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Rajdhani Rajma",
+        "category": "Pulses & Grains",
+        "price": 94,
+        "brand": "Rajdhani",
+        "stock": 377,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Local Toor Dal",
+        "category": "Pulses & Grains",
+        "price": 165,
+        "brand": "Local",
+        "stock": 408,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Pro Nature Sooji (Rava)",
+        "category": "Pulses & Grains",
+        "price": 111,
+        "brand": "Pro Nature",
+        "stock": 371,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pro Nature Moong Dal",
+        "category": "Pulses & Grains",
+        "price": 117,
+        "brand": "Pro Nature",
+        "stock": 92,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pro Nature Lobia - Special",
+        "category": "Pulses & Grains",
+        "price": 82,
+        "brand": "Pro Nature",
+        "stock": 218,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Tenali Moong Dal",
+        "category": "Pulses & Grains",
+        "price": 155,
+        "brand": "Tenali",
+        "stock": 326,
+        "unit": "5kg",
+        "image": "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Haldiram's Ready-to-eat Dal Makhani",
+        "category": "Packaged Foods",
+        "price": 120,
+        "brand": "Haldiram's",
+        "stock": 330,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Britannia Instant Poha",
+        "category": "Packaged Foods",
+        "price": 49,
+        "brand": "Britannia",
+        "stock": 58,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "MTR Papad",
+        "category": "Packaged Foods",
+        "price": 126,
+        "brand": "MTR",
+        "stock": 415,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Organic Sunfeast Ready-to-eat Paneer Butter Masala",
+        "category": "Packaged Foods",
+        "price": 90,
+        "brand": "Sunfeast",
+        "stock": 412,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium ITC Aashirvaad Peanut Butter",
+        "category": "Packaged Foods",
+        "price": 42,
+        "brand": "ITC Aashirvaad",
+        "stock": 69,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic ITC Aashirvaad Macaroni",
+        "category": "Packaged Foods",
+        "price": 145,
+        "brand": "ITC Aashirvaad",
+        "stock": 211,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Bikano Pickle (Mango)",
+        "category": "Packaged Foods",
+        "price": 140,
+        "brand": "Bikano",
+        "stock": 173,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Britannia Instant Noodles",
+        "category": "Packaged Foods",
+        "price": 24,
+        "brand": "Britannia",
+        "stock": 370,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Haldiram's Ready-to-eat Dal Makhani",
+        "category": "Packaged Foods",
+        "price": 59,
+        "brand": "Haldiram's",
+        "stock": 48,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Britannia Ready-to-eat Dal Makhani",
+        "category": "Packaged Foods",
+        "price": 143,
+        "brand": "Britannia",
+        "stock": 134,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Britannia Chocos",
+        "category": "Packaged Foods",
+        "price": 40,
+        "brand": "Britannia",
+        "stock": 125,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Sunfeast Mayonnaise",
+        "category": "Packaged Foods",
+        "price": 56,
+        "brand": "Sunfeast",
+        "stock": 314,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Organic ITC Aashirvaad Wheat Flakes",
+        "category": "Packaged Foods",
+        "price": 49,
+        "brand": "ITC Aashirvaad",
+        "stock": 85,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Bikano Mayonnaise",
+        "category": "Packaged Foods",
+        "price": 14,
+        "brand": "Bikano",
+        "stock": 286,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Sunfeast Soup (Tomato)",
+        "category": "Packaged Foods",
+        "price": 75,
+        "brand": "Sunfeast",
+        "stock": 229,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Bikano Wheat Flakes",
+        "category": "Packaged Foods",
+        "price": 101,
+        "brand": "Bikano",
+        "stock": 200,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "MTR Pasta",
+        "category": "Packaged Foods",
+        "price": 16,
+        "brand": "MTR",
+        "stock": 52,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic ITC Aashirvaad Pasta",
+        "category": "Packaged Foods",
+        "price": 84,
+        "brand": "ITC Aashirvaad",
+        "stock": 23,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Organic Knorr Pasta",
+        "category": "Packaged Foods",
+        "price": 91,
+        "brand": "Knorr",
+        "stock": 324,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Haldiram's Papad",
+        "category": "Packaged Foods",
+        "price": 56,
+        "brand": "Haldiram's",
+        "stock": 23,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic MTR Soya Sauce",
+        "category": "Packaged Foods",
+        "price": 28,
+        "brand": "MTR",
+        "stock": 390,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "MTR Instant Poha",
+        "category": "Packaged Foods",
+        "price": 22,
+        "brand": "MTR",
+        "stock": 114,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Bikano Muesli",
+        "category": "Packaged Foods",
+        "price": 94,
+        "brand": "Bikano",
+        "stock": 205,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Knorr Wheat Flakes",
+        "category": "Packaged Foods",
+        "price": 47,
+        "brand": "Knorr",
+        "stock": 29,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Maggi Mixed Fruit Jam",
+        "category": "Packaged Foods",
+        "price": 27,
+        "brand": "Maggi",
+        "stock": 134,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Britannia Tomato Ketchup",
+        "category": "Packaged Foods",
+        "price": 35,
+        "brand": "Britannia",
+        "stock": 389,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Haldiram's Wheat Flakes",
+        "category": "Packaged Foods",
+        "price": 105,
+        "brand": "Haldiram's",
+        "stock": 147,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "MTR Ready-to-eat Dal Makhani",
+        "category": "Packaged Foods",
+        "price": 107,
+        "brand": "MTR",
+        "stock": 143,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Britannia Soup (Sweet Corn)",
+        "category": "Packaged Foods",
+        "price": 112,
+        "brand": "Britannia",
+        "stock": 189,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "ITC Aashirvaad Corn Flakes",
+        "category": "Packaged Foods",
+        "price": 100,
+        "brand": "ITC Aashirvaad",
+        "stock": 384,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Maggi Wheat Flakes",
+        "category": "Packaged Foods",
+        "price": 66,
+        "brand": "Maggi",
+        "stock": 221,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Maggi Pickle (Mango)",
+        "category": "Packaged Foods",
+        "price": 129,
+        "brand": "Maggi",
+        "stock": 140,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Knorr Peanut Butter",
+        "category": "Packaged Foods",
+        "price": 16,
+        "brand": "Knorr",
+        "stock": 327,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium MTR Pickle (Mango)",
+        "category": "Packaged Foods",
+        "price": 27,
+        "brand": "MTR",
+        "stock": 407,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Bikano Ready-to-eat Dal Makhani",
+        "category": "Packaged Foods",
+        "price": 148,
+        "brand": "Bikano",
+        "stock": 267,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Britannia Oats (Masala)",
+        "category": "Packaged Foods",
+        "price": 94,
+        "brand": "Britannia",
+        "stock": 386,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Maggi Ready-to-eat Dal Makhani",
+        "category": "Packaged Foods",
+        "price": 134,
+        "brand": "Maggi",
+        "stock": 69,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Maggi Oats (Masala)",
+        "category": "Packaged Foods",
+        "price": 44,
+        "brand": "Maggi",
+        "stock": 113,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic ITC Aashirvaad Ready-to-eat Paneer Butter Masala",
+        "category": "Packaged Foods",
+        "price": 39,
+        "brand": "ITC Aashirvaad",
+        "stock": 172,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Haldiram's Mayonnaise",
+        "category": "Packaged Foods",
+        "price": 80,
+        "brand": "Haldiram's",
+        "stock": 279,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Sunfeast Instant Noodles",
+        "category": "Packaged Foods",
+        "price": 33,
+        "brand": "Sunfeast",
+        "stock": 310,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Bikano Macaroni",
+        "category": "Packaged Foods",
+        "price": 34,
+        "brand": "Bikano",
+        "stock": 292,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Bikano Soup (Sweet Corn)",
+        "category": "Packaged Foods",
+        "price": 149,
+        "brand": "Bikano",
+        "stock": 186,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Knorr Chilli Sauce",
+        "category": "Packaged Foods",
+        "price": 83,
+        "brand": "Knorr",
+        "stock": 121,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "MTR Soup (Tomato)",
+        "category": "Packaged Foods",
+        "price": 81,
+        "brand": "MTR",
+        "stock": 392,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nandini Pav",
+        "category": "Dairy & Bakery",
+        "price": 71,
+        "brand": "Nandini",
+        "stock": 249,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Organic Britannia Lassi",
+        "category": "Dairy & Bakery",
+        "price": 101,
+        "brand": "Britannia",
+        "stock": 227,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Mother Dairy Muffin",
+        "category": "Dairy & Bakery",
+        "price": 86,
+        "brand": "Mother Dairy",
+        "stock": 194,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic English Oven Cheese Cubes",
+        "category": "Dairy & Bakery",
+        "price": 57,
+        "brand": "English Oven",
+        "stock": 414,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic English Oven Pizza Base",
+        "category": "Dairy & Bakery",
+        "price": 139,
+        "brand": "English Oven",
+        "stock": 20,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Britannia Croissant",
+        "category": "Dairy & Bakery",
+        "price": 196,
+        "brand": "Britannia",
+        "stock": 275,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Local Multigrain Bread",
+        "category": "Dairy & Bakery",
+        "price": 80,
+        "brand": "Local",
+        "stock": 391,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Amul Butter",
+        "category": "Dairy & Bakery",
+        "price": 101,
+        "brand": "Amul",
+        "stock": 20,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Mother Dairy Burger Buns",
+        "category": "Dairy & Bakery",
+        "price": 176,
+        "brand": "Mother Dairy",
+        "stock": 153,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Local Toned Milk",
+        "category": "Dairy & Bakery",
+        "price": 155,
+        "brand": "Local",
+        "stock": 371,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Local Double Toned Milk",
+        "category": "Dairy & Bakery",
+        "price": 149,
+        "brand": "Local",
+        "stock": 295,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Govardhan Curd (Dahi)",
+        "category": "Dairy & Bakery",
+        "price": 193,
+        "brand": "Govardhan",
+        "stock": 382,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "English Oven Pizza Base",
+        "category": "Dairy & Bakery",
+        "price": 191,
+        "brand": "English Oven",
+        "stock": 353,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Organic Nandini Paneer",
+        "category": "Dairy & Bakery",
+        "price": 134,
+        "brand": "Nandini",
+        "stock": 356,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Britannia Muffin",
+        "category": "Dairy & Bakery",
+        "price": 77,
+        "brand": "Britannia",
+        "stock": 343,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Local Buttermilk (Chaas)",
+        "category": "Dairy & Bakery",
+        "price": 198,
+        "brand": "Local",
+        "stock": 410,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Govardhan Toned Milk",
+        "category": "Dairy & Bakery",
+        "price": 175,
+        "brand": "Govardhan",
+        "stock": 58,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Britannia Full Cream Milk",
+        "category": "Dairy & Bakery",
+        "price": 118,
+        "brand": "Britannia",
+        "stock": 199,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nandini Cake Rusk",
+        "category": "Dairy & Bakery",
+        "price": 139,
+        "brand": "Nandini",
+        "stock": 403,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Nandini Cow Milk",
+        "category": "Dairy & Bakery",
+        "price": 146,
+        "brand": "Nandini",
+        "stock": 286,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "English Oven Pizza Base",
+        "category": "Dairy & Bakery",
+        "price": 58,
+        "brand": "English Oven",
+        "stock": 183,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nandini Butter",
+        "category": "Dairy & Bakery",
+        "price": 151,
+        "brand": "Nandini",
+        "stock": 220,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Local Croissant",
+        "category": "Dairy & Bakery",
+        "price": 183,
+        "brand": "Local",
+        "stock": 77,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Govardhan Cheese Slices",
+        "category": "Dairy & Bakery",
+        "price": 148,
+        "brand": "Govardhan",
+        "stock": 25,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nandini Fresh Cream",
+        "category": "Dairy & Bakery",
+        "price": 176,
+        "brand": "Nandini",
+        "stock": 86,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Mother Dairy Butter",
+        "category": "Dairy & Bakery",
+        "price": 80,
+        "brand": "Mother Dairy",
+        "stock": 158,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nandini Cheese Slices",
+        "category": "Dairy & Bakery",
+        "price": 72,
+        "brand": "Nandini",
+        "stock": 84,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Mother Dairy Khari",
+        "category": "Dairy & Bakery",
+        "price": 110,
+        "brand": "Mother Dairy",
+        "stock": 54,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "English Oven Pav",
+        "category": "Dairy & Bakery",
+        "price": 52,
+        "brand": "English Oven",
+        "stock": 116,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic English Oven Paneer",
+        "category": "Dairy & Bakery",
+        "price": 166,
+        "brand": "English Oven",
+        "stock": 284,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Amul Fresh Cream",
+        "category": "Dairy & Bakery",
+        "price": 97,
+        "brand": "Amul",
+        "stock": 225,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Amul Butter",
+        "category": "Dairy & Bakery",
+        "price": 92,
+        "brand": "Amul",
+        "stock": 321,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nandini White Bread",
+        "category": "Dairy & Bakery",
+        "price": 168,
+        "brand": "Nandini",
+        "stock": 370,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Nandini Cheese Slices",
+        "category": "Dairy & Bakery",
+        "price": 96,
+        "brand": "Nandini",
+        "stock": 178,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Mother Dairy Double Toned Milk",
+        "category": "Dairy & Bakery",
+        "price": 166,
+        "brand": "Mother Dairy",
+        "stock": 388,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Govardhan Double Toned Milk",
+        "category": "Dairy & Bakery",
+        "price": 173,
+        "brand": "Govardhan",
+        "stock": 398,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Britannia Multigrain Bread",
+        "category": "Dairy & Bakery",
+        "price": 103,
+        "brand": "Britannia",
+        "stock": 187,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Mother Dairy Cake Rusk",
+        "category": "Dairy & Bakery",
+        "price": 105,
+        "brand": "Mother Dairy",
+        "stock": 21,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Amul Brown Bread",
+        "category": "Dairy & Bakery",
+        "price": 77,
+        "brand": "Amul",
+        "stock": 128,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Mother Dairy Muffin",
+        "category": "Dairy & Bakery",
+        "price": 56,
+        "brand": "Mother Dairy",
+        "stock": 87,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nandini Garlic Bread",
+        "category": "Dairy & Bakery",
+        "price": 85,
+        "brand": "Nandini",
+        "stock": 123,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Mother Dairy Lassi",
+        "category": "Dairy & Bakery",
+        "price": 140,
+        "brand": "Mother Dairy",
+        "stock": 34,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Local Pav",
+        "category": "Dairy & Bakery",
+        "price": 134,
+        "brand": "Local",
+        "stock": 313,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Mother Dairy Croissant",
+        "category": "Dairy & Bakery",
+        "price": 39,
+        "brand": "Mother Dairy",
+        "stock": 321,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nandini Mishti Doi",
+        "category": "Dairy & Bakery",
+        "price": 102,
+        "brand": "Nandini",
+        "stock": 114,
+        "unit": "200g",
+        "image": "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nescafe Coconut Water",
+        "category": "Beverages",
+        "price": 38,
+        "brand": "Nescafe",
+        "stock": 215,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pepsi Squash (Orange)",
+        "category": "Beverages",
+        "price": 161,
+        "brand": "Pepsi",
+        "stock": 379,
+        "unit": "2L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Taj Mahal Green Tea",
+        "category": "Beverages",
+        "price": 57,
+        "brand": "Taj Mahal",
+        "stock": 216,
+        "unit": "2L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Red Label Apple Juice",
+        "category": "Beverages",
+        "price": 72,
+        "brand": "Red Label",
+        "stock": 32,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nescafe Mixed Fruit Juice",
+        "category": "Beverages",
+        "price": 157,
+        "brand": "Nescafe",
+        "stock": 29,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Lipton Apple Juice",
+        "category": "Beverages",
+        "price": 75,
+        "brand": "Lipton",
+        "stock": 419,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Bru Coconut Water",
+        "category": "Beverages",
+        "price": 31,
+        "brand": "Bru",
+        "stock": 352,
+        "unit": "250g",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Coca-Cola Clear Soda",
+        "category": "Beverages",
+        "price": 248,
+        "brand": "Coca-Cola",
+        "stock": 377,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pepsi Mineral Water",
+        "category": "Beverages",
+        "price": 227,
+        "brand": "Pepsi",
+        "stock": 20,
+        "unit": "2L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Real Lemon Tea",
+        "category": "Beverages",
+        "price": 143,
+        "brand": "Real",
+        "stock": 39,
+        "unit": "2L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Taj Mahal Rose Syrup",
+        "category": "Beverages",
+        "price": 180,
+        "brand": "Taj Mahal",
+        "stock": 322,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Real Squash (Lemon)",
+        "category": "Beverages",
+        "price": 142,
+        "brand": "Real",
+        "stock": 39,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Taj Mahal Dust Tea",
+        "category": "Beverages",
+        "price": 207,
+        "brand": "Taj Mahal",
+        "stock": 397,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Taj Mahal Mineral Water",
+        "category": "Beverages",
+        "price": 54,
+        "brand": "Taj Mahal",
+        "stock": 241,
+        "unit": "2L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nescafe Dust Tea",
+        "category": "Beverages",
+        "price": 146,
+        "brand": "Nescafe",
+        "stock": 304,
+        "unit": "250ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Coca-Cola Coconut Water",
+        "category": "Beverages",
+        "price": 203,
+        "brand": "Coca-Cola",
+        "stock": 281,
+        "unit": "2L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Tata Tea Mango Drink",
+        "category": "Beverages",
+        "price": 244,
+        "brand": "Tata Tea",
+        "stock": 164,
+        "unit": "250ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nescafe Chocolate Syrup",
+        "category": "Beverages",
+        "price": 198,
+        "brand": "Nescafe",
+        "stock": 140,
+        "unit": "250ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Bru Chocolate Syrup",
+        "category": "Beverages",
+        "price": 111,
+        "brand": "Bru",
+        "stock": 195,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Coca-Cola Lemon Tea",
+        "category": "Beverages",
+        "price": 165,
+        "brand": "Coca-Cola",
+        "stock": 338,
+        "unit": "250ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Organic Nescafe Orange Soda",
+        "category": "Beverages",
+        "price": 138,
+        "brand": "Nescafe",
+        "stock": 309,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Lipton Coconut Water",
+        "category": "Beverages",
+        "price": 79,
+        "brand": "Lipton",
+        "stock": 129,
+        "unit": "250ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Lipton Instant Coffee",
+        "category": "Beverages",
+        "price": 52,
+        "brand": "Lipton",
+        "stock": 94,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Bru Guava Juice",
+        "category": "Beverages",
+        "price": 54,
+        "brand": "Bru",
+        "stock": 156,
+        "unit": "250g",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Pepsi Chocolate Syrup",
+        "category": "Beverages",
+        "price": 210,
+        "brand": "Pepsi",
+        "stock": 378,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Coca-Cola Green Tea",
+        "category": "Beverages",
+        "price": 207,
+        "brand": "Coca-Cola",
+        "stock": 279,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Tata Tea Green Tea",
+        "category": "Beverages",
+        "price": 174,
+        "brand": "Tata Tea",
+        "stock": 249,
+        "unit": "250ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Red Label Mineral Water",
+        "category": "Beverages",
+        "price": 166,
+        "brand": "Red Label",
+        "stock": 386,
+        "unit": "2L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Lipton Instant Coffee",
+        "category": "Beverages",
+        "price": 49,
+        "brand": "Lipton",
+        "stock": 247,
+        "unit": "250g",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Taj Mahal Chocolate Syrup",
+        "category": "Beverages",
+        "price": 120,
+        "brand": "Taj Mahal",
+        "stock": 266,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Organic Lipton Sparkling Water",
+        "category": "Beverages",
+        "price": 172,
+        "brand": "Lipton",
+        "stock": 314,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Nescafe Energy Drink",
+        "category": "Beverages",
+        "price": 64,
+        "brand": "Nescafe",
+        "stock": 347,
+        "unit": "250ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Taj Mahal Mixed Fruit Juice",
+        "category": "Beverages",
+        "price": 34,
+        "brand": "Taj Mahal",
+        "stock": 387,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Tata Tea Sparkling Water",
+        "category": "Beverages",
+        "price": 111,
+        "brand": "Tata Tea",
+        "stock": 319,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nescafe Energy Drink",
+        "category": "Beverages",
+        "price": 128,
+        "brand": "Nescafe",
+        "stock": 284,
+        "unit": "2L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Coca-Cola Mixed Fruit Juice",
+        "category": "Beverages",
+        "price": 248,
+        "brand": "Coca-Cola",
+        "stock": 68,
+        "unit": "250ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Taj Mahal Orange Juice",
+        "category": "Beverages",
+        "price": 95,
+        "brand": "Taj Mahal",
+        "stock": 259,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pepsi Sparkling Water",
+        "category": "Beverages",
+        "price": 37,
+        "brand": "Pepsi",
+        "stock": 154,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Red Label Apple Juice",
+        "category": "Beverages",
+        "price": 34,
+        "brand": "Red Label",
+        "stock": 193,
+        "unit": "2L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Pepsi Lemon Soda",
+        "category": "Beverages",
+        "price": 136,
+        "brand": "Pepsi",
+        "stock": 226,
+        "unit": "2L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Real Squash (Orange)",
+        "category": "Beverages",
+        "price": 79,
+        "brand": "Real",
+        "stock": 287,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Bru Filter Coffee",
+        "category": "Beverages",
+        "price": 23,
+        "brand": "Bru",
+        "stock": 239,
+        "unit": "250g",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Taj Mahal Filter Coffee",
+        "category": "Beverages",
+        "price": 75,
+        "brand": "Taj Mahal",
+        "stock": 179,
+        "unit": "250g",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Tropicana Mango Drink",
+        "category": "Beverages",
+        "price": 133,
+        "brand": "Tropicana",
+        "stock": 368,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Lipton Rose Syrup",
+        "category": "Beverages",
+        "price": 249,
+        "brand": "Lipton",
+        "stock": 274,
+        "unit": "250ml",
+        "image": "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Haldiram's Wafer Biscuit",
+        "category": "Snacks",
+        "price": 50,
+        "brand": "Haldiram's",
+        "stock": 39,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Haldiram's Milk Chocolate",
+        "category": "Snacks",
+        "price": 121,
+        "brand": "Haldiram's",
+        "stock": 393,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Parle Chikki",
+        "category": "Snacks",
+        "price": 53,
+        "brand": "Parle",
+        "stock": 103,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Haldiram's Navratan Mix",
+        "category": "Snacks",
+        "price": 92,
+        "brand": "Haldiram's",
+        "stock": 90,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Parle Wafer Biscuit",
+        "category": "Snacks",
+        "price": 41,
+        "brand": "Parle",
+        "stock": 364,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Britannia Moong Dal (Fried)",
+        "category": "Snacks",
+        "price": 22,
+        "brand": "Britannia",
+        "stock": 122,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Kurkure Milk Chocolate",
+        "category": "Snacks",
+        "price": 146,
+        "brand": "Kurkure",
+        "stock": 286,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nestle Cream Biscuit",
+        "category": "Snacks",
+        "price": 31,
+        "brand": "Nestle",
+        "stock": 57,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Haldiram's Cookies",
+        "category": "Snacks",
+        "price": 133,
+        "brand": "Haldiram's",
+        "stock": 97,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Balaji Moong Dal (Fried)",
+        "category": "Snacks",
+        "price": 112,
+        "brand": "Balaji",
+        "stock": 374,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Parle Dark Chocolate",
+        "category": "Snacks",
+        "price": 40,
+        "brand": "Parle",
+        "stock": 126,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Bingo Wafer Biscuit",
+        "category": "Snacks",
+        "price": 12,
+        "brand": "Bingo",
+        "stock": 404,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Cadbury Chikki",
+        "category": "Snacks",
+        "price": 140,
+        "brand": "Cadbury",
+        "stock": 173,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Kurkure Dry Fruits Mix",
+        "category": "Snacks",
+        "price": 81,
+        "brand": "Kurkure",
+        "stock": 103,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Britannia Popcorn",
+        "category": "Snacks",
+        "price": 41,
+        "brand": "Britannia",
+        "stock": 107,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Parle Navratan Mix",
+        "category": "Snacks",
+        "price": 124,
+        "brand": "Parle",
+        "stock": 377,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Cadbury Navratan Mix",
+        "category": "Snacks",
+        "price": 67,
+        "brand": "Cadbury",
+        "stock": 40,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Lays Bhujia Sev",
+        "category": "Snacks",
+        "price": 17,
+        "brand": "Lays",
+        "stock": 132,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Lays Popcorn",
+        "category": "Snacks",
+        "price": 59,
+        "brand": "Lays",
+        "stock": 57,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Bingo Moong Dal (Fried)",
+        "category": "Snacks",
+        "price": 68,
+        "brand": "Bingo",
+        "stock": 297,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Britannia Cream Biscuit",
+        "category": "Snacks",
+        "price": 82,
+        "brand": "Britannia",
+        "stock": 362,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Haldiram's Mixture",
+        "category": "Snacks",
+        "price": 31,
+        "brand": "Haldiram's",
+        "stock": 341,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Parle Mixture",
+        "category": "Snacks",
+        "price": 83,
+        "brand": "Parle",
+        "stock": 141,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Cadbury Moong Dal (Fried)",
+        "category": "Snacks",
+        "price": 105,
+        "brand": "Cadbury",
+        "stock": 266,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nestle Wafer Biscuit",
+        "category": "Snacks",
+        "price": 100,
+        "brand": "Nestle",
+        "stock": 281,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Cadbury Aloo Bhujia",
+        "category": "Snacks",
+        "price": 59,
+        "brand": "Cadbury",
+        "stock": 227,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Kurkure Milk Chocolate",
+        "category": "Snacks",
+        "price": 12,
+        "brand": "Kurkure",
+        "stock": 160,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Nestle Cookies",
+        "category": "Snacks",
+        "price": 53,
+        "brand": "Nestle",
+        "stock": 410,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Lays Mixture",
+        "category": "Snacks",
+        "price": 57,
+        "brand": "Lays",
+        "stock": 224,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Organic Bingo Cookies",
+        "category": "Snacks",
+        "price": 110,
+        "brand": "Bingo",
+        "stock": 239,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Lays Bhujia Sev",
+        "category": "Snacks",
+        "price": 64,
+        "brand": "Lays",
+        "stock": 94,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Kurkure Dark Chocolate",
+        "category": "Snacks",
+        "price": 86,
+        "brand": "Kurkure",
+        "stock": 278,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Bingo Digestive Biscuit",
+        "category": "Snacks",
+        "price": 83,
+        "brand": "Bingo",
+        "stock": 233,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Cadbury Dark Chocolate",
+        "category": "Snacks",
+        "price": 122,
+        "brand": "Cadbury",
+        "stock": 82,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Parle Popcorn",
+        "category": "Snacks",
+        "price": 133,
+        "brand": "Parle",
+        "stock": 359,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Bingo Khatta Meetha",
+        "category": "Snacks",
+        "price": 116,
+        "brand": "Bingo",
+        "stock": 100,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Bingo Nachos",
+        "category": "Snacks",
+        "price": 37,
+        "brand": "Bingo",
+        "stock": 138,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Bingo Milk Chocolate",
+        "category": "Snacks",
+        "price": 41,
+        "brand": "Bingo",
+        "stock": 63,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Britannia Digestive Biscuit",
+        "category": "Snacks",
+        "price": 110,
+        "brand": "Britannia",
+        "stock": 309,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Cadbury Aloo Bhujia",
+        "category": "Snacks",
+        "price": 77,
+        "brand": "Cadbury",
+        "stock": 377,
+        "unit": "1 pack",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Parle Potato Chips",
+        "category": "Snacks",
+        "price": 82,
+        "brand": "Parle",
+        "stock": 153,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Kurkure Namkeen",
+        "category": "Snacks",
+        "price": 109,
+        "brand": "Kurkure",
+        "stock": 42,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Balaji Navratan Mix",
+        "category": "Snacks",
+        "price": 132,
+        "brand": "Balaji",
+        "stock": 36,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Bingo Dark Chocolate",
+        "category": "Snacks",
+        "price": 111,
+        "brand": "Bingo",
+        "stock": 375,
+        "unit": "150g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Cadbury Nachos",
+        "category": "Snacks",
+        "price": 41,
+        "brand": "Cadbury",
+        "stock": 157,
+        "unit": "400g",
+        "image": "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Amul Cow Ghee",
+        "category": "Oils & Ghee",
+        "price": 492,
+        "brand": "Amul",
+        "stock": 220,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Dhara Coconut Oil",
+        "category": "Oils & Ghee",
+        "price": 650,
+        "brand": "Dhara",
+        "stock": 175,
+        "unit": "5L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Saffola Sunflower Oil",
+        "category": "Oils & Ghee",
+        "price": 264,
+        "brand": "Saffola",
+        "stock": 179,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Borges Cow Ghee",
+        "category": "Oils & Ghee",
+        "price": 565,
+        "brand": "Borges",
+        "stock": 258,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Patanjali Mustard Oil",
+        "category": "Oils & Ghee",
+        "price": 395,
+        "brand": "Patanjali",
+        "stock": 291,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Fortune Cow Ghee",
+        "category": "Oils & Ghee",
+        "price": 582,
+        "brand": "Fortune",
+        "stock": 286,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Borges Coconut Oil",
+        "category": "Oils & Ghee",
+        "price": 571,
+        "brand": "Borges",
+        "stock": 128,
+        "unit": "5L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Amul Sunflower Oil",
+        "category": "Oils & Ghee",
+        "price": 362,
+        "brand": "Amul",
+        "stock": 121,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Patanjali Olive Oil",
+        "category": "Oils & Ghee",
+        "price": 236,
+        "brand": "Patanjali",
+        "stock": 138,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Fortune Canola Oil",
+        "category": "Oils & Ghee",
+        "price": 411,
+        "brand": "Fortune",
+        "stock": 348,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Gowardhan Soyabean Oil",
+        "category": "Oils & Ghee",
+        "price": 760,
+        "brand": "Gowardhan",
+        "stock": 400,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Saffola Blended Oil",
+        "category": "Oils & Ghee",
+        "price": 504,
+        "brand": "Saffola",
+        "stock": 313,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Amul Rice Bran Oil",
+        "category": "Oils & Ghee",
+        "price": 534,
+        "brand": "Amul",
+        "stock": 84,
+        "unit": "5L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Dhara Palm Oil",
+        "category": "Oils & Ghee",
+        "price": 660,
+        "brand": "Dhara",
+        "stock": 335,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Gowardhan Blended Oil",
+        "category": "Oils & Ghee",
+        "price": 553,
+        "brand": "Gowardhan",
+        "stock": 392,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Fortune Canola Oil",
+        "category": "Oils & Ghee",
+        "price": 251,
+        "brand": "Fortune",
+        "stock": 247,
+        "unit": "5L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Patanjali Sesame Oil",
+        "category": "Oils & Ghee",
+        "price": 452,
+        "brand": "Patanjali",
+        "stock": 160,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Saffola Desi Ghee",
+        "category": "Oils & Ghee",
+        "price": 414,
+        "brand": "Saffola",
+        "stock": 310,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Borges Blended Oil",
+        "category": "Oils & Ghee",
+        "price": 127,
+        "brand": "Borges",
+        "stock": 124,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Emami Coconut Oil",
+        "category": "Oils & Ghee",
+        "price": 80,
+        "brand": "Emami",
+        "stock": 67,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Dhara Sesame Oil",
+        "category": "Oils & Ghee",
+        "price": 640,
+        "brand": "Dhara",
+        "stock": 39,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Fortune Palm Oil",
+        "category": "Oils & Ghee",
+        "price": 554,
+        "brand": "Fortune",
+        "stock": 102,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Emami Olive Oil",
+        "category": "Oils & Ghee",
+        "price": 159,
+        "brand": "Emami",
+        "stock": 236,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Patanjali Soyabean Oil",
+        "category": "Oils & Ghee",
+        "price": 128,
+        "brand": "Patanjali",
+        "stock": 258,
+        "unit": "5L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Figaro Palm Oil",
+        "category": "Oils & Ghee",
+        "price": 711,
+        "brand": "Figaro",
+        "stock": 342,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Borges Soyabean Oil",
+        "category": "Oils & Ghee",
+        "price": 783,
+        "brand": "Borges",
+        "stock": 339,
+        "unit": "5L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Dhara Desi Ghee",
+        "category": "Oils & Ghee",
+        "price": 484,
+        "brand": "Dhara",
+        "stock": 327,
+        "unit": "5L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Emami Rice Bran Oil",
+        "category": "Oils & Ghee",
+        "price": 375,
+        "brand": "Emami",
+        "stock": 292,
+        "unit": "5L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Organic Emami Groundnut Oil",
+        "category": "Oils & Ghee",
+        "price": 580,
+        "brand": "Emami",
+        "stock": 124,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Saffola Groundnut Oil",
+        "category": "Oils & Ghee",
+        "price": 209,
+        "brand": "Saffola",
+        "stock": 81,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Figaro Canola Oil",
+        "category": "Oils & Ghee",
+        "price": 364,
+        "brand": "Figaro",
+        "stock": 88,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Fortune Olive Oil",
+        "category": "Oils & Ghee",
+        "price": 195,
+        "brand": "Fortune",
+        "stock": 344,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Borges Desi Ghee",
+        "category": "Oils & Ghee",
+        "price": 466,
+        "brand": "Borges",
+        "stock": 250,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Dhara Coconut Oil",
+        "category": "Oils & Ghee",
+        "price": 791,
+        "brand": "Dhara",
+        "stock": 279,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Amul Canola Oil",
+        "category": "Oils & Ghee",
+        "price": 704,
+        "brand": "Amul",
+        "stock": 218,
+        "unit": "1kg",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Gowardhan Olive Oil",
+        "category": "Oils & Ghee",
+        "price": 470,
+        "brand": "Gowardhan",
+        "stock": 303,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Gowardhan Canola Oil",
+        "category": "Oils & Ghee",
+        "price": 315,
+        "brand": "Gowardhan",
+        "stock": 74,
+        "unit": "5L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Fortune Groundnut Oil",
+        "category": "Oils & Ghee",
+        "price": 275,
+        "brand": "Fortune",
+        "stock": 62,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Figaro Blended Oil",
+        "category": "Oils & Ghee",
+        "price": 786,
+        "brand": "Figaro",
+        "stock": 358,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Patanjali Soyabean Oil",
+        "category": "Oils & Ghee",
+        "price": 221,
+        "brand": "Patanjali",
+        "stock": 156,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Amul Rice Bran Oil",
+        "category": "Oils & Ghee",
+        "price": 324,
+        "brand": "Amul",
+        "stock": 327,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Premium Amul Blended Oil",
+        "category": "Oils & Ghee",
+        "price": 121,
+        "brand": "Amul",
+        "stock": 167,
+        "unit": "500ml",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Gowardhan Mustard Oil",
+        "category": "Oils & Ghee",
+        "price": 440,
+        "brand": "Gowardhan",
+        "stock": 349,
+        "unit": "500g",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Classic Figaro Cow Ghee",
+        "category": "Oils & Ghee",
+        "price": 389,
+        "brand": "Figaro",
+        "stock": 383,
+        "unit": "5L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    },
+    {
+        "name": "Dhara Sesame Oil",
+        "category": "Oils & Ghee",
+        "price": 509,
+        "brand": "Dhara",
+        "stock": 203,
+        "unit": "1L",
+        "image": "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=600"
+    }
+]

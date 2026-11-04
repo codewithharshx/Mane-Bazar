@@ -26,7 +26,11 @@ router.put(
   "/:id",
   protect,
   adminOnly,
-  [param("id").isMongoId().withMessage("Invalid category id")],
+  [
+    param("id").isMongoId().withMessage("Invalid category id"),
+    body("name").optional().trim().notEmpty().withMessage("Category name cannot be empty"),
+    body("slug").optional().trim().notEmpty().withMessage("Category slug cannot be empty")
+  ],
   validateRequest,
   updateCategory
 );

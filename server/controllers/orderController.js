@@ -1,10 +1,14 @@
+/**
+ * orderController.js  (Refactored)
+ *
+ * HTTP layer only — no direct business logic.
+ * All order logic has been moved to services/orderService.js.
+ */
+
 const fs = require("fs");
 const path = require("path");
-const Coupon = require("../models/Coupon");
 const Order = require("../models/Order");
-const Payment = require("../models/Payment");
-const Product = require("../models/Product");
-const Store = require("../models/Store");
+const Coupon = require("../models/Coupon");
 const User = require("../models/User");
 const asyncHandler = require("../middleware/asyncHandler");
 const {
@@ -14,226 +18,21 @@ const {
   markIdempotencyCompleted,
   markIdempotencyFailed
 } = require("../services/idempotencyService");
-const { validateCoupon } = require("./couponController");
-const { generateInvoice } = require("../services/invoiceService");
 const {
-  calculatePricing,
-  generateOrderId,
+  buildOrderPayload,
+  persistSuccessfulOrder,
+  adjustSoldCount,
+  adjustStock
+} = require("../services/orderService");
+const {
   isCancellableStatus,
   canTransitionOrderStatus,
-  getAllowedNextOrderStatuses,
-  normalizeDeliverySlot,
-  calculateDistance,
-  mockCoordinatesFromPincode
+  getAllowedNextOrderStatuses
 } = require("../utils/order");
+const { queuePlacementNotificationEmail } = require("../services/emailService");
+const { sendDeliveryUpdate } = require("../services/whatsappService");
 
-const SLOT_LIMIT = 20;
-
-const validateDeliverySlot = async ({ date, timeSlot }) => {
-  const ordersInSlot = await Order.countDocuments({
-    "deliverySlot.date": date,
-    "deliverySlot.timeSlot": timeSlot,
-    status: { $ne: "cancelled" }
-  });
-
-  if (ordersInSlot >= SLOT_LIMIT) {
-    throw new Error("Selected delivery slot is full. Please choose another one.");
-  }
-};
-
-const normalizeItemsFromProducts = (items, productsMap) =>
-  items.map((item) => {
-    const product = productsMap.get(item.productId);
-    return {
-      product: product._id,
-      name: product.name,
-      price: product.price,
-      qty: Number(item.qty),
-      image: product.images?.[0] || ""
-    };
-  });
-
-const adjustStock = async (items, mode = "decrement") => {
-  const bulkOps = items.map((item) => ({
-    updateOne: {
-      filter: { _id: item.product },
-      update: {
-        $inc: { stock: mode === "decrement" ? -item.qty : item.qty }
-      }
-    }
-  }));
-
-  await Product.bulkWrite(bulkOps);
-};
-
-const buildOrderPayload = async ({
-  userId,
-  items,
-  storeId,
-  deliveryAddress,
-  deliverySlot,
-  paymentMethod,
-  paymentStatus,
-  razorpayMeta = {},
-  couponCode = "",
-  forcedOrderId = ""
-}) => {
-  if (!items?.length) {
-    throw new Error("At least one cart item is required");
-  }
-
-  const normalizedTimeSlot = normalizeDeliverySlot(deliverySlot?.timeSlot);
-  if (!normalizedTimeSlot) {
-    throw new Error("Invalid delivery slot");
-  }
-
-  const normalizedDeliverySlot = {
-    ...deliverySlot,
-    timeSlot: normalizedTimeSlot
-  };
-
-  await validateDeliverySlot(normalizedDeliverySlot);
-
-  const productIds = items.map((item) => item.productId);
-  const products = await Product.find({
-    _id: { $in: productIds },
-    isActive: true
-  }).populate("storeId", "name isOpen pincode deliveryRadiusKm location");
-  const productsMap = new Map(products.map((product) => [product._id.toString(), product]));
-
-  const inferredStoreIds = new Set(
-    products
-      .map((product) => (product.storeId ? product.storeId._id.toString() : ""))
-      .filter(Boolean)
-  );
-
-  if (storeId && inferredStoreIds.size && !inferredStoreIds.has(storeId.toString())) {
-    throw new Error("Selected store does not match cart products");
-  }
-
-  if (inferredStoreIds.size > 1) {
-    throw new Error("Cart contains items from multiple stores. Place separate orders per store.");
-  }
-
-  const resolvedStoreId = storeId || Array.from(inferredStoreIds)[0] || null;
-  let store = null;
-
-  if (resolvedStoreId) {
-    store = await Store.findById(resolvedStoreId);
-    if (!store) {
-      throw new Error("Store not found for this order");
-    }
-    if (!store.isOpen) {
-      throw new Error("Store is currently closed. Please order when the store is open.");
-    }
-    if (store.pincode && deliveryAddress?.pincode && store.pincode !== deliveryAddress.pincode) {
-      // Relax pincode exact match if we are doing 25km radius check
-      // We will rely on the 25km distance rule instead
-    }
-
-    if (store.location && store.location.coordinates) {
-      const storeLng = store.location.coordinates[0];
-      const storeLat = store.location.coordinates[1];
-      
-      let userLat = deliveryAddress.lat;
-      let userLng = deliveryAddress.lng;
-      
-      if (!userLat || !userLng) {
-        const mockCoord = mockCoordinatesFromPincode(deliveryAddress.pincode);
-        userLat = mockCoord.lat;
-        userLng = mockCoord.lng;
-      }
-
-      const distance = calculateDistance(storeLat, storeLng, userLat, userLng);
-      if (distance > 25) {
-        throw new Error("Delivery not available. Your location is outside our 25km delivery radius.");
-      }
-    }
-  }
-
-  items.forEach((item) => {
-    const product = productsMap.get(item.productId);
-    if (!product) {
-      throw new Error("One or more products are no longer available");
-    }
-    if (product.stock < Number(item.qty)) {
-      throw new Error(`${product.name} does not have enough stock`);
-    }
-  });
-
-  const normalizedItems = normalizeItemsFromProducts(items, productsMap);
-  const subtotal = normalizedItems.reduce((sum, item) => sum + item.price * item.qty, 0);
-  const deliveryCharge = subtotal >= 499 ? 0 : 40;
-
-  let appliedCoupon = null;
-  let couponDiscount = 0;
-  if (couponCode) {
-    const { coupon, discount } = await validateCoupon({ code: couponCode, subtotal });
-    appliedCoupon = coupon;
-    couponDiscount = discount;
-  }
-
-  const pricing = calculatePricing({
-    items: normalizedItems,
-    couponDiscount,
-    deliveryCharge
-  });
-
-  return {
-    orderId: forcedOrderId || (await generateOrderId()),
-    user: userId,
-    storeId: resolvedStoreId,
-    items: normalizedItems,
-    pricing,
-    couponCode: appliedCoupon?.code || "",
-    paymentMethod,
-    paymentStatus,
-    razorpayOrderId: razorpayMeta.razorpayOrderId || "",
-    razorpayPaymentId: razorpayMeta.razorpayPaymentId || "",
-    razorpaySignature: razorpayMeta.razorpaySignature || "",
-    deliveryAddress,
-    deliverySlot: normalizedDeliverySlot,
-    status: "placed",
-    statusHistory: [
-      {
-        status: "placed",
-        updatedAt: new Date(),
-        note: "Order placed successfully"
-      }
-    ],
-    appliedCoupon
-  };
-};
-
-const persistSuccessfulOrder = async (orderPayload) => {
-  const { appliedCoupon, ...payload } = orderPayload;
-  const order = await Order.create(payload);
-  await adjustStock(order.items, "decrement");
-
-  if (appliedCoupon) {
-    appliedCoupon.usedCount += 1;
-    await appliedCoupon.save();
-  }
-
-  const user = await User.findById(order.user);
-  const invoicePath = await generateInvoice(order, user);
-  order.invoicePath = invoicePath;
-  await order.save();
-
-  await Payment.create({
-    order: order._id,
-    user: order.user,
-    razorpayOrderId: order.razorpayOrderId,
-    razorpayPaymentId: order.razorpayPaymentId,
-    razorpaySignature: order.razorpaySignature,
-    amount: order.pricing.total,
-    currency: "INR",
-    status: order.paymentStatus
-  });
-
-  return { order };
-};
-
+// ─── COD Order ───────────────────────────────────────────────────────────────
 const createCODOrder = asyncHandler(async (req, res) => {
   const idempotencyKey = extractIdempotencyKey(req);
   const requestHash = hashPayload({
@@ -291,19 +90,46 @@ const createCODOrder = asyncHandler(async (req, res) => {
   }
 });
 
+// ─── Get My Orders (paginated) ────────────────────────────────────────────────
 const getMyOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({ user: req.user._id })
-    .sort({ createdAt: -1 })
-    .populate("storeId", "name city")
-    .populate("items.product", "slug");
-  res.json(orders);
+  const page = Math.max(1, parseInt(req.query.page) || 1);
+  const limit = Math.min(50, Math.max(1, parseInt(req.query.limit) || 10));
+  const skip = (page - 1) * limit;
+
+  const filter = {
+    user: req.user._id,
+    status: { $ne: "pending_payment" } // Hide incomplete payment orders from user history
+  };
+
+  const [orders, total] = await Promise.all([
+    Order.find(filter)
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .populate("storeId", "name city")
+      .populate("items.product", "slug name")
+      .lean(),
+    Order.countDocuments(filter)
+  ]);
+
+  res.json({
+    orders,
+    pagination: {
+      page,
+      limit,
+      total,
+      pages: Math.ceil(total / limit)
+    }
+  });
 });
 
+// ─── Get Single Order ─────────────────────────────────────────────────────────
 const getOrderByOrderId = asyncHandler(async (req, res) => {
   const order = await Order.findOne({ orderId: req.params.orderId })
     .populate("storeId", "name city address phone")
     .populate("items.product", "slug")
-    .populate("user", "name email");
+    .populate("user", "name email")
+    .lean();
 
   if (!order) {
     res.status(404);
@@ -321,6 +147,7 @@ const getOrderByOrderId = asyncHandler(async (req, res) => {
   res.json(order);
 });
 
+// ─── Admin: Update Order Status ───────────────────────────────────────────────
 const updateOrderStatus = asyncHandler(async (req, res) => {
   const { status, note = "" } = req.body;
   const order = await Order.findOne({ orderId: req.params.orderId });
@@ -356,12 +183,30 @@ const updateOrderStatus = asyncHandler(async (req, res) => {
   }
 
   await order.save();
-  res.json({
-    message: "Order status updated successfully",
-    order
-  });
+
+  const customer = await User.findById(order.user).select("name email phone");
+  if (customer?.email) {
+    queuePlacementNotificationEmail({
+      to: customer.email,
+      name: customer.name,
+      orderId: order.orderId,
+      status
+    }).catch((error) => {
+      console.error("Failed to queue order status notification:", error.message);
+    });
+  }
+
+  // Send WhatsApp status update if phone available
+  if (customer?.phone) {
+    sendDeliveryUpdate(customer.phone, order, customer.name, status).catch((error) => {
+      console.warn("Failed to send WhatsApp status update:", error.message);
+    });
+  }
+
+  res.json({ message: "Order status updated successfully", order });
 });
 
+// ─── Cancel Order ─────────────────────────────────────────────────────────────
 const cancelOrder = asyncHandler(async (req, res) => {
   const order = await Order.findOne({ orderId: req.params.orderId });
 
@@ -383,6 +228,8 @@ const cancelOrder = asyncHandler(async (req, res) => {
     throw new Error("This order can no longer be cancelled");
   }
 
+  const wasCountedAsSale = order.status !== "pending_payment";
+
   order.status = "cancelled";
   order.statusHistory.push({
     status: "cancelled",
@@ -391,6 +238,9 @@ const cancelOrder = asyncHandler(async (req, res) => {
   });
 
   await adjustStock(order.items, "increment");
+  if (wasCountedAsSale) {
+    await adjustSoldCount(order.items, "decrement");
+  }
 
   if (order.couponCode) {
     const coupon = await Coupon.findOne({ code: order.couponCode });
@@ -400,23 +250,19 @@ const cancelOrder = asyncHandler(async (req, res) => {
     }
   }
 
+  // FIX: Was incorrectly set to "failed" — now correctly "refund_pending"
   if (order.paymentStatus === "paid") {
-    order.paymentStatus = "failed";
+    order.paymentStatus = "refund_pending";
   }
 
   await order.save();
 
-  res.json({
-    message: "Order cancelled successfully",
-    order
-  });
+  res.json({ message: "Order cancelled successfully", order });
 });
 
+// ─── Download Invoice (protected) ─────────────────────────────────────────────
 const downloadInvoice = asyncHandler(async (req, res) => {
-  const order = await Order.findOne({ orderId: req.params.orderId }).populate(
-    "user",
-    "name"
-  );
+  const order = await Order.findOne({ orderId: req.params.orderId }).populate("user", "name");
 
   if (!order) {
     res.status(404);
@@ -440,8 +286,6 @@ const downloadInvoice = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-  buildOrderPayload,
-  persistSuccessfulOrder,
   createCODOrder,
   getMyOrders,
   getOrderByOrderId,

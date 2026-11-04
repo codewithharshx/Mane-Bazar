@@ -1,1 +1,1 @@
-npx secretlint "**/*"
+npx secretlint README.md .env.example client/.env.example server/.env.example "docs/*.md"

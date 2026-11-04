@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import api from "../utils/api";
+import { orderApi } from "../services/orderApi";
 import { formatCurrency, formatDateTime, formatOrderStatus } from "../utils/formatters";
 import StatusBadge from "../components/StatusBadge";
 import PageTransition from "../components/PageTransition";
@@ -16,7 +16,7 @@ const OrderDetailPage = () => {
   useEffect(() => {
     const fetchOrder = async () => {
       try {
-        const { data } = await api.get(`/orders/${orderId}`);
+        const { data } = await orderApi.getByOrderId(orderId);
         setOrder(data);
       } catch (error) {
         toast.error("Unable to load order details");
@@ -30,9 +30,7 @@ const OrderDetailPage = () => {
 
   const downloadInvoice = async () => {
     try {
-      const response = await api.get(`/orders/${order.orderId}/invoice`, {
-        responseType: "blob"
-      });
+      const response = await orderApi.invoice(order.orderId);
       const blobUrl = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement("a");
       link.href = blobUrl;
@@ -48,7 +46,7 @@ const OrderDetailPage = () => {
 
   const cancelOrder = async () => {
     try {
-      await api.put(`/orders/${order.orderId}/cancel`, {});
+      await orderApi.cancel(order.orderId);
       toast.success("Order cancelled");
       navigate("/orders");
     } catch (error) {

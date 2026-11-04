@@ -55,6 +55,26 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: ""
     },
+    isVerified: {
+      type: Boolean,
+      default: false
+    },
+    verificationToken: {
+      type: String,
+      default: ""
+    },
+    verificationTokenExpires: {
+      type: Date,
+      default: null
+    },
+    passwordResetTokenHash: {
+      type: String,
+      default: ""
+    },
+    passwordResetTokenExpires: {
+      type: Date,
+      default: null
+    },
     isActive: {
       type: Boolean,
       default: true
@@ -84,6 +104,10 @@ userSchema.set("toJSON", {
   transform(_doc, ret) {
     delete ret.password;
     delete ret.refreshToken;
+    delete ret.verificationToken;
+    delete ret.verificationTokenExpires;
+    delete ret.passwordResetTokenHash;
+    delete ret.passwordResetTokenExpires;
     return ret;
   }
 });

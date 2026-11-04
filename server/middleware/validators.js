@@ -4,6 +4,7 @@
  */
 
 const { body, param, validationResult } = require("express-validator");
+const { normalizeDeliverySlot } = require("../utils/order");
 
 // ─── Email Validation ─────────────────────────────────────────────────────
 
@@ -73,6 +74,12 @@ const validateProductQty = () =>
   body("qty")
     .isInt({ min: 1, max: 999 })
     .withMessage("Quantity must be between 1 and 999");
+ 
+const validateImageUrl = (fieldName = "image") =>
+  body(fieldName)
+    .optional({ checkFalsy: true })
+    .isURL({ require_protocol: true })
+    .withMessage(`${fieldName} must be a valid URL`);
 
 // ─── Coupon Code Validation ───────────────────────────────────────────
 const validateCouponCode = () =>
@@ -133,6 +140,25 @@ const validateGoogleAuth = [
     .trim()
     .notEmpty()
     .withMessage("Google credential is required"),
+  handleValidationErrors
+];
+
+const validateResendVerification = [
+  validateEmail(),
+  handleValidationErrors
+];
+
+const validateVerifyEmailOtp = [
+  validateEmail(),
+  body("otp")
+    .trim()
+    .matches(/^\d{6}$/)
+    .withMessage("OTP must be a 6-digit code"),
+  handleValidationErrors
+];
+
+const validatePasswordResetRequest = [
+  validateEmail(),
   handleValidationErrors
 ];
 
@@ -204,6 +230,40 @@ const validateCreateOrder = [
   handleValidationErrors
 ];
 
+const validateCheckoutPayload = [
+  body("storeId").optional().isMongoId().withMessage("Store id is invalid"),
+  body("items").isArray({ min: 1 }).withMessage("At least one item is required"),
+  body("items.*.productId").isMongoId().withMessage("Product id is invalid"),
+  body("items.*.qty").isInt({ min: 1 }).withMessage("Quantity must be at least 1"),
+  body("deliveryAddress.label").trim().notEmpty().withMessage("Address label is required"),
+  body("deliveryAddress.street").trim().notEmpty().withMessage("Street is required"),
+  body("deliveryAddress.city").trim().notEmpty().withMessage("City is required"),
+  body("deliveryAddress.pincode").trim().notEmpty().withMessage("Pincode is required"),
+  body("deliverySlot.date").trim().notEmpty().withMessage("Delivery date is required"),
+  body("deliverySlot.timeSlot")
+    .custom((value) => Boolean(normalizeDeliverySlot(value)))
+    .withMessage("Invalid delivery slot")
+];
+
+const validatePasswordReset = [
+  body("token")
+    .trim()
+    .notEmpty()
+    .withMessage("Reset token is required")
+    .isLength({ min: 32 })
+    .withMessage("Invalid reset token"),
+  body("password")
+    .isLength({ min: 6 })
+    .withMessage("Password must be at least 6 characters")
+    .matches(/[A-Z]/)
+    .withMessage("Password must contain at least one uppercase letter")
+    .matches(/[a-z]/)
+    .withMessage("Password must contain at least one lowercase letter")
+    .matches(/[0-9]/)
+    .withMessage("Password must contain at least one number"),
+  handleValidationErrors
+];
+
 module.exports = {
   validateEmail,
   validatePassword,
@@ -212,6 +272,7 @@ module.exports = {
   validatePincode,
   validateAddress,
   validateProductQty,
+  validateImageUrl,
   validateCouponCode,
   validatePaymentStatus,
   validateOrderStatus,
@@ -219,9 +280,14 @@ module.exports = {
   validateRegister,
   validateLogin,
   validateGoogleAuth,
+  validateResendVerification,
+  validateVerifyEmailOtp,
+  validatePasswordResetRequest,
   validateOptionalRefreshToken,
   validateUpdateProfile,
   validateAddressIdParam,
   validateAddAddress,
-  validateCreateOrder
+  validateCreateOrder,
+  validatePasswordReset,
+  validateCheckoutPayload
 };

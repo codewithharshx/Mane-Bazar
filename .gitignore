@@ -1,9 +1,25 @@
 node_modules/
 dist/
 build/
+coverage/
 *.log
+server/invoices/*.pdf
 
 # Environment variables
 .env
 .env.*
 !.env.example
+
+# Local tools & OS
+.DS_Store
+Thumbs.db
+
+# Untracked experiments & scratch files
+apps/
+packages/
+.backup/
+.mimocode/
+prd.json
+progress.txt
+MANE_BAZAR_PROGRESS.md
+tsconfig.base.json

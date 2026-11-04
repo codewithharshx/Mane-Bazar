@@ -1,4 +1,4 @@
-const Order = require("../models/Order");
+const crypto = require("crypto");
 
 const DELIVERY_SLOT_LABELS = {
   morning: "Morning (7AM-11AM)",
@@ -6,10 +6,15 @@ const DELIVERY_SLOT_LABELS = {
   evening: "Evening (4PM-8PM)"
 };
 
+/**
+ * Normalise a free-form delivery slot string to one of the three canonical labels.
+ * Handles em-dashes (U+2013 / U+2014), curly quotes, and common abbreviations.
+ */
 const normalizeDeliverySlot = (input = "") => {
   const normalized = String(input)
     .trim()
-    .replace(/â€“|â€”|–|—/g, "-")
+    // Fix mojibake and actual Unicode dashes
+    .replace(/â€["""]|[\u2013\u2014\u2012]/g, "-")
     .replace(/\s*-\s*/g, "-")
     .toLowerCase();
 
@@ -31,18 +36,19 @@ const normalizeDeliverySlot = (input = "") => {
   return "";
 };
 
-const generateOrderId = async () => {
+/**
+ * Generate a collision-resistant order ID using crypto random bytes.
+ * Format: MB-YYYYMMDD-XXXXXX  (e.g. MB-20250414-3F9A12)
+ * No DB query needed — random suffix makes collisions astronomically unlikely.
+ */
+const generateOrderId = () => {
   const today = new Date();
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, "0");
   const day = String(today.getDate()).padStart(2, "0");
-  const prefix = `MB-${year}${month}${day}`;
-
-  const count = await Order.countDocuments({
-    orderId: { $regex: `^${prefix}` }
-  });
-
-  return `${prefix}-${String(count + 1).padStart(4, "0")}`;
+  const dateStr = `${year}${month}${day}`;
+  const suffix = crypto.randomBytes(3).toString("hex").toUpperCase();
+  return `MB-${dateStr}-${suffix}`;
 };
 
 const TAX_RATE = 0.05;
@@ -63,9 +69,11 @@ const calculatePricing = ({ items, couponDiscount = 0, deliveryCharge = 40 }) =>
   };
 };
 
-const isCancellableStatus = (status) => ["placed", "confirmed"].includes(status);
+const isCancellableStatus = (status) =>
+  ["pending_payment", "placed", "confirmed"].includes(status);
 
 const ORDER_STATUS_TRANSITIONS = Object.freeze({
+  pending_payment: ["placed", "cancelled"],
   placed: ["confirmed", "cancelled"],
   confirmed: ["packed", "cancelled"],
   packed: ["out_for_delivery"],
@@ -80,34 +88,24 @@ const getAllowedNextOrderStatuses = (currentStatus) =>
 const canTransitionOrderStatus = (currentStatus, nextStatus) =>
   getAllowedNextOrderStatuses(currentStatus).includes(nextStatus);
 
+/**
+ * Haversine distance between two lat/lng points. Returns km.
+ */
 function calculateDistance(lat1, lon1, lat2, lon2) {
-  const R = 6371; // km
-  const dLat = (lat2 - lat1) * Math.PI / 180;
-  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
 
   const a =
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(lat1 * Math.PI/180) *
-    Math.cos(lat2 * Math.PI/180) *
-    Math.sin(dLon/2) * Math.sin(dLon/2);
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
 
-  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   return R * c;
 }
-
-const mockCoordinatesFromPincode = (pincode) => {
-  // A pseudo hash of the pincode to generate mock coordinates around India (lat: ~20, lng: ~78)
-  const numericPin = parseInt(pincode, 10);
-  if (isNaN(numericPin)) return { lat: 28.6139, lng: 77.2090 }; // Default to Delhi if invalid
-  
-  const latOffset = (numericPin % 100) / 100;
-  const lngOffset = (Math.floor(numericPin / 100) % 100) / 100;
-  
-  return {
-    lat: 19.0 + (latOffset * 10), // ~19 - 29 (Mumbai to Delhi range)
-    lng: 72.8 + (lngOffset * 10)  // ~72 - 82 
-  };
-};
 
 module.exports = {
   TAX_RATE,
@@ -118,6 +116,5 @@ module.exports = {
   getAllowedNextOrderStatuses,
   canTransitionOrderStatus,
   normalizeDeliverySlot,
-  calculateDistance,
-  mockCoordinatesFromPincode
+  calculateDistance
 };

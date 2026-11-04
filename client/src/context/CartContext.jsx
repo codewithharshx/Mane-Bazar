@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import useLocalStorage from "../hooks/useLocalStorage";
 
@@ -7,7 +7,10 @@ const CartContext = createContext(null);
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useLocalStorage("mane-bazar-cart", []);
   const [coupon, setCoupon] = useLocalStorage("mane-bazar-coupon", null);
-  const [isDrawerOpen, setDrawerOpen] = useLocalStorage("mane-bazar-cart-drawer", false);
+
+  // FIX: Drawer open state is UI-only — should NOT persist to localStorage.
+  // Using localStorage previously caused the drawer to reopen on every page load.
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
 
   const addToCart = (product, qty = 1) => {
     if (product.stock < 1) {
@@ -64,6 +67,7 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => {
     setCartItems([]);
     setCoupon(null);
+    setDrawerOpen(false);
   };
 
   const subtotal = useMemo(
@@ -86,7 +90,7 @@ export const CartProvider = ({ children }) => {
       applyCoupon: setCoupon,
       removeCoupon: () => setCoupon(null)
     }),
-    [cartItems, coupon, subtotal, isDrawerOpen]
+    [cartItems, coupon, subtotal, isDrawerOpen] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
-const { MongoMemoryServer } = require("mongodb-memory-server");
+const { MongoMemoryReplSet } = require("mongodb-memory-server");
+const Order = require("../models/Order");
 
 let memoryServer;
 
@@ -24,7 +25,9 @@ const connectDB = async () => {
       isPlaceholderUri(mongoUri);
 
     if (useMemoryDB) {
-      memoryServer = await MongoMemoryServer.create();
+      memoryServer = await MongoMemoryReplSet.create({
+        replSet: { count: 1 }
+      });
       mongoUri = memoryServer.getUri();
       process.env.MONGO_URI = mongoUri;
       process.env.USE_MEMORY_DB = "true";
@@ -34,6 +37,23 @@ const connectDB = async () => {
     }
 
     const connection = await mongoose.connect(mongoUri);
+
+    try {
+      const indexes = await Order.collection.indexes();
+      const pendingTtlIndex = indexes.find(
+        (index) =>
+          index.key?.pendingPaymentExpiry === 1 &&
+          index.expireAfterSeconds === 0
+      );
+
+      if (pendingTtlIndex?.name) {
+        await Order.collection.dropIndex(pendingTtlIndex.name);
+        console.log(`✅ Dropped legacy index: ${pendingTtlIndex.name}`);
+      }
+    } catch (error) {
+      console.warn("⚠️ Could not verify/drop legacy pending payment TTL index:", error.message);
+    }
+
     console.log(`✅ MongoDB connected: ${connection.connection.host}`);
     return connection;
   } catch (error) {

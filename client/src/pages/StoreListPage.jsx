@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import api from "../utils/api";
+import { storeApi } from "../services/storeApi";
 import PageTransition from "../components/PageTransition";
 import SkeletonLoader from "../components/SkeletonLoader";
 
@@ -48,7 +48,7 @@ const StoreListPage = () => {
     const fetchStores = async () => {
       setLoading(true);
       try {
-        const { data } = await api.get(`/stores/nearby?${queryString}`);
+        const { data } = await storeApi.nearby(Object.fromEntries(new URLSearchParams(queryString)));
         setStores(data.stores || []);
       } catch (error) {
         toast.error("Unable to load nearby stores");

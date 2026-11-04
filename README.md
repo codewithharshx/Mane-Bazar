@@ -1,616 +1,298 @@
-# 🛒 Mane Bazar — Grocery E-Commerce Platform
+<div align="center">
 
-**A production-ready, full-stack grocery e-commerce web application modeled after local Indian kiranas.** Built with MERN stack, Razorpay payments, PDF invoice generation, and comprehensive admin dashboard.
+# 🛒 Mane Bazar
 
-[![GitHub](https://img.shields.io/badge/GitHub-codewithharshx%2Fmane--bazar-blue?logo=github)](https://github.com/codewithharshx/mane-bazar)
-[![License](https://img.shields.io/badge/License-MIT-green)]()
-[![Version](https://img.shields.io/badge/Version-1.0.0-blue)]()
+**A Modern, High-Performance Grocery E-Commerce Platform Built for Local Indian Kiranas**
+
+[![Build Status](https://img.shields.io/github/actions/workflow/status/codewithharshx/Mane-Bazar/ci.yml?branch=main&style=flat-square&logo=github-actions&logoColor=white)](https://github.com/codewithharshx/Mane-Bazar/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=flat-square)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-v18%20|%20v20%20|%20v22-green.svg?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![React](https://img.shields.io/badge/React-18.3-61dafb.svg?style=flat-square&logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-6.3-646CFF.svg?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Express](https://img.shields.io/badge/Express-4.22-lightgrey.svg?style=flat-square&logo=express&logoColor=black)](https://expressjs.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Mongoose%208-green.svg?style=flat-square&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38bdf8.svg?style=flat-square&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Razorpay](https://img.shields.io/badge/Payments-Razorpay%20UPI%20%7C%20COD-02042B.svg?style=flat-square&logo=razorpay&logoColor=white)](https://razorpay.com/)
+
+[Explore Documentation](docs/) • [Architecture](docs/ARCHITECTURE.md) • [REST API](docs/API_REFERENCE.md) • [Local Setup](docs/INSTALLATION.md) • [Report Bug](https://github.com/codewithharshx/Mane-Bazar/issues)
+
+</div>
 
 ---
 
-## ⚡ Quick Start
+## 📖 Introduction
 
-Get up and running in 5 minutes:
+**Mane Bazar** is a full-stack e-commerce web platform engineered to bridge local neighborhood grocery stores (*kiranas*) with digital-first consumers. 
 
+In traditional Indian retail, local kirana merchants face intense competition from centralized quick-commerce aggregators while struggling with complex inventory systems, high commissions, and rigid catalog requirements. Mane Bazar solves this by offering a lightweight, merchant-first commerce platform that delivers:
+
+- **Hyperlocal Kirana Discovery:** Match customers with partner neighborhood kirana stores within a configurable 25 km delivery radius based on pincode and GPS coordinates.
+- **Instant In-Memory Development:** Zero-friction onboarding for developers with automatic embedded in-memory MongoDB—clone and run in seconds without setting up external database servers.
+- **Server-Authoritative Cart & Pricing:** Prevents client-side monetary tampering by calculating item totals, discounts, taxes, and delivery fees strictly on the backend.
+- **Atomic Stock Reservation:** Mongoose database session transactions prevent overselling during checkout spikes, complemented by an automated 15-minute pending order cleanup sweeper.
+- **Frictionless Indian Checkout:** Integrated Razorpay checkout supporting UPI (Google Pay, PhonePe, Paytm), Netbanking, Debit/Credit Cards, alongside standard Cash on Delivery (COD).
+
+---
+
+## 📸 Application Previews
+
+> [!NOTE]
+> High-resolution interface captures can be placed in [`screenshots/`](screenshots/). See [`screenshots/README.md`](screenshots/README.md) for capture guidelines.
+
+<div align="center">
+
+| 🏪 Storefront & Discovery | 📦 Product Catalog & Filters |
+|:---:|:---:|
+| ![Homepage Preview](screenshots/homepage.png)<br><sub>*Storefront banner, categories & promotional strips*</sub> | ![Products Preview](screenshots/products.png)<br><sub>*Faceted category search, price sorting & badges*</sub> |
+
+| 🛒 Shopping Cart & Discounts | 💳 Secure Checkout & Payments |
+|:---:|:---:|
+| ![Cart Preview](screenshots/cart.png)<br><sub>*Slide-over drawer, quantity limits & coupon engine*</sub> | ![Checkout Preview](screenshots/checkout.png)<br><sub>*Saved addresses, Razorpay UPI & Cash on Delivery*</sub> |
+
+| 📊 Merchant Analytics Dashboard | 📱 Mobile Responsive Experience |
+|:---:|:---:|
+| ![Admin Dashboard](screenshots/admin-dashboard.png)<br><sub>*Revenue curves, order status & inventory alerts*</sub> | ![Mobile View](screenshots/mobile-view.png)<br><sub>*Touch-optimized bottom navigation & quick cart*</sub> |
+
+</div>
+
+---
+
+## 🚀 Verified Feature Matrix
+
+Every feature listed below has been verified directly against the production codebase:
+
+### 🛍️ Customer Experience
+- **Responsive Kirana UI:** Built with Tailwind CSS, Framer Motion, and mobile-optimized navigation drawers.
+- **Grocery Category Navigation:** 12 structured staple categories (Atta & Flours, Rice & Grains, Dals & Pulses, Cooking Oils, Spices & Masalas, Dairy, Beverages, Snacks, Packaged Food, Household Care, Personal Care, Dry Fruits).
+- **Persistent Wishlist & Cart:** React Context state persisted across sessions with LocalStorage.
+
+### 🔐 Authentication & Session Security
+- **Email & Password Authentication:** Passwords hashed with salted Bcrypt (12 rounds).
+- **OTP Email Verification:** Cryptographic 6-digit numeric OTP with 10-minute TTL, 60s resend cooldown, and hourly rate limits.
+- **Google OAuth 2.0:** Secure Passport Google strategy with token serialization and profile matching.
+- **JWT Access / Refresh Rotation:** 15-minute access token in memory paired with 7-day secure `HttpOnly` refresh cookie.
+- **Double-Submit CSRF Cookie:** `XSRF-TOKEN` cookie validated against `x-csrf-token` on all state-mutating requests.
+
+### 🔍 Product Discovery & Store Range
+- **Instant Search & Faceting:** Case-insensitive search across titles, brands, and descriptions.
+- **Store Distance Calculator:** Pincode and coordinate distance algorithm validating store delivery eligibility within 25 km.
+- **Pre-Seeded Catalog:** Over 360 authentic Indian kirana items complete with realistic MRPs, discounted selling prices, and pack units.
+
+### 💰 Pricing, Coupons & Checkout
+- **Server-Authoritative Totals:** Strict monetary calculation preventing client-side price modification.
+- **Flexible Coupon Engine:** Supports percentage and flat rupee discounts, minimum order amount thresholds, and maximum discount caps.
+- **Atomic Stock Reservation:** Mongoose session transactions decrement inventory atomically when an order is created, rolling back cleanly if any line item is out of stock.
+- **Background Stock Sweeper:** Periodic sweeper restores reserved stock for abandoned pending payment orders after 15 minutes.
+
+### 💳 Payments & Billing
+- **Razorpay Online Payments:** Server-side order creation and client popup supporting UPI, Cards, and Netbanking.
+- **HMAC SHA-256 Verification:** `crypto.timingSafeEqual` signature verification guarding against payment tampering.
+- **Webhook Reconciliation:** Raw body webhook listener processing `payment.captured`, `payment.failed`, and `refund.processed`.
+- **Cash on Delivery (COD):** Seamless COD ordering with pending payment tracking.
+- **PDF Invoice Generation:** Secure on-the-fly PDF invoice generation using PDFKit, streamed exclusively to authenticated order owners.
+
+### 📦 Merchant Dashboard & Operations
+- **Real-Time Analytics:** Visual revenue area charts and order distribution graphs powered by Recharts.
+- **Product & Inventory Management:** Inline stock editing and product CRUD with `AdminAuditLog` tracking.
+- **Order State Machine:** Merchant workflow tracking order progression: `PLACED` → `CONFIRMED` → `PACKED` → `OUT_FOR_DELIVERY` → `DELIVERED`.
+
+---
+
+## 🛠️ Technology Stack
+
+| Layer | Technologies | Purpose |
+|-------|--------------|---------|
+| **Frontend** | React 18, Vite 6, Tailwind CSS 3 | Reactive single-page application and modern layout system |
+| **State & Animations** | React Context API, Framer Motion | Lightweight global store and fluid page transitions |
+| **Icons & Charts** | Lucide React, Recharts | Consistent iconography and responsive SVG analytics charts |
+| **Backend** | Node.js, Express 4 | Modular REST API and request pipeline |
+| **Database** | MongoDB, Mongoose 8 | Document database with schema validation and transactions |
+| **Local DB Engine** | `mongodb-memory-server` | Zero-configuration local database requiring no daemon setup |
+| **Authentication** | JWT, BcryptJS, Passport Google OAuth | Secure token sessions and social authentication |
+| **Payments** | Razorpay Node SDK, Crypto HMAC | Online payment gateway and webhook verification |
+| **Invoicing** | PDFKit | Vector PDF generation for downloadable tax receipts |
+| **Asynchronous Jobs** | BullMQ, IORedis, Nodemailer | Background email queue with graceful fallback |
+| **Security & Auditing** | Helmet, CORS, Express Rate Limit, Mongo Sanitize | HTTP header hardening, origin whitelisting, and rate limits |
+| **Testing** | Node.js Test Runner (`node --test`) | Native, zero-dependency unit and integration test runner |
+
+---
+
+## 🏗️ Repository Architecture
+
+```
+Mane-Bazar/
+├── .github/                 # GitHub Actions workflows & issue templates
+│   ├── ISSUE_TEMPLATE/      # Standardized bug report and feature templates
+│   ├── PULL_REQUEST_TEMPLATE.md
+│   └── workflows/ci.yml     # CI pipeline (Lint, Test, Secret Scan)
+├── .husky/                  # Git pre-commit hooks (Secret scanning)
+├── client/                  # Frontend Vite React SPA
+│   ├── public/              # Static icons and manifest assets
+│   ├── src/                 # Components, Contexts, Hooks, Pages, Services
+│   ├── .env.example         # Client environment template
+│   └── package.json         # Frontend dependencies & scripts
+├── server/                  # Backend Express REST API
+│   ├── config/              # Database, Passport, and environment schemas
+│   ├── controllers/         # Request handling & schema validation
+│   ├── data/                # Pre-seeded 360+ item grocery catalog
+│   ├── middleware/          # Security, CSRF, Auth, Rate limiting
+│   ├── models/              # Mongoose data schemas & compound indexes
+│   ├── routes/              # Express endpoint definitions
+│   ├── scripts/             # Seed CLI, dataset generator, admin tools
+│   ├── services/            # Atomic business logic, email, invoices
+│   ├── templates/           # Responsive HTML email notification templates
+│   ├── tests/               # Automated unit & integration test suites
+│   ├── .env.example         # Backend environment template
+│   ├── package.json         # Backend dependencies & test scripts
+│   └── server.js            # Express server bootstrap & graceful shutdown
+├── docs/                    # Exhaustive technical documentation
+│   ├── ARCHITECTURE.md      # Detailed system & sequence diagrams
+│   ├── INSTALLATION.md      # Step-by-step local setup guide
+│   ├── ENVIRONMENT.md       # Complete environment variable reference
+│   ├── API_REFERENCE.md     # Full REST API specification
+│   ├── AUTHENTICATION.md    # Auth flow, JWT rotation & RBAC
+│   ├── PAYMENT_FLOW.md      # Razorpay, UPI, COD & webhook lifecycle
+│   ├── DEPLOYMENT.md        # Production cloud deployment guide
+│   ├── CONTRIBUTING.md      # Branching, commits & PR rules
+│   └── REPOSITORY_AUDIT.md  # Comprehensive technical health report
+├── screenshots/             # Visual previews & dimension guidelines
+├── .editorconfig            # Universal editor formatting
+├── .gitattributes           # Line ending normalization
+├── .gitignore               # Ignored dependencies, secrets & builds
+├── .env.example             # Repository-level environment template
+├── LICENSE                  # MIT License
+├── package.json             # Root runner manifest
+├── run.bat                  # One-click Windows startup script
+└── run.sh                   # One-click macOS / Linux startup script
+```
+
+---
+
+## ⚡ Quickstart & Installation
+
+### Option 1: Automated Launch (Recommended)
+
+#### On Windows
+```cmd
+git clone https://github.com/codewithharshx/Mane-Bazar.git
+cd Mane-Bazar
+run.bat
+```
+
+#### On macOS / Linux
 ```bash
-git clone https://github.com/codewithharshx/mane-bazar
-cd mane-bazar
-run.bat              # Windows
-# or for macOS/Linux: cd server && npm install && cd ../client && npm install
-
-# Terminal 1
-cd server && npm run dev    # Backend: http://localhost:5000
-
-# Terminal 2
-cd client && npm run dev    # Frontend: http://localhost:5173
-```
-
-👉 **For detailed setup guide**: See [QUICKSTART.md](./QUICKSTART.md)
-
----
-
-## ✨ Features
-
-| Feature | Status | Details |
-|---------|--------|---------|
-| **Authentication** | ✅ | JWT + Google OAuth |
-| **User Registration** | ✅ | Email & password with validation |
-| **Login System** | ✅ | Email/password + Google OAuth |
-| **Token Refresh** | ✅ | Auto refresh with secure cookies |
-| **Role-Based Access** | ✅ | User / Admin roles with protected routes |
-| **Product Catalog** | ✅ | 360+ groceries pre-seeded |
-| **Search & Filter** | ✅ | By category, brand, price |
-| **Shopping Cart** | ✅ | Add/remove items, adjust quantities |
-| **Wishlist** | ✅ | Persistent localStorage |
-| **Coupon System** | ✅ | Apply discount codes |
-| **Checkout Flow** | ✅ | Address, delivery slot, payment method |
-| **Razorpay Integration** | ✅ | Online payments + testing |
-| **Cash on Delivery** | ✅ | Alternative payment method |
-| **Order Management** | ✅ | Track status, view history |
-| **Order Tracking** | ✅ | Real-time status updates |
-| **PDF Invoices** | ✅ | Auto-generated with order details |
-| **Admin Dashboard** | ✅ | Analytics & management |
-| **Sales Analytics** | ✅ | Revenue, orders, charts |
-| **Order Management** (Admin) | ✅ | View, filter, update status |
-| **Product Management** (Admin) | ✅ | Add, edit, delete, inventory |
-| **User Management** (Admin) | ✅ | Promote/demote admin roles |
-| **Inventory Alerts** | ✅ | Low stock warnings |
-| **Store Listing** | ✅ | Multiple stores with geolocation |
-| **Growth Charts** | ✅ | Monthly user & revenue trends |
-| **In-Memory Database** | ✅ | MongoDB Memory Server (dev) |
-| **Production Ready** | ✅ | MongoDB Atlas support |
-
----
-
-## 🧱 Architecture
-
-### Tech Stack
-
-**Frontend:**
-- React 18.3 with Vite
-- Tailwind CSS for styling
-- Framer Motion for animations
-- React Router v6 for navigation
-- Axios for API calls
-- Google OAuth integration
-- Recharts for analytics
-
-**Backend:**
-- Node.js + Express
-- MongoDB with Mongoose
-- JWT authentication
-- Google OAuth with Passport
-- Razorpay payment integration
-- In-memory MongoDB for dev
-
-**Utilities:**
-- Bcryptjs for password hashing
-- PDFKit for invoice generation
-- Express-validator for input validation
-- Rate limiting for security
-- Helmet for security headers
-
-### Folder Structure
-
-```
-mane-bazar/
-├── client/                      # React frontend (port 5173)
-│   ├── src/
-│   │   ├── components/         # Reusable UI components
-│   │   ├── context/            # AuthContext, CartContext, WishlistContext
-│   │   ├── pages/              # Page components (20+ pages)
-│   │   ├── hooks/              # Custom React hooks
-│   │   ├── utils/              # Helpers, formatters, API calls
-│   │   └── assets/             # Images, icons
-│   ├── .env.local              # Frontend config
-│   └── package.json
-│
-├── server/                      # Express backend (port 5000)
-│   ├── config/                 # DB, Passport config
-│   ├── controllers/            # Business logic (8 controllers)
-│   ├── models/                 # MongoDB models (7 models)
-│   ├── routes/                 # API routes (8 route files)
-│   ├── middleware/             # Auth, validation, error handling
-│   ├── services/               # Utilities (invoice, payment)
-│   ├── utils/                  # Helpers
-│   ├── admin-cli.js            # Admin management CLI
-│   ├── server.js               # Entry point
-│   ├── .env                    # Backend config
-│   └── package.json
-│
-├── QUICKSTART.md               # 5-minute setup guide
-├── SETUP_GUIDE.md              # Comprehensive setup guide
-├── PRODUCTION_CHECKLIST.md     # Pre-launch checklist
-└── README.md                   # This file
+git clone https://github.com/codewithharshx/Mane-Bazar.git
+cd Mane-Bazar
+chmod +x run.sh
+./run.sh
 ```
 
 ---
 
-## 📖 Documentation
+### Option 2: Manual Setup
 
-- **[QUICKSTART.md](./QUICKSTART.md)** - Get started in 5 minutes
-- **[SETUP_GUIDE.md](./SETUP_GUIDE.md)** - Complete setup & deployment guide
-- **[PRODUCTION_CHECKLIST.md](./PRODUCTION_CHECKLIST.md)** - Production readiness checklist
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js v18+ ([Download](https://nodejs.org/))
-- npm v9+ (comes with Node.js)
-- Git ([Download](https://git-scm.com/))
-
-### Installation
-
-1. **Clone Repository**
+1. **Clone the repository:**
    ```bash
-   git clone https://github.com/codewithharshx/mane-bazar
-   cd mane-bazar
+   git clone https://github.com/codewithharshx/Mane-Bazar.git
+   cd Mane-Bazar
    ```
 
-2. **Install Dependencies**
+2. **Install root dependencies:**
    ```bash
-   # Windows
-   run.bat
-   
-   # macOS/Linux
-   cd server && npm install && cd ../client && npm install && cd ..
+   npm install
    ```
 
-3. **Start Development Servers**
+3. **Configure & start the backend:**
    ```bash
-   # Terminal 1: Backend
    cd server
-   npm run dev
-   
-   # Terminal 2: Frontend
-   cd client
-   npm run dev
+   npm ci
+   cp .env.example .env
+   npm run seed        # Seeds 360+ grocery items into in-memory database
+   npm run dev         # Starts backend API on http://localhost:5000
    ```
 
-4. **Access Application**
-   - Frontend: http://localhost:5173
-   - Backend API: http://localhost:5000/api
-   - Admin Dashboard: http://localhost:5173/admin
-
-### Default Admin Account
-- **Email**: admin@manebazar.com
-- **Password**: Admin@123
-
-⚠️ **Change this immediately in production**
+4. **Configure & start the frontend:**
+   ```bash
+   cd ../client
+   npm ci
+   cp .env.example .env.local
+   npm run dev         # Starts frontend on http://localhost:5173
+   ```
 
 ---
 
-## 🔧 Configuration
+## 🩺 Health Checks & Verification
 
-### Backend Environment (.env)
-
-```env
-NODE_ENV=development
-PORT=5000
-MONGODB_MEMORY_SERVER=true
-JWT_SECRET=your-secret-key
-GOOGLE_CLIENT_ID=your-google-id
-GOOGLE_CLIENT_SECRET=your-google-secret
-RAZORPAY_KEY_ID=your-razorpay-key
-RAZORPAY_KEY_SECRET=your-razorpay-secret
-CLIENT_URL=http://localhost:5173
-```
-
-### Frontend Environment (.env.local)
-
-```env
-VITE_API_URL=http://localhost:5000/api
-VITE_GOOGLE_CLIENT_ID=your-google-id
-VITE_RAZORPAY_KEY_ID=your-razorpay-key
-```
-
-👉 See [SETUP_GUIDE.md](./SETUP_GUIDE.md) for complete configuration
-
----
-
-## 🛠️ Admin CLI
-
-Manage admins from command line:
+After launching the servers, verify operational health via HTTP:
 
 ```bash
-cd server
-
-# List all admins
-npm run admin -- list-admins
-
-# Promote user to admin
-npm run admin -- promote email@example.com
-
-# Demote admin to user
-npm run admin -- demote email@example.com
-
-# Create new admin
-npm run admin -- create email@example.com Password123 "Admin Name"
-
-# Reset password
-npm run admin -- reset-password email@example.com NewPassword123
-```
-
----
-
-## 📊 API Documentation
-
-### Auth Endpoints
-- `POST /api/auth/register` - Register user
-- `POST /api/auth/login` - Login user
-- `POST /api/auth/google` - Google OAuth
-- `GET /api/auth/me` - Get current user
-- `POST /api/auth/logout` - Logout
-
-### Service Health
-- `GET /api/health` - Liveness probe (process is running)
-- `GET /api/ready` - Readiness probe (returns 200 only when DB is connected)
-
-### Products
-- `GET /api/products` - List products
-- `GET /api/products/:id` - Get product
-- `GET /api/categories` - List categories
-
-### Orders
-- `POST /api/orders` - Create order
-- `GET /api/orders` - User orders
-- `GET /api/orders/:id` - Order details
-
-### Idempotency For Checkout
-- Use header `x-idempotency-key` on checkout/payment write requests.
-- Reusing the same key with the same payload safely replays the previous result.
-- Reusing the same key with a different payload returns `409`.
-
-### Admin
-- `GET /api/admin/stats` - Dashboard stats
-- `GET /api/admin/orders` - Manage orders
-- `GET /api/admin/products` - Manage products
-
-👉 Full API docs in [SETUP_GUIDE.md](./SETUP_GUIDE.md)
-
----
-
-## 🧪 Testing
-
-### Test Payment Card (Development)
-- **Number**: 4111 1111 1111 1111
-- **CVV**: Any 3 digits
-- **Expiry**: Any future date
-
-### Health Check
-```bash
+# 1. API Liveness Check
 curl http://localhost:5000/api/health
+
+# 2. Database Readiness Check
+curl http://localhost:5000/api/ready
 ```
 
 ---
 
-## 🐛 Troubleshooting
+## 🔒 Security Architecture
 
-### CORS Error
-- Ensure backend is on port 5000
-- Verify `CLIENT_URL` in server/.env
+Mane Bazar enforces rigorous defense-in-depth security principles:
 
-### Database Connection Failed
-- Uses in-memory MongoDB automatically
-- No external setup needed for development
+1. **Zero Secret Leakage:** No credentials, API tokens, or `.env` files are tracked in version control. All example files use sanitized placeholders.
+2. **Pre-Commit Secret Scanning:** Husky pre-commit hooks run `@secretlint` before any commit is accepted.
+3. **Double-Submit CSRF Protection:** All state-modifying requests require a cryptographic CSRF token matching the session cookie.
+4. **NoSQL Injection Defense:** `express-mongo-sanitize` strips dollar-prefixed operators from query parameters and request bodies.
+5. **Rate Limiting:** Granular rate limits protect authentication, OTP dispatch, and payment endpoints against brute-force attacks.
+6. **Payment Tampering Guard:** Razorpay signatures are verified using timing-safe comparisons (`crypto.timingSafeEqual`).
+7. **Secure Invoicing:** Invoices are generated dynamically and served through authenticated role-checked endpoints rather than public static folders.
 
-### Cannot Find Module
+---
+
+## 📚 Documentation Directory
+
+Explore the dedicated documentation guides in [`docs/`](docs/):
+
+- 🏛️ [System Architecture](docs/ARCHITECTURE.md)
+- ⚙️ [Installation & Troubleshooting](docs/INSTALLATION.md)
+- 🔑 [Environment Configuration Reference](docs/ENVIRONMENT.md)
+- 📡 [REST API Specification](docs/API_REFERENCE.md)
+- 🛡️ [Authentication & RBAC](docs/AUTHENTICATION.md)
+- 💳 [Payment Processing & Lifecycle](docs/PAYMENT_FLOW.md)
+- 🚀 [Production Deployment Guide](docs/DEPLOYMENT.md)
+- 🤝 [Contribution Guidelines](docs/CONTRIBUTING.md)
+- 📋 [Repository Audit & Verification Report](docs/REPOSITORY_AUDIT.md)
+
+---
+
+## 🧪 Testing & Verification
+
+Run the automated test suite locally:
+
 ```bash
-cd server && npm install
-cd ../client && npm install
+# Run backend test suite (17 automated tests)
+npm test
+
+# Run frontend build verification
+npm run build
 ```
-
-👉 More troubleshooting in [SETUP_GUIDE.md](./SETUP_GUIDE.md#troubleshooting)
-
----
-
-## 🚀 Deployment
-
-### Quick Deploy Options
-
-**Frontend (Vercel)**
-- Push to GitHub
-- Connect to Vercel
-- Auto-deploys on push
-
-**Backend (Railway/Heroku)**
-- Connect GitHub repo  
-- Set environment variables
-- Deploy
-
-👉 Detailed deployment in [SETUP_GUIDE.md](./SETUP_GUIDE.md#production-deployment)
-
----
-
-## 📋 Project Status
-
-- ✅ Core features complete
-- ✅ Admin dashboard fully functional
-- ✅ Payment integration ready
-- ✅ Database auto-seeding
-- ✅ Validation & error handling
-- ✅ Security middleware implemented
-- ⏳ Some advanced features (real-time notifications)
 
 ---
 
 ## 🤝 Contributing
 
-1. Fork repository
-2. Create feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open Pull Request
+We welcome community contributions! Please review [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) for our Git branching model, Conventional Commits specification, and pull request requirements.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feat/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'feat: Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feat/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
-## 📄 License
+## 📄 License & Credits
 
-This project is licensed under the MIT License - see LICENSE file for details.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
 
----
-
-## 👨‍💻 Author
-
-**Harsh Kumar** - [@codewithharshx](https://github.com/codewithharshx)
-
----
-
-## 🙏 Acknowledgments
-
-- MongoDB for flexible database
-- Express for backend framework
-- React team for frontend library
-- Razorpay for payment processing
-- All open-source contributors
-
----
-
-## 📧 Support
-
-- 📖 **Documentation**: Read [SETUP_GUIDE.md](./SETUP_GUIDE.md)
-- 🐛 **Issues**: Create [GitHub Issue](https://github.com/codewithharshx/mane-bazar/issues)
-- 💬 **Questions**: Check documentation
-- 🚀 **Deploy**: Follow deployment section
-
----
-
-**⭐ If this project helped you, please give it a star!**
-
-Happy coding! 🎉
-
----
-
-## 🧱 Project Structure
-
-```text
-mane-bazar/
-├── client/                  # React + Tailwind frontend
-│   ├── src/
-│   │   ├── components/      # Reusable UI components
-│   │   ├── context/         # AuthContext, CartContext, WishlistContext
-│   │   ├── hooks/           # useGeolocation, useLocalStorage
-│   │   ├── pages/           # All page components
-│   │   └── utils/           # api.js, formatters.js, constants.js
-│   └── .env                 # VITE_API_URL, VITE_RAZORPAY_KEY_ID, ...
-│
-├── server/                  # Node.js + Express backend
-│   ├── config/              # db.js, passport.js
-│   ├── controllers/         # Auth, Product, Order, Payment, Admin...
-│   ├── middleware/           # auth, error, rate limiter, async handler
-│   ├── models/              # User, Product, Order, Store, Category...
-│   ├── routes/              # All Express routers
-│   ├── services/            # invoiceService, paymentService
-│   ├── utils/               # seedData, tokens, order helpers
-│   └── .env                 # PORT, MONGO_URI, JWT_SECRET, ...
-│
-├── run.bat                  # One-click Windows startup script
-└── README.md
-```
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js 18+
-- npm 9+
-- (Optional) MongoDB Atlas account for production
-
-### 1. Clone & Install
-
-```bash
-# Windows — just double-click run.bat
-# Or manually:
-cd server && npm install
-cd ../client && npm install
-```
-
-### 2. Configure Environment Variables
-
-**`server/.env`** — copy from `.env.example`:
-
-```env
-PORT=5000
-NODE_ENV=development
-
-# MongoDB — leave as-is to use in-memory DB for dev
-USE_MEMORY_DB=true
-MONGO_URI=your_mongodb_connection_string
-
-# JWT (change these in production!)
-JWT_SECRET=change_me_in_production_32chars
-JWT_REFRESH_SECRET=change_me_refresh_32chars
-
-# Razorpay (get from https://razorpay.com/docs/api/)
-RAZORPAY_KEY_ID=rzp_test_xxxx
-RAZORPAY_KEY_SECRET=your_razorpay_secret
-
-# Google OAuth (optional — for Google login)
-GOOGLE_CLIENT_ID=your_google_client_id
-GOOGLE_CLIENT_SECRET=your_google_client_secret
-GOOGLE_CALLBACK_URL=http://localhost:5000/api/auth/google/callback
-
-# CORS
-CLIENT_URL=http://localhost:5173
-CORS_WHITELIST=http://localhost:5173,http://127.0.0.1:5173
-COOKIE_DOMAIN=localhost
-```
-
-**`client/.env`**:
-
-```env
-VITE_API_URL=http://localhost:5000/api
-VITE_RAZORPAY_KEY_ID=rzp_test_xxxx
-VITE_GOOGLE_CLIENT_ID=your_google_client_id
-```
-
-### 3. Run Development Servers
-
-**Easiest (Windows)**:
-
-```text
-Double-click run.bat
-```
-
-**Manual**:
-
-```bash
-# Terminal 1 — Backend
-cd server
-npm run dev
-
-# Terminal 2 — Frontend
-cd client
-npm run dev
-```
-
-- **Backend**: <http://localhost:5000>
-- **Frontend**: <http://localhost:5173>
-- **API Health**: <http://localhost:5000/api/health>
-
----
-
-## 👤 Default Admin Account
-
-When the database is seeded automatically, an admin account is created:
-
-```text
-Email:    admin@manebazar.in
-Password: Admin@123
-```
-
-> ⚠️ Change this password immediately in any non-development environment.
-
----
-
-## 🔑 API Reference
-
-### Auth
-
-| Method | Route | Auth | Description |
-| --- | --- | --- | --- |
-| POST | `/api/auth/register` | Public | Register new user |
-| POST | `/api/auth/login` | Public | Login with email/password |
-| POST | `/api/auth/google` | Public | Google login (ID token) |
-| POST | `/api/auth/refresh-token` | Cookie | Refresh access token |
-| POST | `/api/auth/logout` | Cookie | Logout + clear cookie |
-| GET | `/api/auth/me` | Bearer | Get current user |
-| PUT | `/api/auth/profile` | Bearer | Update profile |
-| POST | `/api/auth/addresses` | Bearer | Add address |
-| PUT | `/api/auth/addresses/:id` | Bearer | Update address |
-| DELETE | `/api/auth/addresses/:id` | Bearer | Delete address |
-
-### Products
-
-| Method | Route | Auth | Description |
-| --- | --- | --- | --- |
-| GET | `/api/products` | Public | List with search/filter/pagination |
-| GET | `/api/products/:slug` | Public | Product detail |
-| POST | `/api/products` | Admin | Create product |
-| PUT | `/api/products/:id` | Admin | Update product |
-| DELETE | `/api/products/:id` | Admin | Delete product |
-
-### Orders
-
-| Method | Route | Auth | Description |
-| --- | --- | --- | --- |
-| POST | `/api/orders/cod` | Bearer | Place COD order |
-| GET | `/api/orders/mine` | Bearer | My orders |
-| GET | `/api/orders/:orderId` | Bearer | Order detail |
-| PUT | `/api/orders/:orderId/status` | Admin | Update order status |
-| POST | `/api/orders/:orderId/cancel` | Bearer | Cancel order |
-| GET | `/api/orders/:orderId/invoice` | Bearer | Download invoice PDF |
-
-### Payment (Razorpay)
-
-| Method | Route | Auth | Description |
-| --- | --- | --- | --- |
-| POST | `/api/payment/create-order` | Bearer | Create Razorpay order |
-| POST | `/api/payment/verify` | Bearer | Verify and confirm payment |
-
-### Admin
-
-| Method | Route | Auth | Description |
-| --- | --- | --- | --- |
-| GET | `/api/admin/dashboard` | Admin | Full analytics data |
-| GET | `/api/admin/orders` | Admin | All orders (search/filter/paginate) |
-| GET | `/api/admin/users` | Admin | All users (search/filter/paginate) |
-| PATCH | `/api/admin/users/:id/role` | Admin | Change user role |
-| DELETE | `/api/admin/users/:id` | Admin | Delete user |
-| GET | `/api/admin/inventory` | Admin | Low stock alerts |
-| PATCH | `/api/admin/inventory/:id/restock` | Admin | Restock product |
-
----
-
-## 💳 Payment Flow
-
-1. **Razorpay** — Frontend calls `POST /api/payment/create-order` → opens Razorpay checkout → on success calls `POST /api/payment/verify` → order saved + invoice generated.
-2. **COD** — Frontend calls `POST /api/orders/cod` → order saved immediately with `paymentStatus: "pending"` → set to `"paid"` when delivered.
-
----
-
-## 🗄️ Database
-
-The app uses **in-memory MongoDB** by default for local development (no Atlas setup needed). On first startup, it auto-seeds with:
-
-- 10+ grocery categories
-- 300+ real grocery products with Indian brand names and cloud image URLs
-- 5 store locations
-- 1 admin user
-
-To use a real MongoDB Atlas cluster, set `USE_MEMORY_DB=false` and configure `MONGO_URI` in `server/.env`.
-
----
-
-## 🏗️ Production Deployment
-
-1. Set `NODE_ENV=production` in server environment
-2. Configure real `MONGO_URI` (Atlas or self-hosted)
-3. Generate secure 32+ char secrets for `JWT_SECRET` and `JWT_REFRESH_SECRET`
-4. Configure real Razorpay production keys
-5. Build frontend: `cd client && npm run build`
-6. Serve `client/dist` as static files or deploy to Vercel/Netlify
-7. Deploy server to Railway, Render, or any Node.js host
-
----
-
-## 🛡️ Security Features
-
-- **Helmet** — HTTP security headers
-- **Rate limiting** — 20 auth requests per 15 minutes
-- **MongoDB sanitization** — prevents NoSQL injection
-- **Bcrypt** — password hashing (12 salt rounds)
-- **JWT** — short-lived access tokens (15m) + long-lived refresh tokens (7d) via HttpOnly cookies
-- **CORS** — whitelist-based origin control
-- **Role-based access control** — user / admin roles enforced on every protected route
-
----
-Updated for CodeRabbit test
-
-## 📜 License
-
-MIT — built by the Mane Bazar development team.
+Maintained by **[Harshwardha Ramdas Sathe](https://github.com/codewithharshx)** and the Mane Bazar open-source contributors.

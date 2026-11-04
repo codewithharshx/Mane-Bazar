@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import api from "../utils/api";
+import { adminApi } from "../services/adminApi";
+import { orderApi } from "../services/orderApi";
 import AdminShell from "../components/AdminShell";
 import StatusBadge from "../components/StatusBadge";
 import { ORDER_STATUSES } from "../utils/constants";
@@ -20,11 +21,11 @@ const AdminOrdersPage = () => {
   const fetchOrders = async () => {
     setLoading(true);
     try {
-      const params = new URLSearchParams({ page, limit: PAGE_SIZE });
-      if (search) params.set("search", search);
-      if (statusFilter !== "all") params.set("status", statusFilter);
+      const params = { page, limit: PAGE_SIZE };
+      if (search) params.search = search;
+      if (statusFilter !== "all") params.status = statusFilter;
 
-      const { data } = await api.get(`/admin/orders?${params}`);
+      const { data } = await adminApi.orders(params);
       setOrders(data.orders);
       setTotal(data.total);
       setPages(data.pages);
@@ -47,7 +48,7 @@ const AdminOrdersPage = () => {
 
   const updateStatus = async (orderId, status) => {
     try {
-      await api.put(`/orders/${orderId}/status`, { status });
+      await orderApi.updateStatus(orderId, { status });
       toast.success("Status updated");
       fetchOrders();
     } catch (error) {

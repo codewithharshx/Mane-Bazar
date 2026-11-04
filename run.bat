@@ -12,9 +12,9 @@ if not exist "server\.env" (
   copy "server\.env.example" "server\.env" >nul
 )
 
-if not exist "client\.env" (
-  echo Creating client\.env from example...
-  copy "client\.env.example" "client\.env" >nul
+if not exist "client\.env.local" (
+  echo Creating client\.env.local from example...
+  copy "client\.env.example" "client\.env.local" >nul
 )
 
 if not exist "server\node_modules\" (
@@ -52,7 +52,7 @@ set /p RE_SEED="Do you want to run the database seeder? [y/N]: "
 if /i "%RE_SEED%"=="y" (
   echo Generating fresh 360+ item dataset...
   pushd server
-  node generate_dataset.js
+  call npm run generate:dataset
   echo Seeding database with Mane Bazar authentic info...
   call npm run seed
   popd

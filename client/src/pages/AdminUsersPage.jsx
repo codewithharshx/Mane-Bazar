@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import api from "../utils/api";
+import { adminApi } from "../services/adminApi";
 import AdminShell from "../components/AdminShell";
 import ConfirmDialog from "../components/ConfirmDialog";
 import { formatDateTime } from "../utils/formatters";
@@ -33,11 +33,11 @@ const AdminUsersPage = () => {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const params = new URLSearchParams({ page, limit: PAGE_SIZE });
-      if (search) params.set("search", search);
-      if (roleFilter !== "all") params.set("role", roleFilter);
+      const params = { page, limit: PAGE_SIZE };
+      if (search) params.search = search;
+      if (roleFilter !== "all") params.role = roleFilter;
 
-      const { data } = await api.get(`/admin/users?${params}`);
+      const { data } = await adminApi.users(params);
       setUsers(data.users);
       setTotal(data.total);
       setPages(data.pages);
@@ -60,7 +60,7 @@ const AdminUsersPage = () => {
 
   const updateRole = async (userId, newRole) => {
     try {
-      const { data } = await api.patch(`/admin/users/${userId}/role`, { role: newRole });
+      const { data } = await adminApi.updateUserRole(userId, newRole);
       toast.success(data.message);
       fetchUsers();
     } catch (error) {
@@ -70,7 +70,7 @@ const AdminUsersPage = () => {
 
   const handleDelete = async () => {
     try {
-      await api.delete(`/admin/users/${deleteTarget._id}`);
+      await adminApi.deleteUser(deleteTarget._id);
       toast.success("User deleted successfully");
       setDeleteTarget(null);
       fetchUsers();

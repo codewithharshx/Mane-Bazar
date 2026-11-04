@@ -63,37 +63,70 @@ const catJSONMap = {
 
 const createProductSeeds = (categoryMap, storeId) => {
   const items = [];
-  const datasetPath = path.join(__dirname, '..', 'dataset.JSON');
+  const slugify = (str) => str.toLowerCase().replace(/[^\w-]+/g, '-').replace(/-+/g, '-');
   
-  if (fs.existsSync(datasetPath)) {
-    const rawData = fs.readFileSync(datasetPath);
-    const jsonItems = JSON.parse(rawData);
-    
-    jsonItems.forEach((item, index) => {
-      const mappedSlug = catJSONMap[item.category] || "packaged-foods";
-      const catId = categoryMap.get(mappedSlug);
+  // Try loading from new products.seed.json first
+  const productsPath = path.join(__dirname, '..', 'data', 'products.seed.json');
+  if (fs.existsSync(productsPath)) {
+    try {
+      const rawData = fs.readFileSync(productsPath);
+      const seedData = JSON.parse(rawData);
       
-      items.push({
-        name: item.name,
-        brand: item.brand,
-        category: catId,
-        storeId,
-        slug: slugify(item.name) + "-" + index,
-        price: item.price,
-        mrp: Math.round(item.price * 1.15), // add 15% to make a fake mrp
-        discount: 15,
-        stock: item.stock,
-        lowStockThreshold: 10,
-        images: [item.image],
-        description: `${item.name} from ${item.brand} available in ${item.unit} packaging. High quality delivered straight to your door.`,
-        tags: [item.category.toLowerCase(), "premium"],
-        isActive: true
-      });
-    });
-  } else {
-    console.warn("dataset.JSON not found. Returning empty products array.");
+      if (seedData.products && Array.isArray(seedData.products)) {
+        const categoryMapping = {
+          'cat_fruits': 'fruits',
+          'cat_vegetables': 'fruits',
+          'cat_dairy': 'dairy-products',
+          'cat_grains': 'pulses-dal',
+          'cat_packaged': 'packaged-foods',
+          'cat_bakery': 'packaged-foods'
+        };
+        
+        seedData.products.forEach((product, index) => {
+          const mappedCategory = categoryMapping[product.category] || 'packaged-foods';
+          let catId = categoryMap.get(mappedCategory);
+          
+          if (!catId) {
+            for (const [slug, id] of categoryMap.entries()) {
+              if (slug.includes(mappedCategory.split('-')[0])) {
+                catId = id;
+                break;
+              }
+            }
+          }
+          
+          if (!catId) {
+            catId = categoryMap.values().next().value;
+          }
+          
+          items.push({
+            name: product.name,
+            brand: product.brand || 'Mane Bazar',
+            category: catId,
+            storeId,
+            slug: product.slug || (slugify(product.name) + "-" + index),
+            price: product.price,
+            mrp: product.originalPrice || product.price,
+            discount: product.originalPrice ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100) : 0,
+            stock: product.stock,
+            lowStockThreshold: 10,
+            image: product.image,
+            images: [product.image],
+            description: product.description,
+            tags: product.tags || [],
+            rating: product.rating || 0,
+            reviews: product.reviews || 0,
+            isActive: true
+          });
+        });
+        console.log(`✅ Loaded ${items.length} products from products.seed.json`);
+        return items;
+      }
+    } catch (error) {
+      console.warn("Failed to load products.seed.json:", error.message);
+    }
   }
-
+  
   return items;
 };
 
@@ -122,6 +155,7 @@ const seedDatabase = async ({ clearExisting = true } = {}) => {
     email: "admin@manebazar.com",
     password: "Admin@123",
     role: "admin",
+    isVerified: true,
     addresses: [
       {
         label: "Store",

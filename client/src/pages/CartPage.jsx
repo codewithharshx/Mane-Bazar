@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
-import api from "../utils/api";
+import { couponApi } from "../services/couponApi";
 import { formatCurrency } from "../utils/formatters";
 import PageTransition from "../components/PageTransition";
 
@@ -32,7 +32,7 @@ const CartPage = () => {
     }
 
     try {
-      const { data } = await api.post("/coupons/apply", {
+      const { data } = await couponApi.apply({
         code: couponCode,
         subtotal
       });

@@ -9,40 +9,27 @@ const {
   getOrderByOrderId,
   updateOrderStatus
 } = require("../controllers/orderController");
-const { adminOnly, protect } = require("../middleware/authMiddleware");
+const { adminOnly, ensureVerified, protect } = require("../middleware/authMiddleware");
 const { checkoutRateLimiter } = require("../middleware/rateLimiter");
 const validateRequest = require("../middleware/validateRequest");
-const { normalizeDeliverySlot } = require("../utils/order");
+const { validateCheckoutPayload } = require("../middleware/validators");
 
 const router = express.Router();
-
-const orderValidation = [
-  body("storeId").optional().isMongoId().withMessage("Store id is invalid"),
-  body("items").isArray({ min: 1 }).withMessage("At least one item is required"),
-  body("items.*.productId").isMongoId().withMessage("Product id is invalid"),
-  body("items.*.qty").isInt({ min: 1 }).withMessage("Quantity must be at least 1"),
-  body("deliveryAddress.label").trim().notEmpty().withMessage("Address label is required"),
-  body("deliveryAddress.street").trim().notEmpty().withMessage("Street is required"),
-  body("deliveryAddress.city").trim().notEmpty().withMessage("City is required"),
-  body("deliveryAddress.pincode").trim().notEmpty().withMessage("Pincode is required"),
-  body("deliverySlot.date").trim().notEmpty().withMessage("Delivery date is required"),
-  body("deliverySlot.timeSlot")
-    .custom((value) => Boolean(normalizeDeliverySlot(value)))
-    .withMessage("Invalid delivery slot")
-];
 
 router.post(
   "/cod",
   checkoutRateLimiter,
   protect,
-  orderValidation,
+  ensureVerified,
+  validateCheckoutPayload,
   validateRequest,
   createCODOrder
 );
-router.get("/my-orders", protect, getMyOrders);
+router.get("/my-orders", protect, ensureVerified, getMyOrders);
 router.get(
   "/:orderId",
   protect,
+  ensureVerified,
   [param("orderId").trim().notEmpty().withMessage("Order id is required")],
   validateRequest,
   getOrderByOrderId
@@ -50,6 +37,7 @@ router.get(
 router.get(
   "/:orderId/invoice",
   protect,
+  ensureVerified,
   [param("orderId").trim().notEmpty().withMessage("Order id is required")],
   validateRequest,
   downloadInvoice
@@ -83,6 +71,7 @@ router.put(
 router.put(
   "/:orderId/cancel",
   protect,
+  ensureVerified,
   [param("orderId").trim().notEmpty().withMessage("Order id is required")],
   validateRequest,
   cancelOrder

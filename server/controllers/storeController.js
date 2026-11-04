@@ -1,6 +1,7 @@
 const Product = require("../models/Product");
 const Store = require("../models/Store");
 const asyncHandler = require("../middleware/asyncHandler");
+const { escapeRegex } = require("../utils/regex");
 
 const toObjectIdOrNull = (value) => {
   if (!value) return null;
@@ -16,22 +17,25 @@ const parsePageParams = (query) => {
 
 const buildStoreFilter = (query) => {
   const filter = {};
+  const safeCity = query.city ? escapeRegex(query.city) : "";
+  const safeCategory = query.category ? escapeRegex(query.category) : "";
+  const safeSearch = query.search ? escapeRegex(query.search) : "";
 
   if (query.city) {
-    filter.city = { $regex: query.city, $options: "i" };
+    filter.city = { $regex: safeCity, $options: "i" };
   }
   if (query.pincode) {
     filter.pincode = query.pincode;
   }
   if (query.category) {
-    filter.categories = { $in: [new RegExp(`^${query.category}$`, "i")] };
+    filter.categories = { $in: [new RegExp(`^${safeCategory}$`, "i")] };
   }
   if (query.search) {
     filter.$or = [
-      { name: { $regex: query.search, $options: "i" } },
-      { categories: { $elemMatch: { $regex: query.search, $options: "i" } } },
-      { city: { $regex: query.search, $options: "i" } },
-      { address: { $regex: query.search, $options: "i" } }
+      { name: { $regex: safeSearch, $options: "i" } },
+      { categories: { $elemMatch: { $regex: safeSearch, $options: "i" } } },
+      { city: { $regex: safeSearch, $options: "i" } },
+      { address: { $regex: safeSearch, $options: "i" } }
     ];
   }
   if (typeof query.isOpen === "string") {

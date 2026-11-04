@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import api from "../utils/api";
+import { orderApi } from "../services/orderApi";
+import { paymentApi } from "../services/paymentApi";
 import { DELIVERY_SLOTS } from "../utils/constants";
 import { formatCurrency } from "../utils/formatters";
 import { createIdempotencyKey } from "../utils/idempotency";
@@ -74,8 +75,7 @@ const CheckoutPage = () => {
   };
 
   const handleCOD = async (attemptKey) => {
-    const { data } = await api.post(
-      "/orders/cod",
+    const { data } = await orderApi.createCod(
       buildPayload(),
       {
         headers: {
@@ -92,8 +92,7 @@ const CheckoutPage = () => {
       throw new Error("Unable to load Razorpay checkout");
     }
 
-    const { data } = await api.post(
-      "/payment/create-order",
+    const { data } = await paymentApi.createOrder(
       buildPayload(),
       {
         headers: {
@@ -112,25 +111,27 @@ const CheckoutPage = () => {
         order_id: data.order.id,
         handler: async (response) => {
           try {
-            const verifyPayload = {
-              ...buildPayload(),
-              orderReceipt: data.order.receipt,
-              razorpayOrderId: response.razorpay_order_id,
-              razorpayPaymentId: response.razorpay_payment_id,
-              razorpaySignature: response.razorpay_signature
-            };
-            const verifyResponse = await api.post(
-              "/payment/verify",
-              verifyPayload,
+            // FIX: verify sends only Razorpay IDs — stock already reserved by createOrder
+            const verifyResponse = await paymentApi.verify(
               {
-                headers: {
-                  "x-idempotency-key": `${attemptKey}:verify`
-                }
+                razorpayOrderId: response.razorpay_order_id,
+                razorpayPaymentId: response.razorpay_payment_id,
+                razorpaySignature: response.razorpay_signature
+              },
+              {
+                headers: { "x-idempotency-key": `${attemptKey}:verify` }
               }
             );
             handleSuccess(verifyResponse.data.order.orderId);
             resolve();
           } catch (error) {
+            // Payment verified on Razorpay side but our server errored — notify failure to restore stock
+            try {
+              await paymentApi.paymentFailed({
+                razorpayOrderId: data.order.id,
+                reason: "Verification request failed"
+              });
+            } catch { /* best-effort */ }
             reject(error);
           }
         },
@@ -143,7 +144,14 @@ const CheckoutPage = () => {
           color: "#16a34a"
         },
         modal: {
-          ondismiss: () => reject(new Error("Payment cancelled"))
+          ondismiss: () => {
+            // Restore reserved stock when user dismisses the payment modal
+            paymentApi.paymentFailed({
+              razorpayOrderId: data.order.id,
+              reason: "Payment cancelled by user"
+            }).catch(() => {});
+            reject(new Error("Payment cancelled"));
+          }
         }
       });
 
