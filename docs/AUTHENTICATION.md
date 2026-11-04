@@ -7,6 +7,7 @@ This document details the authentication protocols, token management strategies,
 ## 1. Authentication Architecture Overview
 
 Mane Bazar implements a modern, secure hybrid authentication model:
+
 - **Short-Lived Access Tokens (JWT):** Passed via the `Authorization: Bearer <token>` header to authenticate API requests. Valid for 15 minutes.
 - **Long-Lived Refresh Tokens:** Stored in a secure, `HttpOnly`, `SameSite` browser cookie. Valid for 7 days.
 - **CSRF Token Protection:** Double-submit cookie pattern (`XSRF-TOKEN` cookie validated against the `x-csrf-token` header) prevents cross-site request forgery on state-changing requests.
@@ -30,11 +31,14 @@ Mane Bazar implements a modern, secure hybrid authentication model:
 ## 2. Customer Registration & Verification Flow
 
 ### 2.1 Password Hashing
+
 - User passwords are automatically salted and hashed using **Bcrypt** with 12 salt rounds before persisting to PostgreSQL.
 - Raw passwords are never stored in plaintext or logged.
 
 ### 2.2 6-Digit Email Verification (OTP)
+
 When a customer registers:
+
 1. An ephemeral 6-digit cryptographic OTP is generated via `crypto.randomInt()`.
 2. The OTP record is saved in PostgreSQL with an automated 10-minute expiration timestamp.
 3. An email containing the OTP is queued via Nodemailer.
@@ -48,6 +52,7 @@ When a customer registers:
 ## 3. Login & Session Lifecycle
 
 ### 3.1 Credential Login
+
 1. Customer submits `email` and `password` to `POST /api/auth/login`.
 2. Rate limiting (`authRateLimiter`) restricts submissions to 20 attempts per 15-minute window per IP.
 3. The server compares the password using `bcrypt.compare()`.
@@ -55,6 +60,7 @@ When a customer registers:
    - An **Access Token** signed with `JWT_SECRET` containing `{ id, email, role }`.
    - A **Refresh Token** signed with `JWT_REFRESH_SECRET`.
 5. The refresh token is set as an `HttpOnly` cookie:
+
    ```javascript
    res.cookie("refreshToken", refreshToken, {
      httpOnly: true,
@@ -65,7 +71,9 @@ When a customer registers:
    ```
 
 ### 3.2 Token Refresh Protocol
+
 When the frontend Axios interceptor (`apps/frontend/src/services/apiClient.ts`) detects a `401 Unauthorized` response with an expired access token:
+
 1. It pauses pending requests and automatically calls `POST /api/auth/refresh-token`.
 2. The browser automatically sends the `refreshToken` cookie.
 3. The server verifies the token signature and verifies the user exists in the database.
@@ -73,7 +81,9 @@ When the frontend Axios interceptor (`apps/frontend/src/services/apiClient.ts`) 
 5. The failed request is retried seamlessly without disrupting the customer's checkout or browsing experience.
 
 ### 3.3 User Profile Sanitization (`/api/auth/me`)
+
 When user profile data is queried, sensitive fields are stripped:
+
 - Hashed passwords (`password`)
 - Verification tokens & OTP hashes (`verificationToken`, `passwordResetTokenHash`)
 
@@ -116,9 +126,9 @@ Mane Bazar defines two primary authorization roles:
 | `admin` | All customer capabilities plus: access merchant analytics dashboard, add/edit/delete products, modify inventory levels, update order fulfillment stages, view merchant audit logs, manage user roles. |
 
 ### 5.1 Route Protection Enforcement
+
 - **Backend Middleware (`apps/backend/src/presentation/middleware/authMiddleware.ts`):**
   - `protect`: Verifies JWT signature and binds `req.user`.
   - `adminOnly`: Validates that `req.user.role === 'ADMIN'`. Unauthorized requests receive `403 Forbidden`.
 - **Frontend Guards (`apps/frontend/src/components/ProtectedRoute.tsx`):**
   - `<ProtectedRoute>` checks auth state and role before rendering protected pages. Unauthenticated customers are redirected to `/login` with an automatic `returnUrl`.
-

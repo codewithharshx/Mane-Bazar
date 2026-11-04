@@ -10,8 +10,10 @@ const __dirname = path.dirname(__filename);
 
 const EMAIL_QUEUE_NAME = "emails";
 
-// Template directory points to apps/backend/src/templates/email
-const TEMPLATE_DIR = path.join(__dirname, "..", "..", "templates", "email");
+// Template directory points to apps/backend/src/templates/email (with dist fallback)
+const distTemplateDir = path.join(__dirname, "..", "..", "templates", "email");
+const srcTemplateDir = path.join(__dirname, "..", "..", "..", "src", "templates", "email");
+const TEMPLATE_DIR = fs.existsSync(distTemplateDir) ? distTemplateDir : srcTemplateDir;
 
 let transporter: nodemailer.Transporter | null = null;
 let queue: Queue | null = null;

@@ -22,9 +22,15 @@ import orderRoutes from "./presentation/routes/orderRoutes.js";
 import paymentRoutes from "./presentation/routes/paymentRoutes.js";
 import adminRoutes from "./presentation/routes/adminRoutes.js";
 import { handleWebhook } from "./presentation/controllers/webhookController.js";
+import path from "path";
+import fs from "fs";
 import configurePassport from "./config/passport.js";
 
-// Load env vars
+// Load env vars: check apps/backend/.env, then fallback to current directory
+const backendEnvPath = path.resolve(process.cwd(), "apps/backend/.env");
+if (fs.existsSync(backendEnvPath)) {
+  dotenv.config({ path: backendEnvPath });
+}
 dotenv.config();
 
 // Catch unhandled rejections for debugging
