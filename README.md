@@ -1,8 +1,10 @@
 <div align="center">
 
-# 🛒 Mane Bazar
+<img src="docs/assets/branding/logo-header.svg" alt="Mane Bazar — माने बाज़ार Since 1984" width="460" />
 
-**Enterprise-Grade Grocery E-Commerce Monorepo Platform for Indian Kiranas**
+<br/>
+
+**Enterprise-Grade Indian Kirana Quick-Commerce Platform • Estd. 1984 (Kasegaon, Sangli)**
 
 [![CI Status](https://img.shields.io/github/actions/workflow/status/codewithharshx/Mane-Bazar/ci.yml?branch=main&style=flat-square&logo=github-actions&logoColor=white)](https://github.com/codewithharshx/Mane-Bazar/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg?style=flat-square)](LICENSE)
@@ -17,6 +19,21 @@
 [![Vitest](https://img.shields.io/badge/Tests-61%20Passed-FCC72B.svg?style=flat-square&logo=vitest&logoColor=black)](apps/backend/src/)
 
 [Explore Documentation](docs/) • [System Architecture](docs/ARCHITECTURE.md) • [REST API Reference](docs/API_REFERENCE.md) • [Local Installation](docs/INSTALLATION.md) • [Environment Guide](docs/ENVIRONMENT.md) • [Report Bug](https://github.com/codewithharshx/Mane-Bazar/issues)
+
+</div>
+
+---
+
+## 🏛️ Authentic Physical Store & Provenance
+
+<div align="center">
+
+<img src="docs/assets/branding/logo-storefront.svg" alt="Mane Bazar Physical Storefront in Kasegaon" width="580" />
+
+<p>
+  <b>माने बाज़ार • Physical Storefront: Kasegaon, Sangli, Maharashtra (GSTIN: <code>27AILPM4993G1ZZ</code>)</b><br/>
+  <sub>Serving Indian families with authentic kitchen staples, pure oils, spices, grains & packaged essentials since 1984.</sub>
+</p>
 
 </div>
 

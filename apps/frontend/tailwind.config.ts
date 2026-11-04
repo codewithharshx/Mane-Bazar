@@ -6,6 +6,8 @@ export default {
       fontFamily: {
         sans: ["Inter", "sans-serif"],
         display: ["Outfit", "sans-serif"],
+        hindi: ["'Noto Sans Devanagari'", "'Yatra One'", "'Arial Unicode MS'", "sans-serif"],
+        serif: ["'Playfair Display'", "'Cinzel'", "'Georgia'", "serif"],
       },
       colors: {
         brand: {
@@ -17,6 +19,10 @@ export default {
           accentLight: "#fed7aa",
           dark: "#0f172a",
           muted: "#64748b",
+          storeBurgundy: "#701a75",
+          storeGold: "#f59e0b",
+          storeRed: "#dc2626",
+          storeWood: "#3d1b11",
         },
         surface: {
           DEFAULT: "#ffffff",

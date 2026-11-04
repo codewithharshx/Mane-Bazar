@@ -6,6 +6,7 @@ import { useAuth } from "../context/AuthContext";
 import { useCart } from "../context/CartContext";
 import { useGeolocation } from "../hooks/useGeolocation";
 import useDebounce from "../hooks/useDebounce";
+import { BrandLogo } from "./BrandLogo";
 
 /* ── Icons (inline SVG, no heavy dep) ─────────────────────────────── */
 const SearchIcon = () => (
@@ -166,15 +167,9 @@ const Navbar = () => {
         }`}>
 
           {/* ── Left: Logo + Location ───────────────────────────────── */}
-          <div className="flex items-center gap-4">
-            <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
-              <div className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-green-600 to-emerald-400 text-sm font-black text-white shadow-lg select-none">
-                MB
-              </div>
-              <div className="hidden sm:block">
-                <p className="text-[15px] font-black text-slate-900 leading-tight tracking-tight">Mane Bazar</p>
-                <p className="text-[9px] uppercase font-bold tracking-[0.22em] text-slate-400">Premium Grocery</p>
-              </div>
+          <div className="flex items-center gap-3 sm:gap-4">
+            <Link to="/" className="flex items-center flex-shrink-0 focus:outline-none focus:ring-2 focus:ring-amber-500/40 rounded-2xl transition-transform active:scale-95" aria-label="Mane Bazar Home">
+              <BrandLogo variant="header" />
             </Link>
 
             {/* Location badge — hidden on xs */}
@@ -407,13 +402,10 @@ const Navbar = () => {
               className="mobile-menu-panel"
             >
               {/* Header */}
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center gap-2">
-                  <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-green-600 to-emerald-400 grid place-items-center text-white text-xs font-black">
-                    MB
-                  </div>
-                  <span className="font-black text-slate-900">Mane Bazar</span>
-                </div>
+              <div className="flex items-center justify-between mb-6 pb-3 border-b border-slate-100">
+                <Link to="/" onClick={() => setMobileOpen(false)}>
+                  <BrandLogo variant="header" showTagline={false} />
+                </Link>
                 <button
                   ref={mobileCloseRef}
                   type="button"

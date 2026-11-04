@@ -1,0 +1,187 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450" width="100%" height="100%">
+  <defs>
+    <!-- Facade Burgundy -->
+    <linearGradient id="facadeBurgundy" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#831843"/>
+      <stop offset="60%" stop-color="#701a75"/>
+      <stop offset="100%" stop-color="#4a044e"/>
+    </linearGradient>
+
+    <!-- Timber Wood Panel -->
+    <linearGradient id="timberWood" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3d1b11"/>
+      <stop offset="50%" stop-color="#4e2517"/>
+      <stop offset="100%" stop-color="#2d120a"/>
+    </linearGradient>
+
+    <!-- Golden Arch Portal -->
+    <linearGradient id="goldenPortal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="40%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <!-- Glowing Red Sign Letters -->
+    <filter id="sfRedGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#dc2626" flood-opacity="0.45"/>
+      <feDropShadow dx="0" dy="1" stdDeviation="1" flood-color="#7f1d1d" flood-opacity="0.8"/>
+    </filter>
+
+    <linearGradient id="sfSignRed" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="50%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+
+    <!-- Saffron / Green Ribbon -->
+    <linearGradient id="sfSaffron" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+    <linearGradient id="sfGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Sky / Ambient backdrop -->
+  <rect width="600" height="450" rx="20" fill="#f8fafc"/>
+
+  <!-- ================================================================= -->
+  <!-- 1. TOP PARAPET (Wine / Burgundy Facade Band)                       -->
+  <!-- ================================================================= -->
+  <path d="M 80,40 L 520,40 L 520,95 L 80,95 Z" fill="url(#facadeBurgundy)"/>
+  <!-- Top parapet crown cornice -->
+  <polygon points="220,15 380,15 410,40 190,40" fill="#581c87" stroke="#3b0764" stroke-width="1.5"/>
+  <rect x="230" y="20" width="140" height="15" rx="3" fill="#831843"/>
+
+  <!-- ================================================================= -->
+  <!-- 2. UPPER TIMBER SIGNBOARD WITH "MB" MONOGRAM                      -->
+  <!-- ================================================================= -->
+  <g transform="translate(160, 60)">
+    <!-- Timber backing board -->
+    <rect width="280" height="100" rx="8" fill="url(#timberWood)" stroke="#1c0904" stroke-width="2"/>
+    <!-- Woodgrain horizontal lines -->
+    <line x1="0" y1="25" x2="280" y2="25" stroke="#1c0904" stroke-width="1.5" opacity="0.4"/>
+    <line x1="0" y1="50" x2="280" y2="50" stroke="#1c0904" stroke-width="1.5" opacity="0.4"/>
+    <line x1="0" y1="75" x2="280" y2="75" stroke="#1c0904" stroke-width="1.5" opacity="0.4"/>
+
+    <!-- Gold border inset -->
+    <rect x="6" y="6" width="268" height="88" rx="6" fill="none" stroke="#f59e0b" stroke-width="1" stroke-opacity="0.4"/>
+
+    <!-- "MB" Monogram in Center -->
+    <g transform="translate(140, 52)">
+      <text x="-32" y="0" font-family="'Playfair Display', serif" font-size="46" font-weight="900" font-style="italic" fill="#ffffff" letter-spacing="-2px" text-anchor="middle">M</text>
+      <text x="24" y="0" font-family="'Playfair Display', serif" font-size="46" font-weight="900" font-style="italic" fill="#ffffff" letter-spacing="-1px" text-anchor="middle">B</text>
+    </g>
+
+    <!-- Tricolor Ribbon Swirl -->
+    <path d="M 75,64 C 100,58 120,72 145,69 C 170,66 195,58 208,60 C 195,64 170,72 145,74 C 120,77 100,63 75,64 Z" fill="url(#sfSaffron)"/>
+    <path d="M 74,67 C 99,61 119,75 145,72 C 171,69 196,61 209,63 C 196,67 171,75 145,77 C 119,80 99,66 74,67 Z" fill="#ffffff"/>
+    <path d="M 73,70 C 98,64 118,78 145,75 C 172,72 197,64 210,66 C 197,70 172,78 145,80 C 118,83 98,69 73,70 Z" fill="url(#sfGreen)"/>
+
+    <!-- Since 1984 -->
+    <text x="140" y="93" font-family="'Inter', sans-serif" font-size="9" font-weight="800" letter-spacing="3.5px" fill="#fef08a" text-anchor="middle">SINCE 1984</text>
+  </g>
+
+  <!-- ================================================================= -->
+  <!-- 3. ARCHITECTURAL GOLDEN PORTAL FRAME                              -->
+  <!-- ================================================================= -->
+  <!-- Outer Yellow Portal Surround -->
+  <path d="M 70,165 L 530,165 L 530,410 L 490,410 L 490,270 L 110,270 L 110,410 L 70,410 Z" fill="url(#goldenPortal)" stroke="#b45309" stroke-width="2"/>
+
+  <!-- ================================================================= -->
+  <!-- 4. WHITE FASCIA BOARD WITH "माने बाज़ार" (Illuminated 3D Red)       -->
+  <!-- ================================================================= -->
+  <rect x="110" y="178" width="380" height="90" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+
+  <!-- GSTIN Top-Left on Board (As seen on real board) -->
+  <text x="122" y="193" font-family="'Inter', monospace" font-size="7.5" font-weight="600" fill="#64748b" letter-spacing="0.5px">GSTIN: 27AILPM4993G1ZZ</text>
+
+  <!-- Centered Devanagari 3D Illuminated Channel Letters: माने बाज़ार -->
+  <g filter="url(#sfRedGlow)" transform="translate(300, 242)">
+    <text x="0" y="0" 
+          font-family="'Noto Sans Devanagari', 'Yatra One', 'Arial Unicode MS', sans-serif" 
+          font-size="52" 
+          font-weight="900" 
+          letter-spacing="1px" 
+          fill="url(#sfSignRed)" 
+          stroke="#991b1b" 
+          stroke-width="1.2"
+          text-anchor="middle">माने बाज़ार</text>
+  </g>
+
+  <!-- Marigold Festive Garland (Toran) across the bottom of the sign -->
+  <g transform="translate(110, 268)">
+    <path d="M 0,2 Q 47,20 95,2 Q 142,20 190,2 Q 237,20 285,2 Q 332,20 380,2" fill="none" stroke="#f59e0b" stroke-width="3"/>
+    <!-- Yellow & Orange Marigold blossoms -->
+    <circle cx="10" cy="4" r="4" fill="#fbbf24"/>
+    <circle cx="30" cy="11" r="4.5" fill="#ea580c"/>
+    <circle cx="50" cy="14" r="5" fill="#f59e0b"/>
+    <circle cx="70" cy="11" r="4.5" fill="#ea580c"/>
+    <circle cx="95" cy="4" r="4" fill="#fbbf24"/>
+    <circle cx="115" cy="11" r="4.5" fill="#ea580c"/>
+    <circle cx="142" cy="14" r="5" fill="#f59e0b"/>
+    <circle cx="165" cy="11" r="4.5" fill="#ea580c"/>
+    <circle cx="190" cy="4" r="4" fill="#fbbf24"/>
+    <circle cx="215" cy="11" r="4.5" fill="#ea580c"/>
+    <circle cx="237" cy="14" r="5" fill="#f59e0b"/>
+    <circle cx="260" cy="11" r="4.5" fill="#ea580c"/>
+    <circle cx="285" cy="4" r="4" fill="#fbbf24"/>
+    <circle cx="310" cy="11" r="4.5" fill="#ea580c"/>
+    <circle cx="332" cy="14" r="5" fill="#f59e0b"/>
+    <circle cx="355" cy="11" r="4.5" fill="#ea580c"/>
+    <circle cx="375" cy="4" r="4" fill="#fbbf24"/>
+  </g>
+
+  <!-- ================================================================= -->
+  <!-- 5. STORE INTERIOR & ENTRANCE                                      -->
+  <!-- ================================================================= -->
+  <rect x="110" y="272" width="380" height="138" fill="#f1f5f9"/>
+
+  <!-- Glass Door Frame -->
+  <line x1="300" y1="272" x2="300" y2="410" stroke="#94a3b8" stroke-width="2"/>
+  <rect x="120" y="280" width="170" height="120" fill="#ffffff" fill-opacity="0.7" stroke="#cbd5e1" stroke-width="1"/>
+  <rect x="310" y="280" width="170" height="120" fill="#ffffff" fill-opacity="0.7" stroke="#cbd5e1" stroke-width="1"/>
+
+  <!-- Shelves with Colorful Grocery Products inside -->
+  <rect x="130" y="300" width="150" height="10" rx="2" fill="#cbd5e1"/>
+  <rect x="135" y="288" width="15" height="12" rx="2" fill="#ef4444"/>
+  <rect x="155" y="288" width="14" height="12" rx="2" fill="#f59e0b"/>
+  <rect x="173" y="288" width="16" height="12" rx="2" fill="#16a34a"/>
+  <rect x="193" y="288" width="14" height="12" rx="2" fill="#3b82f6"/>
+  <rect x="211" y="288" width="18" height="12" rx="2" fill="#a855f7"/>
+  <rect x="233" y="288" width="16" height="12" rx="2" fill="#ef4444"/>
+
+  <rect x="130" y="340" width="150" height="10" rx="2" fill="#cbd5e1"/>
+  <rect x="138" y="325" width="22" height="15" rx="2" fill="#d97706"/>
+  <rect x="165" y="325" width="20" height="15" rx="2" fill="#059669"/>
+  <rect x="190" y="325" width="24" height="15" rx="2" fill="#dc2626"/>
+  <rect x="220" y="325" width="22" height="15" rx="2" fill="#2563eb"/>
+
+  <!-- Right shelves -->
+  <rect x="320" y="300" width="150" height="10" rx="2" fill="#cbd5e1"/>
+  <rect x="325" y="288" width="16" height="12" rx="2" fill="#16a34a"/>
+  <rect x="345" y="288" width="18" height="12" rx="2" fill="#e11d48"/>
+  <rect x="367" y="288" width="15" height="12" rx="2" fill="#f59e0b"/>
+  <rect x="386" y="288" width="18" height="12" rx="2" fill="#6366f1"/>
+  <rect x="408" y="288" width="16" height="12" rx="2" fill="#0d9488"/>
+
+  <!-- Entry Steps (Grey Platform from photo) -->
+  <rect x="220" y="390" width="160" height="12" rx="2" fill="#64748b"/>
+  <rect x="200" y="402" width="200" height="12" rx="2" fill="#475569"/>
+
+  <!-- Stainless Steel Safety Railing (From photo) -->
+  <line x1="80" y1="360" x2="160" y2="360" stroke="#94a3b8" stroke-width="3"/>
+  <line x1="80" y1="380" x2="160" y2="380" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="80" y1="400" x2="160" y2="400" stroke="#94a3b8" stroke-width="2.5"/>
+  <line x1="85" y1="355" x2="85" y2="415" stroke="#64748b" stroke-width="3"/>
+  <line x1="120" y1="355" x2="120" y2="415" stroke="#64748b" stroke-width="3"/>
+  <line x1="155" y1="355" x2="155" y2="415" stroke="#64748b" stroke-width="3"/>
+
+  <!-- Store Tagline Banner at bottom -->
+  <rect x="70" y="415" width="460" height="25" rx="6" fill="#0f172a"/>
+  <text x="300" y="432" font-family="'Inter', sans-serif" font-size="11" font-weight="700" letter-spacing="1.5px" fill="#ffffff" text-anchor="middle">
+    MANE BAZAR • PHYSICAL STOREFRONT • KASEGAON, SANGLI
+  </text>
+</svg>

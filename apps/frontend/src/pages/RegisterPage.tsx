@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { User, Mail, Lock, CheckCircle2, ArrowRight } from "lucide-react";
+import { BrandLogo } from "../components/BrandLogo";
 
 const RegisterPage = () => {
   const { register } = useAuth();
@@ -47,8 +48,11 @@ const RegisterPage = () => {
         <div className="absolute -top-24 -left-24 w-48 h-48 bg-emerald-400/15 rounded-full blur-3xl pointer-events-none" />
 
         <div className="text-center mb-8 relative z-10">
-          <div className="w-16 h-16 bg-gradient-to-tr from-emerald-600 to-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-white shadow-btn-green">
-            <span className="text-2xl font-bold tracking-wider font-display">MB</span>
+          <Link to="/" className="inline-block focus:outline-none mb-3">
+            <BrandLogo variant="monogram" size="lg" className="mx-auto" />
+          </Link>
+          <div className="flex items-center justify-center gap-1.5 mb-1 font-hindi text-rose-600 font-black text-lg">
+            <span>माने बाज़ार</span>
           </div>
           <h1 className="font-display text-2xl sm:text-3xl font-extrabold text-slate-900">Create Account</h1>
           <p className="text-slate-500 text-sm mt-1.5 font-medium">Join Mane Bazar for Indian grocery delivery</p>

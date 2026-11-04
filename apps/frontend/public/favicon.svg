@@ -1,6 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
-  <path d="M3 6h18"/>
-  <path d="M16 10a4 4 0 0 1-8 0"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
+  <defs>
+    <linearGradient id="favWood" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#422216"/>
+      <stop offset="100%" stop-color="#1f0c07"/>
+    </linearGradient>
+    <linearGradient id="favGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fde047"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="favSaffron" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+    <linearGradient id="favGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+  </defs>
 
+  <!-- Rounded Tile with Golden Border -->
+  <rect width="64" height="64" rx="14" fill="url(#favWood)" stroke="url(#favGold)" stroke-width="2"/>
+
+  <!-- Serif MB Letters (From Store Sign) -->
+  <text x="21" y="36" font-family="'Playfair Display', 'Cinzel', 'Georgia', serif" font-size="28" font-weight="900" font-style="italic" fill="#ffffff" letter-spacing="-1px" text-anchor="middle">M</text>
+  <text x="44" y="36" font-family="'Playfair Display', 'Cinzel', 'Georgia', serif" font-size="28" font-weight="900" font-style="italic" fill="#ffffff" letter-spacing="-0.5px" text-anchor="middle">B</text>
+
+  <!-- Tricolor Ribbon Swirl -->
+  <path d="M 10,43 C 20,39 30,49 42,47 C 50,45 56,40 58,41 C 52,44 46,50 38,51 C 28,53 18,44 10,43 Z" fill="url(#favSaffron)"/>
+  <path d="M 9,45 C 19,41 29,51 42,49 C 50,47 56,42 58,43 C 52,46 46,52 38,53 C 28,55 18,46 9,45 Z" fill="#ffffff"/>
+  <path d="M 8,47 C 18,43 28,53 42,51 C 50,49 56,44 58,45 C 52,48 46,54 38,55 C 28,57 18,48 8,47 Z" fill="url(#favGreen)"/>
+
+  <!-- Mini "1984" tag -->
+  <text x="32" y="60" font-family="'Inter', sans-serif" font-size="6" font-weight="800" letter-spacing="1px" fill="#fef08a" text-anchor="middle">1984</text>
+</svg>

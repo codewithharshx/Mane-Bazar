@@ -5,6 +5,7 @@ import { useCart } from "../context/CartContext";
 import ProductCard from "../components/ProductCard";
 import QuickViewModal from "../components/QuickViewModal";
 import SkeletonLoader from "../components/SkeletonLoader";
+import { BrandLogo } from "../components/BrandLogo";
 import {
   ArrowRight,
   Clock,
@@ -13,6 +14,9 @@ import {
   Flame,
   PackageCheck,
   ShoppingCart,
+  MapPin,
+  Award,
+  Store,
 } from "lucide-react";
 
 const CATEGORY_AVATARS: Record<string, { icon: string; bg: string }> = {
@@ -101,25 +105,36 @@ const HomePage = () => {
           <div className="grid lg:grid-cols-12 gap-12 items-center">
             {/* Left Content Column */}
             <div className="lg:col-span-7 space-y-6">
-              {/* Express delivery pill badge */}
-              <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100/90 border border-emerald-300/60 px-4 py-1.5 text-xs font-bold text-emerald-800 shadow-sm backdrop-blur-sm">
+              {/* Provenance & Express Delivery Pill Badge */}
+              <div className="inline-flex items-center gap-2 rounded-full bg-amber-50/90 border border-amber-300/80 px-4 py-1.5 text-xs font-bold text-amber-900 shadow-sm backdrop-blur-sm">
                 <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                <Zap size={14} className="text-emerald-600" />
-                <span>Now delivering in 30 mins • Sangli & Kasegaon Hub</span>
+                <span className="font-hindi text-rose-600 font-extrabold">माने बाज़ार</span>
+                <span className="text-amber-400">•</span>
+                <span className="text-amber-800 font-extrabold">SINCE 1984</span>
+                <span className="text-amber-400">•</span>
+                <Zap size={13} className="text-emerald-600" />
+                <span className="text-slate-700 font-medium hidden sm:inline">30-Min Fast Delivery in Kasegaon &amp; Sangli</span>
+                <span className="text-slate-700 font-medium sm:hidden">30-Min Delivery</span>
               </div>
 
               {/* Main Headline */}
-              <h1
-                className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]"
-                style={{ fontFamily: "Outfit, sans-serif" }}
-              >
-                Fresh groceries, delivered{" "}
-                <span className="text-green-gradient">fast.</span>
-              </h1>
+              <div>
+                <p className="font-hindi text-rose-600 font-bold text-base sm:text-lg tracking-wide mb-1 flex items-center gap-2">
+                  <span>विश्वास आणि दर्जाची ४० वर्षे</span>
+                  <span className="text-amber-500 text-xs">★</span>
+                </p>
+                <h1
+                  className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]"
+                  style={{ fontFamily: "Outfit, sans-serif" }}
+                >
+                  Authentic groceries, delivered{" "}
+                  <span className="text-green-gradient">in minutes.</span>
+                </h1>
+              </div>
 
               {/* Subtitle */}
               <p className="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
-                Order authentic pantry staples, fresh dairy, crunchy snacks, pure spices, and daily household essentials. Zero fresh produce policy — 100% packaged grocery perfection with real PDF tax invoices.
+                Shop pure kitchen staples, sealed flours, unadulterated oils, spices, dairy and daily household necessities from Kasegaon's legendary kirana store. 100% packaged grocery assurance with real PDF tax invoices.
               </p>
 
               {/* CTA Row */}
@@ -370,7 +385,84 @@ const HomePage = () => {
       )}
 
       {/* ══════════════════════════════════════════════════════════════════
-          4. POPULAR PRODUCTS WITH INTERACTIVE CATEGORY TABS
+          4. AUTHENTIC PHYSICAL KIRANA HERITAGE SHOWCASE (Since 1984)
+      ══════════════════════════════════════════════════════════════════ */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="rounded-[36px] bg-gradient-to-br from-amber-500/10 via-white to-emerald-500/10 border border-amber-200/80 p-6 sm:p-10 shadow-card">
+          <div className="grid lg:grid-cols-12 gap-8 items-center">
+            {/* Left: Physical Storefront Vector Illustration from Photo */}
+            <div className="lg:col-span-5 flex justify-center">
+              <BrandLogo variant="storefront" className="max-w-md w-full" />
+            </div>
+
+            {/* Right: Heritage Kirana Story & Proof Points */}
+            <div className="lg:col-span-7 space-y-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-amber-100/80 border border-amber-300 px-3.5 py-1 text-xs font-bold text-amber-900">
+                <Store size={14} className="text-amber-700" />
+                <span>Visit In Person or Order Online</span>
+              </div>
+
+              <div className="space-y-1">
+                <p className="font-hindi text-rose-600 font-black text-2xl sm:text-3xl tracking-tight">
+                  माने बाज़ार • कासेगाव
+                </p>
+                <h3
+                  className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight"
+                  style={{ fontFamily: "Outfit, sans-serif" }}
+                >
+                  40 Years of Kirana Heritage • Serving Sangli Since 1984
+                </h3>
+              </div>
+
+              <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+                Before fast-delivery apps existed, Mane Bazar was already the beating heart of daily groceries in Kasegaon. Today, we combine our physical storefront legacy with quick-commerce speed. Every pulse, grain, spice pack, and oil tin is personally inspected for batch freshness and authenticity.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                <div className="flex items-start gap-3 rounded-2xl bg-white p-3.5 border border-slate-200/80 shadow-sm">
+                  <div className="p-2 rounded-xl bg-amber-50 text-amber-700 flex-shrink-0">
+                    <Award size={18} />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900">Zero Produce Compromise</h4>
+                    <p className="text-[11px] text-slate-500 mt-0.5">Strictly packaged goods &amp; sealed staples. No wilted veggies or damaged perishables.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 rounded-2xl bg-white p-3.5 border border-slate-200/80 shadow-sm">
+                  <div className="p-2 rounded-xl bg-emerald-50 text-emerald-700 flex-shrink-0">
+                    <MapPin size={18} />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900">Registered Local Store</h4>
+                    <p className="text-[11px] text-slate-500 mt-0.5">Physical store in Kasegaon. GSTIN: 27AILPM4993G1ZZ. Real GST invoices.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="pt-2 flex items-center gap-3">
+                <Link
+                  to="/products"
+                  className="inline-flex items-center gap-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white px-5 py-2.5 text-xs font-bold transition-all shadow-sm active:scale-95"
+                >
+                  <span>Explore Online Aisles</span>
+                  <ArrowRight size={14} />
+                </Link>
+                <Link
+                  to="/stores"
+                  className="inline-flex items-center gap-2 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 px-5 py-2.5 text-xs font-bold transition-all shadow-sm active:scale-95"
+                >
+                  <Store size={14} className="text-amber-600" />
+                  <span>Store Location Details</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════════════
+          5. POPULAR PRODUCTS WITH INTERACTIVE CATEGORY TABS
       ══════════════════════════════════════════════════════════════════ */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">

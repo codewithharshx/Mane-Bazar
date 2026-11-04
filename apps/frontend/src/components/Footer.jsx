@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { BrandLogo } from "./BrandLogo";
 
 const QUICK_LINKS = [
   { label: "Home", to: "/" },
@@ -60,21 +61,18 @@ const Footer = () => (
 
         {/* Brand column */}
         <div>
-          <Link to="/" className="inline-flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-green-600 to-emerald-400 grid place-items-center text-white text-sm font-black shadow-md">
-              MB
-            </div>
-            <div>
-              <p className="text-lg font-black text-slate-900 leading-tight" style={{ fontFamily: "Outfit, sans-serif" }}>
-                Mane Bazar
-              </p>
-              <p className="text-[10px] uppercase font-bold tracking-widest text-slate-400">Premium Grocery</p>
-            </div>
+          <Link to="/" className="inline-block focus:outline-none rounded-2xl">
+            <BrandLogo variant="header" showTagline={true} />
           </Link>
 
           <p className="mt-4 text-sm leading-7 text-slate-500 max-w-xs">
-            A fast, full-featured grocery ordering experience built for Indian households and neighbourhood shop owners. From pantry staples to daily essentials — delivered fresh.
+            Serving Kasegaon families with pride since 1984. From daily kitchen staples, pure oils &amp; spices to packaged essentials — now delivered directly to your doorstep with guaranteed Kirana purity.
           </p>
+
+          <div className="mt-3.5 inline-flex items-center gap-2 rounded-xl bg-amber-50 border border-amber-200/70 px-3 py-1.5 text-xs font-semibold text-amber-800">
+            <span>📍</span>
+            <span>Store: Kasegaon, Sangli • GSTIN: 27AILPM4993G1ZZ</span>
+          </div>
 
           {/* Social icons */}
           <div className="mt-5 flex gap-2">
