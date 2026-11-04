@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { productApi, categoryApi } from "../services/api";
-import { useCart } from "../context/CartContext";
-import { Search, ShoppingCart } from "lucide-react";
-import { motion } from "framer-motion";
+import ProductCard from "../components/ProductCard";
+import QuickViewModal from "../components/QuickViewModal";
+import SkeletonLoader from "../components/SkeletonLoader";
+import { Search } from "lucide-react";
 
 const ProductsPage = () => {
   const [products, setProducts] = useState<any[]>([]);
@@ -12,7 +13,7 @@ const ProductsPage = () => {
   const [search, setSearch] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sort, setSort] = useState("newest");
-  const { addToCart } = useCart();
+  const [quickViewProduct, setQuickViewProduct] = useState<any | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -21,8 +22,9 @@ const ProductsPage = () => {
   }, [searchParams]);
 
   useEffect(() => {
+    let isMounted = true;
     setLoading(true);
-    const params: any = { limit: 24 };
+    const params: any = { limit: 36 };
     if (search) params.search = search;
     if (selectedCategory) params.category = selectedCategory;
     if (sort) params.sort = sort;
@@ -30,115 +32,125 @@ const ProductsPage = () => {
     Promise.all([
       productApi.list(params),
       categoryApi.list(),
-    ]).then(([prodRes, catRes]) => {
-      setProducts(prodRes.data?.products || prodRes.data?.data || []);
-      setCategories(catRes.data?.categories || catRes.data?.data || []);
-    }).catch(() => {
-      setProducts([]);
-      setCategories([]);
-    }).finally(() => setLoading(false));
+    ])
+      .then(([prodRes, catRes]) => {
+        if (!isMounted) return;
+        setProducts(prodRes.data?.products || prodRes.data?.data || []);
+        setCategories(catRes.data?.categories || catRes.data?.data || []);
+      })
+      .catch(() => {
+        if (isMounted) {
+          setProducts([]);
+          setCategories([]);
+        }
+      })
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
   }, [search, selectedCategory, sort]);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <h1 className="font-display text-3xl font-bold text-slate-800 mb-6">All Products</h1>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="mb-6">
+        <h1
+          className="text-3xl font-extrabold text-slate-900"
+          style={{ fontFamily: "Outfit, sans-serif" }}
+        >
+          All Grocery Products
+        </h1>
+        <p className="text-sm text-slate-500 mt-1">
+          Explore staples, dairy, beverages, snacks, and personal care essentials.
+        </p>
+      </div>
 
-      {/* Filters */}
+      {/* Filters and Search Bar */}
       <div className="flex flex-col sm:flex-row gap-3 mb-8">
         <div className="relative flex-1">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search size={16} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             type="text"
-            placeholder="Search products..."
+            placeholder="Search groceries by name, brand, or tag..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+            className="w-full pl-10 pr-4 py-2.5 rounded-2xl border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-green-500 bg-white"
           />
         </div>
+
         <select
           value={selectedCategory}
           onChange={(e) => {
             setSelectedCategory(e.target.value);
             setSearchParams(e.target.value ? { category: e.target.value } : {});
           }}
-          className="px-4 py-2.5 rounded-xl border border-slate-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="px-4 py-2.5 rounded-2xl border border-slate-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500 text-slate-700"
         >
           <option value="">All Categories</option>
           {categories.map((cat: any) => (
-            <option key={cat.id || cat._id} value={cat.slug}>{cat.name}</option>
+            <option key={cat.id || cat._id || cat.slug} value={cat.slug}>
+              {cat.name}
+            </option>
           ))}
         </select>
+
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
-          className="px-4 py-2.5 rounded-xl border border-slate-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500"
+          className="px-4 py-2.5 rounded-2xl border border-slate-200 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-green-500 text-slate-700"
         >
-          <option value="newest">Newest</option>
+          <option value="newest">Sort: Newest</option>
           <option value="price_asc">Price: Low to High</option>
           <option value="price_desc">Price: High to Low</option>
           <option value="popular">Most Popular</option>
         </select>
       </div>
 
+      {/* Products Grid */}
       {loading ? (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-          {Array.from({ length: 12 }).map((_, i) => (
-            <div key={i} className="h-64 rounded-2xl bg-slate-100 animate-pulse" />
-          ))}
-        </div>
+        <SkeletonLoader count={8} />
       ) : products.length === 0 ? (
-        <div className="text-center py-20">
-          <div className="text-5xl mb-4">🔍</div>
-          <p className="text-slate-600 font-medium">No products found</p>
-          <p className="text-slate-400 text-sm mt-1">Try adjusting your search or filters</p>
+        <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-200">
+          <div className="text-5xl mb-4 select-none">🔍</div>
+          <p className="text-slate-700 font-bold text-lg">No products found</p>
+          <p className="text-slate-400 text-sm mt-1">
+            Try searching for another staple or reset your category filter.
+          </p>
+          {(search || selectedCategory) && (
+            <button
+              type="button"
+              onClick={() => {
+                setSearch("");
+                setSelectedCategory("");
+                setSearchParams({});
+              }}
+              className="mt-4 inline-flex items-center px-4 py-2 rounded-xl bg-green-50 text-green-700 font-semibold text-xs hover:bg-green-100 transition-colors"
+            >
+              Reset Filters
+            </button>
+          )}
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
           {products.map((product: any, i: number) => (
-            <motion.div
-              key={product.id || product._id}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.03 }}
-              className="bg-white rounded-2xl border border-slate-100 hover:border-green-200 hover:shadow-card-hover transition-all duration-300 overflow-hidden group"
-            >
-              <Link to={`/products/${product.slug}`}>
-                <div className="aspect-square bg-slate-50 overflow-hidden">
-                  <img
-                    src={product.images?.[0] || product.image || "https://images.unsplash.com/photo-1542838132-92c53300491e?w=300"}
-                    alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                </div>
-              </Link>
-              <div className="p-3">
-                <p className="text-xs text-slate-400 mb-1">{product.brand}</p>
-                <Link to={`/products/${product.slug}`}>
-                  <h3 className="font-medium text-sm text-slate-800 line-clamp-2 hover:text-green-700 transition-colors">
-                    {product.name}
-                  </h3>
-                </Link>
-                <div className="flex items-center gap-2 mt-2">
-                  <span className="font-bold text-green-700">₹{product.price}</span>
-                  {product.mrp > product.price && (
-                    <span className="text-xs text-slate-400 line-through">₹{product.mrp}</span>
-                  )}
-                  {product.discount > 0 && (
-                    <span className="text-xs text-orange-600 font-semibold">{product.discount}% off</span>
-                  )}
-                </div>
-                <button
-                  onClick={() => addToCart(product)}
-                  disabled={product.stock < 1}
-                  className="mt-3 w-full flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 disabled:bg-slate-200 disabled:text-slate-400 text-white text-xs font-semibold py-2 rounded-xl transition-all duration-200"
-                >
-                  <ShoppingCart size={12} />
-                  {product.stock < 1 ? "Out of Stock" : "Add to Cart"}
-                </button>
-              </div>
-            </motion.div>
+            <ProductCard
+              key={product.id || product._id || i}
+              product={product}
+              index={i}
+              onQuickView={setQuickViewProduct}
+            />
           ))}
         </div>
+      )}
+
+      {/* Quick View Modal */}
+      {quickViewProduct && (
+        <QuickViewModal
+          product={quickViewProduct}
+          onClose={() => setQuickViewProduct(null)}
+        />
       )}
     </div>
   );

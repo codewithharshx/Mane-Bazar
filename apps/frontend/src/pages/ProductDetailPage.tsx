@@ -5,6 +5,7 @@ import { useCart } from "../context/CartContext";
 import { useWishlist } from "../context/WishlistContext";
 import { ShoppingCart, Heart, ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
+import ProductImage from "../components/ProductImage";
 
 const ProductDetailPage = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -46,9 +47,10 @@ const ProductDetailPage = () => {
       </button>
       <div className="grid md:grid-cols-2 gap-12">
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="aspect-square rounded-3xl overflow-hidden bg-slate-50">
-          <img
-            src={product.images?.[0] || product.image || "https://images.unsplash.com/photo-1542838132-92c53300491e?w=600"}
+          <ProductImage
+            product={product}
             alt={product.name}
+            containerClassName="w-full h-full rounded-3xl"
             className="w-full h-full object-cover"
           />
         </motion.div>

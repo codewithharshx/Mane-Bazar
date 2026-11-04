@@ -87,9 +87,13 @@ export const TextSkeleton = ({ lines = 3 }) => (
   </div>
 );
 
-/* ── Default generic skeleton (backward compat) ──────────────────────── */
-const SkeletonLoader = ({ className = "" }) => (
-  <div className={`skeleton ${className}`} />
+/* ── Default generic skeleton (grid of product skeletons) ───────────── */
+const SkeletonLoader = ({ count = 4, className = "" }) => (
+  <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 ${className}`}>
+    {Array.from({ length: count }).map((_, i) => (
+      <ProductCardSkeleton key={i} />
+    ))}
+  </div>
 );
 
 export default SkeletonLoader;

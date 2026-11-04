@@ -10,14 +10,14 @@ const repositoryRoot = path.resolve(currentDirectory, "../../..");
 const categorySeeds = [
   { name: "Rice & Grains", slug: "rice-grains", icon: "grain", image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=400" },
   { name: "Atta & Flour", slug: "atta-flour", icon: "wheat", image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&q=80&w=400" },
-  { name: "Pulses & Dal", slug: "pulses-dal", icon: "beans", image: "https://images.unsplash.com/photo-1600626337887-21a8cd34842a?auto=format&fit=crop&q=80&w=400" },
+  { name: "Pulses & Dal", slug: "pulses-dal", icon: "beans", image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=400" },
   { name: "Cooking Oil & Ghee", slug: "cooking-oil-ghee", icon: "droplet", image: "https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&q=80&w=400" },
   { name: "Spices & Masala", slug: "spices-masala", icon: "pepper", image: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&q=80&w=400" },
   { name: "Packaged Foods", slug: "packaged-foods", icon: "package", image: "https://images.unsplash.com/photo-1621939514649-280e2ee25f60?auto=format&fit=crop&q=80&w=400" },
   { name: "Snacks & Biscuits", slug: "snacks-biscuits", icon: "cookie", image: "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=400" },
   { name: "Beverages", slug: "beverages", icon: "cup-soda", image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&q=80&w=400" },
   { name: "Dairy Products", slug: "dairy-products", icon: "milk", image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&q=80&w=400" },
-  { name: "Dry Fruits & Nuts", slug: "dry-fruits-nuts", icon: "nut", image: "https://images.unsplash.com/photo-1599557434557-418ca100b21a?auto=format&fit=crop&q=80&w=400" },
+  { name: "Dry Fruits & Nuts", slug: "dry-fruits-nuts", icon: "nut", image: "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&q=80&w=400" },
   { name: "Household Essentials", slug: "household-essentials", icon: "home", image: "https://images.unsplash.com/photo-1584824486516-0555a07fc511?auto=format&fit=crop&q=80&w=400" },
   { name: "Personal Care", slug: "personal-care", icon: "sparkles", image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&q=80&w=400" }
 ];
